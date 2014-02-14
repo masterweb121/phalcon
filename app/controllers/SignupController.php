@@ -1,8 +1,15 @@
 <?php
 
-class SignupController extends \Phalcon\Mvc\Controller
+class SignupController extends HomeController
 {
-
+	public function initialize()
+    {
+        $this->view->setTemplateAfter('home');
+		//Set the document title
+        $this->tag->setTitle('Signup');
+        parent::initialize();
+    }
+	
     public function indexAction()
     {
 

@@ -5,7 +5,8 @@ class ProductController extends HomeController
 
     public function initialize()
     {
-        //Set the document title
+        $this->view->setTemplateAfter('home');
+		//Set the document title
         $this->tag->setTitle('Manage your product types');
         parent::initialize();
     }

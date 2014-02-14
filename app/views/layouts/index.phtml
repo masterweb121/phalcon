@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<?php echo $this->tag->getTitle() ?>
+<link href="css/theme.css" rel="stylesheet" rev="stylesheet" type="text/css" media="all">
+<style type="text/css">
+body,table,input,textarea,select {font-family:微软雅黑,Verdana,sans-serif,宋体;}  
+</style>
+ 
+</head>
+<body>
+<div class=channel">
+
+</div>
+
+
+<div id="global-header">
+	<div id="channel">
+		<div class="language">
+		<?php 
+		foreach ($this->elements->getChannel() as $link) {
+			echo "$link\n";
+		}
+		?>
+			<a href="http://netkiller.users.sourceforge.net/zh-cn/%7B$uri_string%7D">{#chinese#}</a> |
+			<a href="http://netkiller.users.sourceforge.net/zh-tw/%7B$uri_string%7D">{#taiwan#}</a> |
+			<a href="http://netkiller.users.sourceforge.net/en-us/%7B$uri_string%7D">{#english#}</a> |
+			<a title="点击以繁体中文方式浏览" name="StranLink" href="http://netkiller.users.sourceforge.net/#">繁體中文</a>
+
+		</div>
+		<div class="member">
+
+		</div>
+	</div>
+	<div id="masthead">
+		<div id="logo">
+			<img src="img/freebsd.png" height="75" alt="freebsd logo">
+			<img src="img/linux.png" height="75" alt="linux logo">
+			<img src="img/openbsd.png" height="75" alt="openbsd logo">
+			<img src="img/gnu.png" height="75" alt="gnu logo">
+		</div>
+		<div id="banner">
+		
+		</div>
+	</div>
+	<div class="navigation">
+	<?php echo $this->elements->getMenu() ?>
+	<ul>
+		<li {if="" $mainmenu="" eq="" ''="" or="" 'index'}="" class="on" {="" if}=""><a href="/index.html" target="_parent">{#home#}</a></li>
+		<li {if="" $mainmenu="" eq="" 'technology'}="" class="on" {="" if}=""><a href="/technology/index.html" target="_parent">{#technology#}</a></li>
+		<li {if="" $mainmenu="" eq="" 'photography'}="" class="on" {="" if}=""><a href="/photography/index.html" target="_parent">{#photography#}</a></li>
+		<li {if="" $mainmenu="" eq="" 'radio'}="" class="on" {="" if}=""><a href="/radio/index.html" target="_parent">{#radio#}</a></li>
+        <li {if="" $mainmenu="" eq="" 'outdoor'}="" class="on" {="" if}=""><a href="/outdoor/index.html" target="_parent">{#outdoor#}</a></li>
+        <li {if="" $mainmenu="" eq="" 'music'}="" class="on" {="" if}=""><a href="/music/index.html">{#music#}</a></li>
+		<li {if="" $mainmenu="" eq="" 'activity'}="" class="on" {="" if}=""><a href="/activity/index.html" target="_parent">{#activity#}</a></li>
+		<li {if="" $mainmenu="" eq="" 'groups'}="" class="on" {="" if}=""><a href="/groups/index.html" target="_parent">{#group#}</a></li>		
+		<li {if="" $mainmenu="" eq="" 'member'}="" class="on" {="" if}=""><a href="/member/index.html" target="_parent">{#member#}</a></li>
+		<li {if="" $mainmenu="" eq="" 'guestbook'}="" class="on" {="" if}=""><a href="/member/guestbook.html" target="_parent">{#guestbook#}?????</a></li>
+	</ul>
+	<ul style="float:right;">
+		<li>
+		{include file="block/search.tpl" block='box'}
+		</li>
+	</ul>
+</div>
+{if $submenu}
+<div class="subnav">
+	{include file="$submenu" }
+</div>
+{/if}</div>
+
+<!--
+<div class="sidebar">
+<ul class="menu">
+    <li><a href="/">Home</a></li>
+    <li><a href="/articles">Articles</a></li>
+    <li><a href="/contact">Contact us</a></li>
+</ul>
+</div>
+-->
+
+<div id="container">
+<?php echo $this->getContent() ?>
+
+<div id="fullContainer">
+
+<div id="bigContainer">
+
+	<div class="main-module">
+		<div class="head"><h2>站长简介</h2></div>
+		<div class="body"> 
+			<img src="/img/shutterbug.gif" height="75" style="float:left;" alt="shutterbug">
+			<img src="/img/neo.jpg" height="90" alt="shutterbug" style="float:right; padding-right:10px;">	
+			  <p>陈景峰 &nbsp; 昵称：netkiller &nbsp; English name: Neo chen &nbsp;<br>
+			  盲流，IT民工,UNIX like爱好者,业余无线电爱好者（呼号：BG7NYT）,摄影爱好者。<br>
+			  《PostgreSQL实用实例参考》，《Postfix 完整解决方案》，《Netkiller Security 手札》，《Netkiller Linux 手札》文档的作者 &nbsp;&nbsp;&nbsp;&nbsp;
+			<a href="/home/about.html" class="score-700">more &gt;&gt;&gt;</a></p>
+	   	</div>
+		<div class="foot"></div>
+	</div>
+	<div class="main-module">
+		<div class="head"><h2>原创文档</h2></div>
+		<div class="body">
+		<div style="float:left;">
+			<ul>
+				<li><a href="/technology/linux/index.html">Netkiller Linux 手札</a></li>
+			  	<li><a href="/technology/developer/index.html">Netkiller Developer 手札</a></li>
+				<li><a href="/technology/security/index.html">Netkiller Security 手札</a></li>
+				<li><a href="/technology/docbook/index.html">Netkiller Document 手札</a></li>
+				<li><a href="/technology/database/index.html">Netkiller Database 手札</a></li>
+				<li><a href="/technology/ubuntu/index.html">Netkiller Ubuntu 手札</a></li>
+				<li><a href="/technology/centos/index.html">Netkiller CentOS 手札</a></li>
+				<li><a href="/technology/freebsd/index.html">Netkiller FreeBSD 手札</a></li>
+				
+			</ul>
+		</div>	
+		<div style="float:left;">	
+		<ul>
+			<li><a href="http://netkiller.users.sourceforge.net/archives/technology/architect/index.html">Netkiller Architect 手札</a></li>
+			<li><a href="http://netkiller.users.sourceforge.net/archives/technology/architect/index.html">大型网站架设指南</a></li>
+			<li><a href="http://netkiller.users.sourceforge.net/archives/technology/postgres/postgresql.html">PostgreSQL 实例参考</a></li>
+			<li><a href="http://netkiller.users.sourceforge.net/archives/technology/postfix/index.html">Postfix Solution</a></li>
+			<li><a href="http://netkiller.users.sourceforge.net/archives/technology/pureftpd/index.html">PureFTPD</a></li>
+			<li><a href="http://netkiller.users.sourceforge.net/archives/technology/proftpd/index.html">ProFTPD</a></li>
+			<li><a href="/technology/" class="score-812.5 endless-pages-found-next-link">More &gt;&gt;&gt;</a></li>		
+		</ul>
+		</div>
+	   	</div>
+		<div class="foot"></div>
+	</div>
+
+	<div class="main-module">
+		<div class="head"><h2>{#itinerary#}</h2></div>
+		<div class="body">
+			<ol>
+			{foreach from=$travels item=last10}
+				<li><a href="/outdoor/travelogue/itinerary/%7B$last10-%3Eid%7D.html">{$last10-&gt;title}</a></li>
+			{/foreach}
+			</ol>
+		</div>
+	</div>
+	
+</div>
+<div id="smallContainer">
+
+<div class="side-module">
+	<div class="head"><h2>摄影作品</h2></div>
+	<div class="body">	
+	<a href="/photography/"><img src="/img/slides.jpg" width="278"></a>
+   	</div>
+	<div class="foot"></div>
+</div>	
+{if $activities}
+<div class="side-module">
+	<div class="head"><h2>原最新活动</h2></div>
+	<div class="body">
+		<ol>
+		{foreach from=$activities item=line}
+			<li>
+				<a href="/activity/item/%7B$line-%3Eid%7D.html">{$line-&gt;subject}</a>
+			</li>
+		{/foreach}
+		</ol>
+   	</div>
+	<div class="foot"></div>
+</div>
+{/if}
+
+
+
+	</div>
+
+{*	
+	<div id="leftColumn">
+		{include file="left.tpl"}
+	</div>	
+
+	<div id="rightColumn">
+		{include file="right.tpl"}
+	</div>
+*}	
+
+</div>
+{*
+<br clear="all">
+
+<table width="100%">
+	<tbody><tr>
+	<td valign="top">	
+	<div class="main-module">
+		<div class="head"><h2>{$rss.digital.headline}</h2></div>
+		<div class="body">
+		<ol>
+		{foreach from=$rss.digital.items item=i}
+			<li><a href="http://netkiller.users.sourceforge.net/%7B$i.link%7D">{$i.title}</a></li>
+		{/foreach}
+		</ol>
+	   	</div>
+		<div class="foot"></div>
+	</div>
+	</td>
+	<td valign="top">
+	<div class="main-module">
+		<div class="head"><h2>{$rss.car.headline}</h2></div>
+		<div class="body">
+		<ol>
+		{foreach from=$rss.car.items item=i}
+			<li><a href="http://netkiller.users.sourceforge.net/%7B$i.link%7D">{$i.title}</a></li>
+		{/foreach}
+		</ol>
+	   	</div>
+		<div class="foot"></div>
+	</div>
+	</td>
+	<td valign="top">
+	<div class="main-module">
+		<div class="head"><h2>{$rss.book.headline}</h2></div>
+		<div class="body">
+		<ol>
+		{foreach from=$rss.book.items item=i}
+			<li><a href="http://netkiller.users.sourceforge.net/%7B$i.link%7D">{$i.title}</a></li>
+		{/foreach}
+		</ol>
+	   	</div>
+		<div class="foot"></div>
+	</div>	
+		
+	</td>
+	</tr>
+</tbody></table>
+
+<table width="100%">
+    <tbody><tr>
+    <td valign="top">
+
+
+
+    </td>
+    <td valign="top">
+
+
+
+    
+    </td>
+    <td valign="top">
+
+    </td>
+    </tr>
+</tbody></table>
+*}
+
+</div>
+
+<br clear="all">
+<div id="global-footer">
+  	<div class="first">
+		<span>版权所有,侵权必究,法律顾问 <a href="http://www.arclawyer.cn/">广东广和律师事务所</a>孙建武律师(<a href="/radio/qrz/bg7nhl.html">BG7NHL</a>)</span>
+	</div>
+	<div class="second">
+		<a href="http://tuhuli.com/">土狐狸 </a> &nbsp;|&nbsp;
+		<a href="http://lhbc.sq.ez369.cn/">易众社区</a> &nbsp;|&nbsp; 
+		<a href="http://zyr.hk/">自由人俱乐部</a> 
+	</div>
+	<div class="third"> 
+  		<a href="/home/about.html">About</a> | 
+  		<a href="/home/contact.html">Contact us</a> | 
+  		<a href="http://netkiller.users.sourceforge.net/sitemaps/technology.xml">Sitemaps</a> |
+  		<a href="http://netkiller.users.sourceforge.net/#">FAQs</a> | 
+  		<a href="http://netkiller.users.sourceforge.net/#">Affiliates</a> | 
+  		<a href="http://netkiller.users.sourceforge.net/#">Privacy policy </a>
+	</div>
+	
+	<div> <a href="http://validator.w3.org/check?uri=referer" target="_blank"> <img alt="XHTML 1.0 Transitional" src="/img/xhtml.png" border="0"> </a> <a href="http://jigsaw.w3.org/css-validator/check/referer" target="_blank"> <img alt="Css Validator" src="/img/css.png" border="0"> </a> <a href="http://netkiller.users.sourceforge.net/new.xml" target="_blank"> <img alt="RSS 2.0" src="/img/rss2.png" border="0"> </a> <a href="http://www.mozilla.org/products/firefox/" target="_blank"> <img alt="Get firefox" src="/img/firefox.gif" border="0"> </a> </div>
+	<div> Copyright ? 2007 - 2009 Neo All Rights Reserved. {*Group Limited*} </div>
+	
+</div>
+
+
+    <footer>
+        <p>&copy; Company 2012</p>
+    </footer>	
+	
+</body>
+</html>

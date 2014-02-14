@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<?php echo $this->tag->getTitle() ?>
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+            <?php echo $this->elements->getMenu() ?>
+        </div>
+    </div>
+</div>
+<div class="sidebar">
+<ul class="menu">
+    <li><a href="/">Home</a></li>
+    <li><a href="/articles">Articles</a></li>
+    <li><a href="/contact">Contact us</a></li>
+</ul>
+</div>
+<div class="container">
+	<?php echo $this->getContent() ?>
+</div>	
+    <footer>
+        <p>&copy; Company 2012</p>
+    </footer>	
+	
+</body>
+</html>
