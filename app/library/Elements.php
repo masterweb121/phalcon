@@ -15,17 +15,27 @@ class Elements extends Component
 	}
     public function getMenu()
     {
+		$links = array(
+				array('title'=>'Home', 'link'=>'/'),
+				array('title'=>'Technology','link'=>'/technology/'),
+				array('title'=>'About','link'=>'/about/')
+		);
         //...
-	return('
-		<a class="brand" href="/">Home</a> | <a class="brand" href="#">About</a>
-		');
+		return($links);
     }
-	public function getMenuitem()
+	public function getMenuitem($menu)
     {
-        //...
-	return('
-		<a class="brand" href="/">Home</a> | <a class="brand" href="#">About</a>
-		');
+		$submenu = array('/about/' => array(
+				array('title'=>'Home', 'link'=>'/'),
+				array('title'=>'Technology','link'=>'/technology/'),
+				array('title'=>'About','link'=>'/about/')
+			)
+		);
+		if(array_key_exists($menu,$submenu)){
+			
+			return($submenu[$menu]);
+		}
+		return( array());
     }
     public function getTabs()
     {

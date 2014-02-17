@@ -2,18 +2,13 @@
 <html>
 <head>
 	<?php echo $this->tag->getTitle() ?>
-<link href="css/theme.css" rel="stylesheet" rev="stylesheet" type="text/css" media="all">
+<link href="/css/theme.css" rel="stylesheet" rev="stylesheet" type="text/css" media="all">
 <style type="text/css">
 body,table,input,textarea,select {font-family:微软雅黑,Verdana,sans-serif,宋体;}  
 </style>
  
 </head>
 <body>
-<div class=channel">
-
-</div>
-
-
 <div id="global-header">
 	<div id="channel">
 		<div class="language">
@@ -44,8 +39,11 @@ body,table,input,textarea,select {font-family:微软雅黑,Verdana,sans-serif,�
 		</div>
 	</div>
 	<div class="navigation">
-	<?php echo $this->elements->getMenu() ?>
-	<ul>
+		<ul>
+		<?php foreach( $this->elements->getMenu() as $menu) {?>
+			<li class="on"><a href="<?php echo $menu['link']?>" target="_parent"><?php echo $menu['title']?></a></li>
+		<?php }?>
+		<!--
 		<li {if="" $mainmenu="" eq="" ''="" or="" 'index'}="" class="on" {="" if}=""><a href="/index.html" target="_parent">{#home#}</a></li>
 		<li {if="" $mainmenu="" eq="" 'technology'}="" class="on" {="" if}=""><a href="/technology/index.html" target="_parent">{#technology#}</a></li>
 		<li {if="" $mainmenu="" eq="" 'photography'}="" class="on" {="" if}=""><a href="/photography/index.html" target="_parent">{#photography#}</a></li>
@@ -56,18 +54,33 @@ body,table,input,textarea,select {font-family:微软雅黑,Verdana,sans-serif,�
 		<li {if="" $mainmenu="" eq="" 'groups'}="" class="on" {="" if}=""><a href="/groups/index.html" target="_parent">{#group#}</a></li>		
 		<li {if="" $mainmenu="" eq="" 'member'}="" class="on" {="" if}=""><a href="/member/index.html" target="_parent">{#member#}</a></li>
 		<li {if="" $mainmenu="" eq="" 'guestbook'}="" class="on" {="" if}=""><a href="/member/guestbook.html" target="_parent">{#guestbook#}?????</a></li>
-	</ul>
+		-->
+		</ul>
 	<ul style="float:right;">
 		<li>
-		{include file="block/search.tpl" block='box'}
+<!-- Google CSE Search Box Begins -->
+  <form id="searchbox_008589143145807374698:f5uprauilyy" action="/technology/search/">
+    <input type="hidden" name="cx" value="008589143145807374698:f5uprauilyy" />
+    <input type="hidden" name="cof" value="FORID:11" />
+    <input name="q" type="text" size="25" />
+    <input type="submit" name="sa" value="Search" />
+  </form>
+  <script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=searchbox_008589143145807374698%3Af5uprauilyy"></script>
+<!-- Google CSE Search Box Ends -->
 		</li>
 	</ul>
 </div>
-{if $submenu}
+<?php if($this->elements->getMenuitem($_GET['_url'])){ ?>
 <div class="subnav">
-	{include file="$submenu" }
+	<ul>
+	<?php foreach( $this->elements->getMenuitem($_GET['_url']) as $submenu) {?>
+	<li class="on"><a href="<?php echo $submenu['link']?>" target="_parent"><?php echo $submenu['title']?></a></li>
+	<?php }?>
+	<ul>
 </div>
-{/if}</div>
+<?php } ?>
+
+</div>
 
 <!--
 <div class="sidebar">
@@ -81,174 +94,6 @@ body,table,input,textarea,select {font-family:微软雅黑,Verdana,sans-serif,�
 
 <div id="container">
 <?php echo $this->getContent() ?>
-
-<div id="fullContainer">
-
-<div id="bigContainer">
-
-	<div class="main-module">
-		<div class="head"><h2>站长简介</h2></div>
-		<div class="body"> 
-			<img src="/img/shutterbug.gif" height="75" style="float:left;" alt="shutterbug">
-			<img src="/img/neo.jpg" height="90" alt="shutterbug" style="float:right; padding-right:10px;">	
-			  <p>陈景峰 &nbsp; 昵称：netkiller &nbsp; English name: Neo chen &nbsp;<br>
-			  盲流，IT民工,UNIX like爱好者,业余无线电爱好者（呼号：BG7NYT）,摄影爱好者。<br>
-			  《PostgreSQL实用实例参考》，《Postfix 完整解决方案》，《Netkiller Security 手札》，《Netkiller Linux 手札》文档的作者 &nbsp;&nbsp;&nbsp;&nbsp;
-			<a href="/home/about.html" class="score-700">more &gt;&gt;&gt;</a></p>
-	   	</div>
-		<div class="foot"></div>
-	</div>
-	<div class="main-module">
-		<div class="head"><h2>原创文档</h2></div>
-		<div class="body">
-		<div style="float:left;">
-			<ul>
-				<li><a href="/technology/linux/index.html">Netkiller Linux 手札</a></li>
-			  	<li><a href="/technology/developer/index.html">Netkiller Developer 手札</a></li>
-				<li><a href="/technology/security/index.html">Netkiller Security 手札</a></li>
-				<li><a href="/technology/docbook/index.html">Netkiller Document 手札</a></li>
-				<li><a href="/technology/database/index.html">Netkiller Database 手札</a></li>
-				<li><a href="/technology/ubuntu/index.html">Netkiller Ubuntu 手札</a></li>
-				<li><a href="/technology/centos/index.html">Netkiller CentOS 手札</a></li>
-				<li><a href="/technology/freebsd/index.html">Netkiller FreeBSD 手札</a></li>
-				
-			</ul>
-		</div>	
-		<div style="float:left;">	
-		<ul>
-			<li><a href="http://netkiller.users.sourceforge.net/archives/technology/architect/index.html">Netkiller Architect 手札</a></li>
-			<li><a href="http://netkiller.users.sourceforge.net/archives/technology/architect/index.html">大型网站架设指南</a></li>
-			<li><a href="http://netkiller.users.sourceforge.net/archives/technology/postgres/postgresql.html">PostgreSQL 实例参考</a></li>
-			<li><a href="http://netkiller.users.sourceforge.net/archives/technology/postfix/index.html">Postfix Solution</a></li>
-			<li><a href="http://netkiller.users.sourceforge.net/archives/technology/pureftpd/index.html">PureFTPD</a></li>
-			<li><a href="http://netkiller.users.sourceforge.net/archives/technology/proftpd/index.html">ProFTPD</a></li>
-			<li><a href="/technology/" class="score-812.5 endless-pages-found-next-link">More &gt;&gt;&gt;</a></li>		
-		</ul>
-		</div>
-	   	</div>
-		<div class="foot"></div>
-	</div>
-
-	<div class="main-module">
-		<div class="head"><h2>{#itinerary#}</h2></div>
-		<div class="body">
-			<ol>
-			{foreach from=$travels item=last10}
-				<li><a href="/outdoor/travelogue/itinerary/%7B$last10-%3Eid%7D.html">{$last10-&gt;title}</a></li>
-			{/foreach}
-			</ol>
-		</div>
-	</div>
-	
-</div>
-<div id="smallContainer">
-
-<div class="side-module">
-	<div class="head"><h2>摄影作品</h2></div>
-	<div class="body">	
-	<a href="/photography/"><img src="/img/slides.jpg" width="278"></a>
-   	</div>
-	<div class="foot"></div>
-</div>	
-{if $activities}
-<div class="side-module">
-	<div class="head"><h2>原最新活动</h2></div>
-	<div class="body">
-		<ol>
-		{foreach from=$activities item=line}
-			<li>
-				<a href="/activity/item/%7B$line-%3Eid%7D.html">{$line-&gt;subject}</a>
-			</li>
-		{/foreach}
-		</ol>
-   	</div>
-	<div class="foot"></div>
-</div>
-{/if}
-
-
-
-	</div>
-
-{*	
-	<div id="leftColumn">
-		{include file="left.tpl"}
-	</div>	
-
-	<div id="rightColumn">
-		{include file="right.tpl"}
-	</div>
-*}	
-
-</div>
-{*
-<br clear="all">
-
-<table width="100%">
-	<tbody><tr>
-	<td valign="top">	
-	<div class="main-module">
-		<div class="head"><h2>{$rss.digital.headline}</h2></div>
-		<div class="body">
-		<ol>
-		{foreach from=$rss.digital.items item=i}
-			<li><a href="http://netkiller.users.sourceforge.net/%7B$i.link%7D">{$i.title}</a></li>
-		{/foreach}
-		</ol>
-	   	</div>
-		<div class="foot"></div>
-	</div>
-	</td>
-	<td valign="top">
-	<div class="main-module">
-		<div class="head"><h2>{$rss.car.headline}</h2></div>
-		<div class="body">
-		<ol>
-		{foreach from=$rss.car.items item=i}
-			<li><a href="http://netkiller.users.sourceforge.net/%7B$i.link%7D">{$i.title}</a></li>
-		{/foreach}
-		</ol>
-	   	</div>
-		<div class="foot"></div>
-	</div>
-	</td>
-	<td valign="top">
-	<div class="main-module">
-		<div class="head"><h2>{$rss.book.headline}</h2></div>
-		<div class="body">
-		<ol>
-		{foreach from=$rss.book.items item=i}
-			<li><a href="http://netkiller.users.sourceforge.net/%7B$i.link%7D">{$i.title}</a></li>
-		{/foreach}
-		</ol>
-	   	</div>
-		<div class="foot"></div>
-	</div>	
-		
-	</td>
-	</tr>
-</tbody></table>
-
-<table width="100%">
-    <tbody><tr>
-    <td valign="top">
-
-
-
-    </td>
-    <td valign="top">
-
-
-
-    
-    </td>
-    <td valign="top">
-
-    </td>
-    </tr>
-</tbody></table>
-*}
-
 </div>
 
 <br clear="all">
@@ -274,11 +119,6 @@ body,table,input,textarea,select {font-family:微软雅黑,Verdana,sans-serif,�
 	<div> Copyright ? 2007 - 2009 Neo All Rights Reserved. {*Group Limited*} </div>
 	
 </div>
-
-
-    <footer>
-        <p>&copy; Company 2012</p>
-    </footer>	
 	
 </body>
 </html>

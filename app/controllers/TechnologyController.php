@@ -4,7 +4,7 @@ class TechnologyController extends HomeController
 {
 	public function initialize()
     {
-        //$this->view->setTemplateAfter('home');
+        $this->view->setTemplateAfter('index');
 		//Set the document title
         $this->tag->setTitle('Signup');
         parent::initialize();
@@ -15,6 +15,9 @@ class TechnologyController extends HomeController
 
     }
 	public function linuxAction(){
+	
+
+	
 		$book='linux';
 		$page = str_replace('/technology/'.$book.'/','', $_GET['_url']);
 		if(empty($page)){
@@ -26,8 +29,8 @@ class TechnologyController extends HomeController
 		$response->setContent($html);
 		
 		$expireDate = new DateTime();
-		$expireDate->modify('+1 minutes');
-		$response->setExpires($expireDate);
+		$expireDate->modify('+5 minutes');
+		$response->setExpires($expireDate);		
 		echo $html;
 	}
 	public function docbook($book,$page){
@@ -59,4 +62,7 @@ class TechnologyController extends HomeController
 
         $this->view->disable();
     }
+	public function searchAction(){
+	
+	}
 }
