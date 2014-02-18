@@ -4,7 +4,7 @@ class SignupController extends HomeController
 {
 	public function initialize()
     {
-        $this->view->setTemplateAfter('home');
+        $this->view->setTemplateAfter('index');
 		//Set the document title
         $this->tag->setTitle('Signup');
         parent::initialize();

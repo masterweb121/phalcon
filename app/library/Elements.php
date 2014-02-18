@@ -19,6 +19,7 @@ class Elements extends Component
 		$links = array(
 				array('title'=>'Home', 'link'=>'/'),
 				array('title'=>'Technology','link'=>'/technology/'),
+				array('title'=>'Photography','link'=>'/photography/'),
 				array('title'=>'About','link'=>'/about/')
 		);
         //...
@@ -47,6 +48,13 @@ class Elements extends Component
 				array('title'=>'MySQL','link'=>'/technology/mysql/'),
 				array('title'=>'FreeBSD','link'=>'/technology/freebsd/'),
 				array('title'=>'Architect','link'=>'/technology/architect/')
+			),
+			'photography' => array(
+				array('title'=>'2014','link'=>'/photography/2014/'),
+				array('title'=>'2013','link'=>'/photography/2013/'),
+				array('title'=>'2012','link'=>'/photography/2012/'),
+				array('title'=>'2011','link'=>'/photography/2011/'),
+				array('title'=>'2010','link'=>'/photography/2010/')
 			)
 		);
 		if(array_key_exists($menu,$submenu)){

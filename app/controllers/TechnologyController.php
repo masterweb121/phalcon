@@ -81,7 +81,16 @@ class TechnologyController extends HomeController
 		$response->setExpires($expireDate);		
 		echo $html;
 	}
-	
+	public function developerAction(){
+		$book='developer';
+		$html = $this->docbook($book);
+		echo $html;
+	}
+	public function phpAction(){
+		$book='php';
+		$html = $this->docbook($book);
+		echo $html;
+	}
 	public function docbook($book){
 
 		$page = str_replace('/technology/'.$book.'/','', $_GET['_url']);
