@@ -91,6 +91,9 @@ class TechnologyController extends HomeController
 		$html = $this->docbook($book);
 		echo $html;
 	}
+	public function freebookAction($book){
+		print_r( $this->elements->getChannel());
+	}
 	public function docbook($book){
 
 		$page = str_replace('/technology/'.$book.'/','', $_GET['_url']);
@@ -99,7 +102,12 @@ class TechnologyController extends HomeController
 		}
 		
 		$subdir = substr($page, 0, strrpos($page,'/'));
-	
+		
+		$img = strrpos($page,'.png');
+		if($img){
+			$this->view->disable();
+		}
+
 		//Create an Output frontend. Cache the files for 2 days
 		$frontCache = new Phalcon\Cache\Frontend\Output(array(
 			"lifetime" => 172800
@@ -127,6 +135,8 @@ class TechnologyController extends HomeController
 			}
 			$content = str_replace('href="', 'href="'.$prefix, $content);
 			$content = str_replace('src="', 'src="'.$prefix, $content);
+			$content = str_replace('href="'.$prefix.'http://', 'href="http://', $content);
+			
 			// Store it in the cache
 			$cache->save($cacheKey, $content);
 		}	

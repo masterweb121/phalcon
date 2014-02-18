@@ -60,6 +60,12 @@ try {
         return new Elements();
     });
 
+	//Register a controller as a service
+	$di->set('browse', function() {
+		$component = new Browse();
+		return $component;
+	});
+
     //Handle the request
     $application = new \Phalcon\Mvc\Application($di);
 
