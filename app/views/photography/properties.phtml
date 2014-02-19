@@ -1,0 +1,96 @@
+<div id="fullContainer">
+<div id="bigContainer">
+
+	<div class="main-module">
+		<div class=head><H2>{#itinerary#}</H2></div>
+		<div class=body>
+			<ol>
+			{foreach from=$last10s item=last10}
+				<li><a href="/{$locale}/outdoor/travelogue/itinerary/{$last10->id}.html">{$last10->title}</a></li>
+			{/foreach}
+			</ol>
+		</div>
+	</div>
+
+	<div class="main-module">
+	    <div class="head"><h2>{#article#}</h2></div>
+	    <div class="body">
+		{if $article}
+			<ol>
+			{foreach from=$article item=row}
+				<li><a href="/{$locale}/article/{$row->category_id}/{$row->id}.html">{$row->title}</a></li>
+			{/foreach}
+			</ol>
+		{/if}
+	    </div>
+	    <div class="foot"></div>
+	</div>	
+{*
+	<div id=gumballs>
+		{foreach from=$photos item=Photo}
+		<div class=gumball>
+			<a href="/{$locale}/photography/view/{$Photo->photo_category_id}/{$Photo->id}/" rel=nofollow>
+				<img alt="{$Photo->title}" src="{#PHOTO_URL#}/thumbnail_{$Photo->path}">
+			</a>
+			<a href="{$Photo->id}">{$Photo->title}</a> 
+		</div>
+		{/foreach}
+	</div>
+*}
+</div>
+<div id="smallContainer">
+<div class="side-module">
+  <div class="head">
+    <h2>EXIF Parameters</h2>
+  </div>
+  <div class="body" style="padding:5px 0px 0px 0px;">
+	{if $exif}
+	<ul>
+		{foreach from=$exif key=name item=value}
+		<li>&nbsp;&nbsp;{$name} : {$value} </li>
+		{/foreach}
+	</ul>
+	{else}
+		&nbsp;&nbsp;&nbsp; NO EXIF
+	{/if}
+    <div class="divider solid"></div>
+    <div class=foot-links><a href="/{$locale}/photography/home/about/exif.html">About EXIF Parameters</a> </div>
+  </div>
+  <div class=foot></div>
+</div>
+
+<div class="side-module">
+  <div class="head">
+    <h2>RGB Histogram</h2>
+  </div>
+  <div class="body" style="padding:0px;">
+ 	<img src="/{$locale}/photography/gallery/histograms/{$histogram}" width=245 />
+    <div class="divider solid"></div>
+    <div class=foot-links><a href="/{$locale}/photography/home/about/histogram.html">About RGB Histogram</a> </div>
+  </div>
+  <div class=foot></div>
+</div>
+
+<div class="side-module">
+  <div class="head">
+    <h2>一些常用光源的色温为</h2>
+  </div>
+  <div class="body">
+
+	<ul> 
+	  <li>标准烛光为1930K（开尔文温度单位）；</li> 
+	  <li>钨丝灯为2760-2900K；</li>				
+	  <li>荧光灯为3000K；</li>			
+	  <li>闪光灯为3800K；</li>			
+	  <li>中午阳光为5400K；</li>	
+	  <li>电子闪光灯为6000K；</li> 
+	  <li>蓝天为12000-18000K。</li> 
+	</ul> 
+
+    <div class="divider solid"></div>
+    <div class="foot-links">  </div>
+  </div>
+  <div class="foot"></div>
+</div>
+</div>
+</div>

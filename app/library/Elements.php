@@ -50,11 +50,11 @@ class Elements extends Component
 				array('title'=>'Architect','link'=>'/technology/architect/')
 			),
 			'photography' => array(
-				array('title'=>'2014','link'=>'/photography/2014/'),
-				array('title'=>'2013','link'=>'/photography/2013/'),
-				array('title'=>'2012','link'=>'/photography/2012/'),
-				array('title'=>'2011','link'=>'/photography/2011/'),
-				array('title'=>'2010','link'=>'/photography/2010/')
+				array('title'=>'2014','link'=>'/photography/album/2014/'),
+				array('title'=>'2013','link'=>'/photography/album/2013/'),
+				array('title'=>'2012','link'=>'/photography/album/2012/'),
+				array('title'=>'2011','link'=>'/photography/album/2011/'),
+				array('title'=>'2010','link'=>'/photography/album/2010/')
 			)
 		);
 		if(array_key_exists($menu,$submenu)){

@@ -1,0 +1,125 @@
+	<script type="text/javascript" src="/js/photoview.js"></script>
+	<div id="preview">
+		<div style="float:none">
+			<ul>
+				<li style="float:left;">图片名称：{$preview.name}</li>
+				<li style="float:right;">图片作者：<a href="/profile/{$preview.id}/">{$preview.username}</a></li>
+			</ul>
+		</div>
+<!--		
+		{if $isfull }
+
+			<div id="photoview" style="width: 959px">
+			<a href="/photos/preview/{$preview.id}/">
+			<img id="photo" src="{#PHOTO_URL#}/{$preview.photo}" onload="javascript:if(this.width>900) this.width=900;" />
+			</a>
+			</div>
+
+		{else}
+-->			
+			<div id="photoview" style="width: 579px">
+			<a href="/photos/full/{$preview.id}/">
+				<img id="photo" src="/<?php echo $image ?>" onload="javascript:if(this.width > this.height){if(this.width>570) this.width=570;}else{if(this.height>570) this.height=570;}" />
+			</a>
+			</div>
+			
+		<div class="control">
+	<table id="button_bar" border="0" cellspacing="0" cellpadding="3" align="center">
+	<tr>
+	 <td align="right" style="padding-left:8px;">			
+		  <table border="0" cellspacing="0" cellpadding="0">
+		   <tr>
+			<td onmouseover="bg('#000000')" width="15" bgColor="#000000" height="15"></td>
+			<td onmouseover="bg('#1A1A1A')" width="15" bgColor="#1A1A1A" height="15"></td>
+			<td onmouseover="bg('#333333')" width="15" bgColor="#333333" height="15"></td>
+			<td onmouseover="bg('#4D4D4D')" width="15" bgColor="#4D4D4D" height="15"></td>
+			<td onmouseover="bg('#666666')" width="15" bgColor="#666666" height="15"></td>
+			<td onmouseover="bg('#808080')" width="15" bgColor="#808080" height="15"></td>
+			<td onmouseover="bg('#999999')" width="15" bgColor="#999999" height="15"></td>
+		
+			<td onmouseover="bg('#B3B3B3')" width="15" bgColor="#B3B3B3" height="15"></td>
+			<td onmouseover="bg('#CCCCCC')" width="15" bgColor="#CCCCCC" height="15"></td>
+			<td onmouseover="bg('#EEEEEE')" width="15" bgColor="#EEEEEE" height="15"></td>
+			<td onmouseover="bg('#FFFFFF')" width="15" bgColor="#FFFFFF" height="15"></td>
+			<td onmouseover="bg('#F3F3F3')" width="15" bgColor="wheat" height="15"></td>
+			<td width="5"></td>
+			<td><img style="cursor: pointer" onclick="toggleGreyScale('photo');" width="20" height="15" alt="黑白" src="/images/grayscale.gif"></td>
+		   </tr>
+		  </table>
+	 </td>
+	 <td style="padding-right:8px;">
+		<script language="javascript">
+		  var intPhotoW = document.images["photo"].width;
+		  var intPhotoH = document.images["photo"].height;
+		</script>
+		<a href="#" onClick="javascript:setPhotoScale(50); return false" title="缩放至 50%">50%</a>
+		<a href="#" onClick="javascript:setPhotoScale(75); return false" title="缩放至 75%">75%</a>	
+		<a href="#" onClick="javascript:setPhotoScale(100); return false" title="缩放至 100%">100%</a> 
+		<a href="#" onClick="javascript:toggleHorizontalMirror('photo'); return false" title="Horizontal Mirror">水平</a> 
+		<a href="#" onClick="javascript:toggleVerticalMirror('photo'); return false" title="Vertical Mirror">垂直</a> 
+		<a href="#" onClick="javascript:toggleInvert('photo'); return false" title="Invert">彩色反转片</a> 
+		<a href="#" onClick="javascript:toggleXray('photo'); return false" title="Xray">黑白反转片</a>
+{*		
+		<a href="#" onClick="javascript:toggleMask('photo'); return false" title="Invert">mask</a> 
+*}	 
+		
+		
+		  
+	 </td>
+	</tr>
+	</table>			  
+		</div>
+<!--
+		<div class="description">
+		{#description#}：{$preview.description}
+		</div>
+		{if $preview.camera}
+		<div class="camera">
+			{#camera#}：{$preview.camera}
+		</div>
+		{/if}
+		{if $preview.lens}
+		<div class="lens">
+			{#lens#}：{$preview.lens}
+		</div>
+		{/if}
+-->		
+	</div>
+
+<?php
+
+?>
+
+<?php foreach($related as $image) { ?>
+<div style="width:98px;height:80px;background:#EEE;border:1px solid #ccc;text-align:center;float:left;margin:0 0 5px 5px;display:inline;overflow:hidden;">
+	<div style="width:95px;margin:3px;">
+		<a href="/photography/photo/<?php echo $collection?>/<?php echo $album ?>/<?php echo $image ?>/" rel="nofollow">
+        <img style="width:128px;" src="/images/<?php echo $collection?>/<?php echo $album ?>/<?php echo $image ?>" alt="Thumbnail..."/>
+		</a>
+	</div>
+</div>
+<?php } ?>
+
+
+<!--	
+	<div id="feedback">
+		<dl>
+			<dt>最新留言</dt>
+			{if $comments}
+				<dd>
+				{foreach from=$comments item=comment}
+				<ul>
+					<li style="padding-left:5px; ">{$comment.username}: </li>
+					<li>{$comment.comment}</li>
+					<li style="float:right;">{$comment.created}</li>
+				</ul>
+				<br clear="all" />
+				{/foreach}
+				</dd>
+			{else}
+				<dd>没有评论</dd>
+			{/if}
+			
+		</dl>
+	</div>
+-->	
