@@ -1,0 +1,27 @@
+<link rel="stylesheet" href="/css/photo.css" type="text/css" media="all" />
+
+<div class="main-module">
+	<div class="head"><h2><?php echo $imagepath ?> - 版权所有,侵权必究,禁止转载,商业用途,如有问题请联系本人.</h2></div>
+	<div class="body">
+
+		<div class="slide">
+		<a href="/photography/photo/<?php echo $imagepath ?>">
+			<img id="photo" src="/photography/image/<?php echo $imagepath ?>" onload="javascript:if(this.width>933) this.width=933;" />
+		</a>
+		</div>
+
+	</div>
+</div>	
+<br />
+	
+<br clear="all" />
+
+<?php foreach($related as $image) { ?>
+<div style="width:98px;height:80px;background:#EEE;border:1px solid #ccc;text-align:center;float:left;margin:0 0 5px 5px;display:inline;overflow:hidden;">
+	<div style="width:95px;margin:3px;">
+		<a href="/photography/slide/<?php echo $collection?>/<?php echo $album ?>/<?php echo $image ?>" rel="nofollow">
+        <img style="width:128px;" src="/photography/thumbnail/<?php echo $collection?>/<?php echo $album ?>/<?php echo $image ?>" alt="Thumbnail..."/>
+		</a>
+	</div>
+</div>
+<?php } ?>

@@ -123,7 +123,7 @@ class TechnologyController extends HomeController
 		$url = 'http://192.168.6.2/'.$book.'/'.$page;
 		
 		// Try to get cached records
-		$cacheKey = crc32($url);
+		$cacheKey = 'doc.'.crc32($url);
 		$content    = $cache->get($cacheKey);
 		if ($content === null) {
 			$content = @file_get_contents($url); 
