@@ -1,7 +1,7 @@
 div.slide {
 	padding:5px;
 	border: 4px #aaaaaa  solid;
-	margin-bottom:10px;
+	margin-bottom:5px;
 	width: 942px;
 	text-align:center; 
 	font-size: 24px;
@@ -23,77 +23,27 @@ div.view img {
 	border: 2px #aaaaaa  solid;
 	margin-bottom: 20px;
 }
-div.activity div.content table tr{
-	border: 1px #aaaaaa  solid;
-	font-size:12px;
-}		
 
-/* ==========================  outdoor ============================== */
-div.outdoor{
-	border: 1px #aaaaaa  solid;
+div.photo_relate {
+	text-align:center;
 }
 
-/* ==========================  member ============================== */
-#profile ul{
-	margin:0px;
-	padding:0px;
-	width:550px;
-}
-#profile ul li{
+div.relate {
+	height:80px;
 	float:left;
-	margin:2px;
-	padding:2px;
-	list-style-type:none;
-	height: 22px;
 }
 
-.profile_label{
-	width:70px;
-}
-.profile_value{
-	width:400px;
-}
-/*  ==========================   Frame   ============================ */
-#container{
-	clear:both;
-	/*width: 980px;*/
-}
+div.relate img {
+	width:100px;
 
-#leftColumn { 
-	float: left;
-	width: 200px;
-	vertical-align:top;
-	margin-right: 10px;
-}
+	background:#EEE;
+	border:1px solid #ccc;
+	text-align:center;
 
-#centerColumn {
-	float: left;
-	text-align: left;
-	width: 560px;
-	white-space:normal;
-	/*word-break:break-all;*/
-	word-wrap: break-word;	
-}
+	padding:5px;
+	/*margin:0 0 5px 5px;*/
+	
 
-#rightColumn {
-	float:right;
-	margin-left: 10px; 
-	width: 180px;
-}
-
-#bigContainer { 
-	float: left;
-	width: 650px;
-}
-#smallContainer { 
-	float: right;
-	width: 300px;
-}
-#halfContainer{
-	width: 600px;
-}
-#leftColumn dl,#centerColumn dl,#rightColumn dl,
-#bigContainer dl, #smallContainer dl
-{ 
-
+	display:inline;
+	overflow:hidden;
 }

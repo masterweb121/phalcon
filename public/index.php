@@ -1,8 +1,9 @@
 <?php 
 //print_r(get_loaded_extensions()); 
-
+//print_r($_SERVER);
+//print_r($_POST);
+//die();
 try {
-
 
     //Read the configuration
     $config = new Phalcon\Config\Adapter\Ini('../app/config/config.ini');

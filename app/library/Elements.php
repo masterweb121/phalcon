@@ -20,6 +20,7 @@ class Elements extends Component
 				array('title'=>'Home', 'link'=>'/'),
 				array('title'=>'Technology','link'=>'/technology/'),
 				array('title'=>'Photography','link'=>'/photography/'),
+				array('title'=>'Radio','link'=>'/radio/'),
 				array('title'=>'About','link'=>'/about/')
 		);
         //...

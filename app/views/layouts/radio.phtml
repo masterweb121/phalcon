@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<?php echo $this->tag->getTitle() ?>
+<link href="/css/theme.css" rel="stylesheet" rev="stylesheet" type="text/css" media="all">
+<style type="text/css">
+body,table,input,textarea,select {font-family:微软雅黑,Verdana,sans-serif,宋体;}  
+</style>
+ 
+</head>
+<body>
+<div id="global-header">
+	<div id="channel">
+		<div class="language">
+		<?php 
+		foreach ($this->elements->getChannel() as $link) {
+			echo "$link\n";
+		}
+		?>
+			<a href="http://netkiller.users.sourceforge.net/zh-cn/%7B$uri_string%7D">{#chinese#}</a> |
+			<a href="http://netkiller.users.sourceforge.net/zh-tw/%7B$uri_string%7D">{#taiwan#}</a> |
+			<a href="http://netkiller.users.sourceforge.net/en-us/%7B$uri_string%7D">{#english#}</a> |
+			<a title="点击以繁体中文方式浏览" name="StranLink" href="http://netkiller.users.sourceforge.net/#">繁體中文</a>
+
+		</div>
+		<div class="member">
+
+		</div>
+	</div>
+	<div id="masthead">
+		<div id="logo">
+			<img src="/img/freebsd.png" height="75" alt="freebsd logo">
+			<img src="/img/linux.png" height="75" alt="linux logo">
+			<img src="/img/openbsd.png" height="75" alt="openbsd logo">
+			<img src="/img/gnu.png" height="75" alt="gnu logo">
+		</div>
+		<div id="banner">
+		
+		</div>
+	</div>
+	<div class="navigation">
+		<ul>
+		<?php foreach( $this->elements->getMenu() as $menu) {?>
+			<li class="on"><a href="<?php echo $menu['link']?>" target="_parent"><?php echo $menu['title']?></a></li>
+		<?php }?>
+		<!--
+		<li {if="" $mainmenu="" eq="" ''="" or="" 'index'}="" class="on" {="" if}=""><a href="/index.html" target="_parent">{#home#}</a></li>
+		<li {if="" $mainmenu="" eq="" 'technology'}="" class="on" {="" if}=""><a href="/technology/index.html" target="_parent">{#technology#}</a></li>
+		<li {if="" $mainmenu="" eq="" 'photography'}="" class="on" {="" if}=""><a href="/photography/index.html" target="_parent">{#photography#}</a></li>
+		<li {if="" $mainmenu="" eq="" 'radio'}="" class="on" {="" if}=""><a href="/radio/index.html" target="_parent">{#radio#}</a></li>
+        <li {if="" $mainmenu="" eq="" 'outdoor'}="" class="on" {="" if}=""><a href="/outdoor/index.html" target="_parent">{#outdoor#}</a></li>
+        <li {if="" $mainmenu="" eq="" 'music'}="" class="on" {="" if}=""><a href="/music/index.html">{#music#}</a></li>
+		<li {if="" $mainmenu="" eq="" 'activity'}="" class="on" {="" if}=""><a href="/activity/index.html" target="_parent">{#activity#}</a></li>
+		<li {if="" $mainmenu="" eq="" 'groups'}="" class="on" {="" if}=""><a href="/groups/index.html" target="_parent">{#group#}</a></li>		
+		<li {if="" $mainmenu="" eq="" 'member'}="" class="on" {="" if}=""><a href="/member/index.html" target="_parent">{#member#}</a></li>
+		<li {if="" $mainmenu="" eq="" 'guestbook'}="" class="on" {="" if}=""><a href="/member/guestbook.html" target="_parent">{#guestbook#}?????</a></li>
+		-->
+		</ul>
+	<ul style="float:right;">
+		<li>
+<!-- Google CSE Search Box Begins -->
+  <form id="searchbox_008589143145807374698:f5uprauilyy" action="/technology/search/">
+    <input type="hidden" name="cx" value="008589143145807374698:f5uprauilyy" />
+    <input type="hidden" name="cof" value="FORID:11" />
+    <input name="q" type="text" size="25" />
+    <input type="submit" name="sa" value="Search" />
+  </form>
+  <script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=searchbox_008589143145807374698%3Af5uprauilyy"></script>
+<!-- Google CSE Search Box Ends -->
+		</li>
+	</ul>
+</div>
+<?php if($this->elements->getMenuitem($_GET['_url'])){ ?>
+<div class="subnav">
+	<ul>
+	<?php foreach( $this->elements->getMenuitem($_GET['_url']) as $submenu) {?>
+	<li class="on"><a href="<?php echo $submenu['link']?>" target="_parent"><?php echo $submenu['title']?></a></li>
+	<?php }?>
+	<ul>
+</div>
+<?php } ?>
+
+</div>
+
+<!--
+<div class="sidebar">
+<ul class="menu">
+    <li><a href="/">Home</a></li>
+    <li><a href="/articles">Articles</a></li>
+    <li><a href="/contact">Contact us</a></li>
+</ul>
+</div>
+-->
+
+<div id="container">
+<?php echo $this->getContent() ?>
+</div>
+
+<br clear="all">
+<div id="global-footer">
+  	<div class="first">
+		<span>版权所有,侵权必究,法律顾问 <a href="http://www.arclawyer.cn/">广东广和律师事务所</a>孙建武律师(<a href="/radio/qrz/bg7nhl.html">BG7NHL</a>)</span>
+	</div>
+	<div class="second">
+		<a href="http://tuhuli.com/">土狐狸 </a> &nbsp;|&nbsp;
+		<a href="http://lhbc.sq.ez369.cn/">易众社区</a> &nbsp;|&nbsp; 
+		<a href="http://zyr.hk/">自由人俱乐部</a> 
+	</div>
+	<div class="third"> 
+  		<a href="/home/about.html">About</a> | 
+  		<a href="/home/contact.html">Contact us</a> | 
+  		<a href="http://netkiller.users.sourceforge.net/sitemaps/technology.xml">Sitemaps</a> |
+  		<a href="http://netkiller.users.sourceforge.net/#">FAQs</a> | 
+  		<a href="http://netkiller.users.sourceforge.net/#">Affiliates</a> | 
+  		<a href="http://netkiller.users.sourceforge.net/#">Privacy policy </a>
+	</div>
+	
+	<div> <a href="http://validator.w3.org/check?uri=referer" target="_blank"> <img alt="XHTML 1.0 Transitional" src="/img/xhtml.png" border="0"> </a> <a href="http://jigsaw.w3.org/css-validator/check/referer" target="_blank"> <img alt="Css Validator" src="/img/css.png" border="0"> </a> <a href="http://netkiller.users.sourceforge.net/new.xml" target="_blank"> <img alt="RSS 2.0" src="/img/rss2.png" border="0"> </a> <a href="http://www.mozilla.org/products/firefox/" target="_blank"> <img alt="Get firefox" src="/img/firefox.gif" border="0"> </a> </div>
+	<div> Copyright ? 2007 - 2009 Neo All Rights Reserved. {*Group Limited*} </div>
+	
+</div>
+	
+</body>
+</html>
