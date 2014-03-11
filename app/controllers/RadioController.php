@@ -12,8 +12,10 @@ class RadioController extends HomeController
 	
     public function indexAction()
     {
-		
 		//$this->view->disable();
+    }
+    public function repeaterAction(){
+        
     }
     public function registerAction()
     {

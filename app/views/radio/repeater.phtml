@@ -1,0 +1,155 @@
+<div class="wrapper">
+
+<div class="mainWrap">
+
+
+<div class="main-module">
+	<div class="head"><h2>{#repeater#} 439.460 信号覆盖区</h2></div>
+	<div class="body"> 
+
+<script>
+$(document).ready(function(){
+	if (GBrowserIsCompatible()) {
+		var map = new GMap2(document.getElementById("map_canvas"));
+
+		//map.addControl(new GSmallMapControl());
+        //最大模式
+        map.addControl(new GLargeMapControl());
+        //只有放大和缩小的模式
+        //map.addControl(new GSmallZoomControl());
+        //只有地图缩放控制条的模式
+        map.addControl(new GScaleControl());
+        //填加地图类型控制器 允许在地图视图、卫星视图和地图卫星混合模式, 三个模式中切换
+        map.addControl(new GMapTypeControl());
+        map.addControl(new GOverviewMapControl());
+		map.setMapType(G_NORMAL_MAP);
+		map.setCenter(new GLatLng(22.5345, 114.0610), 9);
+		map.setUIToDefault();
+
+    /**
+     * Add a circle to the global variable "map". This function won't work for circles that encompass
+     * the North or South Pole. Also, there is a slight distortion in the upper-left, upper-right,
+     * lower-left, and lower-right sections of the circle that worsens as it gets larger and/or closer
+     * to a pole.
+     * @param lat Latitude in degrees
+     * @param lng Longitude in degrees
+     * @param radius Radius of the circle in statute miles
+     * @param {String} strokeColor Color of the circle outline in HTML hex style, e.g. "#FF0000"
+     * @param strokeWidth Width of the circle outline in pixels
+     * @param strokeOpacity Opacity of the circle outline between 0.0 and 1.0
+     * @param {String} fillColor Color of the inside of the circle in HTML hex style, e.g. "#FF0000"
+     * @param fillOpacity Opacity of the inside of the circle between 0.0 and 1.0
+     */
+
+	function drawCircle(lat, lng, radius, strokeColor, strokeWidth, strokeOpacity, fillColor, fillOpacity) {
+      var d2r = Math.PI/180;
+      var r2d = 180/Math.PI;
+      var Clat = radius * 0.014483;  // Convert statute miles into degrees latitude
+      var Clng = Clat/Math.cos(lat*d2r); 
+      var Cpoints = []; 
+      for (var i=0; i < 33; i++) { 
+        var theta = Math.PI * (i/16); 
+        Cy = lat + (Clat * Math.sin(theta)); 
+        Cx = lng + (Clng * Math.cos(theta)); 
+        var P = new GPoint(Cx,Cy); 
+        Cpoints.push(P); 
+      }
+
+      var polygon = new GPolygon(Cpoints, strokeColor, strokeWidth, strokeOpacity, fillColor, fillOpacity);
+      map.addOverlay(polygon);
+     }
+     drawCircle(22.5814, 114.2050, 80.0, "#555555", 1, 0.75, "#cccccc",.20);
+     drawCircle(22.5814, 114.2050, 200.0, "#888888", 1, 0.75, "#cccccc",.20);
+     
+     drawCircle(22.5555, 114.0542, 10.0, "#800000", 1, 0.75, "#FF0000",.2);
+	 drawCircle(22.5555, 114.0542, 20.0, "#008000", 1, 0.75, "#00FF00",.5);		
+	 drawCircle(22.5555, 114.0542, 30.0, "#000080", 1, 0.75, "#0000FF",.10);
+	 drawCircle(22.5555, 114.0542, 40.0, "#000080", 1, 0.75, "#0000FF",.15);
+	 drawCircle(22.5555, 114.0542, 5.0, "#800000", 1, 0.75, "#FF0000",.2);
+	 
+	 
+
+	 
+		var opts = {text :"439.460"}; 
+        var marker = new PopupMarker(new GLatLng(22.5555, 114.0542), opts);
+        map.addOverlay(marker);	
+		var opts = {text :"梧桐山"}; 
+        var marker = new PopupMarker(new GLatLng(22.5814, 114.2050), opts);
+        map.addOverlay(marker);	
+     
+	}
+});
+</script>
+
+		<div id="map_canvas" style="width: 650px; height: 300px"></div>
+		从最内测向外依次是,0.5w 手台,2W手台,5W手台+Yagi/5W车台+GP天线，车台全功率，罕见的成功通联。
+		最外侧两个灰色覆盖区是，梧桐山顶手台覆盖区和罕见成功通联，曾经有火腿通联成功。
+	</div>
+	<div class=foot></div>
+</div>	
+<?php if ($is_manager){ ?>
+<div class="side-module">
+	<div class="head"><h2>Repeater Manager</h2></div>
+	<div class="body">
+
+<form id="radio.repeater" name="radio.repeater" method="post" action=""> 
+<label for="mastership">{#mastership#}</label><input name="mastership" type="text" id="mastership" value="" size="-1" maxlength="" /><br /> 
+<label for="province">{#province#}</label><input name="province" type="text" id="province" value="" size="4" maxlength="" /><br /> 
+<label for="city">{#city#}</label><input name="city" type="text" id="city" value="" size="4" maxlength="" /><br /> 
+<label for="frequency">{#frequency#}</label><input name="frequency" type="text" id="frequency" value="" size="-1" maxlength="" /><br /> 
+<label for="shift">{#shift#}</label><input name="shift" type="text" id="shift" value="" size="2" maxlength="" /><br /> 
+<label for="tone">{#tone#}</label><input name="tone" type="text" id="tone" value="" size="-1" maxlength="" /><br /> 
+<label for="code">{#code#}</label><input name="code" type="text" id="code" value="" size="-1" maxlength="" /><br /> 
+<label for="coordinate">{#coordinate#}</label><input name="coordinate" type="text" id="coordinate" value="" size="16" maxlength="" /><br /> 
+<label for="status">{#status#}</label><input name="status" type="text" id="status" value="" size="1" maxlength="" /><br /> 
+<label for="updated">{#updated#}</label><input name="updated" type="text" id="updated" value="" size="4" maxlength="" /><br /> 
+<input type="submit" name="submit" id="submit" value="{#submit#}" /> 
+<input type="reset" name="reset" id="reset" value="{#reset#}" /> 
+</form> 
+
+   	</div>
+	<div class="foot"></div>
+</div>
+<?php } ?>
+<div class="side-module">
+	<div class="head"><h2>Hongkong VHF/UHF repeater</h2></div>
+	<div class="body">
+		<img src="http://i206.photobucket.com/albums/bb279/vr2xlb/Table-0.jpg" /> 	
+   	</div>
+	<div class="foot"></div>
+</div>
+
+
+
+</div>
+<div class="sideWrap">
+	<div class="side-module">
+	  <div class="head">
+		<h2>业余无线电中继台</h2>
+	  </div>
+	  <div class="body">
+	  		<ul>
+			<li>
+				<a href="/radio/repeater/439.460">439.460</a>
+			</li>
+			<li>
+				<a href="/photography/view/2014/BBBB/">BBBB</a>
+			</li>
+			<li>
+				<a href="/photography/view/2014/KKK/">KKK</a>
+			</li>
+			<li>
+				<a href="/photography/view/2014/aaa/">aaa</a>
+			</li>
+			<li>
+				<a href="/photography/view/2014/golden/">golden</a>
+			</li>
+			</ul>
+			<div class="divider solid"></div>
+		<div class="foot-links"><a href="">添加中继</a> </div>
+	  </div>
+	  <div class="foot"></div>
+	</div>
+</div>
+
+</div>

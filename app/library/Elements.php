@@ -56,7 +56,12 @@ class Elements extends Component
 				array('title'=>'2012','link'=>'/photography/album/2012/'),
 				array('title'=>'2011','link'=>'/photography/album/2011/'),
 				array('title'=>'2010','link'=>'/photography/album/2010/')
-			)
+			),
+            'radio' => array(
+				array('title'=>'Repeater', 'link'=>'/radio/repeater'),
+				array('title'=>'Technology','link'=>'/technology/'),
+				array('title'=>'About','link'=>'/about/')
+			),
 		);
 		if(array_key_exists($menu,$submenu)){
 			
