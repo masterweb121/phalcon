@@ -147,4 +147,16 @@ class TechnologyController extends HomeController
 	public function searchAction(){
 	
 	}
+    public function ipAction(){
+        $this->view->result = null;
+        if($this->request->getPost()){
+            $ipaddr = $this->request->getPost("ip", "string");
+            $url = sprintf("http://api.map.baidu.com/location/ip?ak=IoN3tUhZjq78v2DyeztYLQEO&ip=%s&coor=bd09ll",$ipaddr);
+            
+            $result = json_decode(file_get_contents($url), TRUE);
+            $this->view->result = $result;
+            //print_r($result);
+            //$this->view->disable();
+        }
+    }
 }

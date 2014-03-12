@@ -1,0 +1,30 @@
+<?php use Phalcon\Tag; ?>
+
+<h2>Sign up using this form</h2>
+
+<?php echo Tag::form("technology/ip"); ?>
+
+ <p>
+    <label for="ip">Name</label>
+    <?php echo Tag::textField("ip") ?>
+ </p>
+
+ <p>
+    <?php echo Tag::submitButton("search") ?>
+ </p>
+
+</form>
+
+<?php if(empty($result)){ ?>
+<p>没有查询到该IP的归属地<p>
+<?php }else {?>
+<ul>
+    <li><?php echo $result['content']['address_detail']['province'] ; ?></li>
+    <li><?php echo $result['content']['address_detail']['city'] ; ?></li>
+    <li><?php echo $result['content']['address_detail']['street'] ; ?></li>
+</ul>
+<ul>
+    <li><?php echo $result['content']['point']['x'] ; ?></li>
+    <li><?php echo $result['content']['point']['y'] ; ?></li>
+</ul>
+<?php } ?>

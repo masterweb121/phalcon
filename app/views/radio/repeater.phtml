@@ -6,79 +6,52 @@
 <div class="main-module">
 	<div class="head"><h2>{#repeater#} 439.460 信号覆盖区</h2></div>
 	<div class="body"> 
-
+<style type="text/css">
+#map {
+    /* height: 180px; */
+    width: 650px; 
+    height: 300px;
+} 
+</style>
+<script src="http://www.openlayers.org/api/OpenLayers.js"></script>
+<div id="map"></div>
 <script>
-$(document).ready(function(){
-	if (GBrowserIsCompatible()) {
-		var map = new GMap2(document.getElementById("map_canvas"));
 
-		//map.addControl(new GSmallMapControl());
-        //最大模式
-        map.addControl(new GLargeMapControl());
-        //只有放大和缩小的模式
-        //map.addControl(new GSmallZoomControl());
-        //只有地图缩放控制条的模式
-        map.addControl(new GScaleControl());
-        //填加地图类型控制器 允许在地图视图、卫星视图和地图卫星混合模式, 三个模式中切换
-        map.addControl(new GMapTypeControl());
-        map.addControl(new GOverviewMapControl());
-		map.setMapType(G_NORMAL_MAP);
-		map.setCenter(new GLatLng(22.5345, 114.0610), 9);
-		map.setUIToDefault();
+map = new OpenLayers.Map("map");
+map.addLayer(new OpenLayers.Layer.OSM());
+epsg4326 = new OpenLayers.Projection("EPSG:4326"); //WGS 1984 projection
+projectTo = map.getProjectionObject(); //The map projection (Spherical Mercator)
 
-    /**
-     * Add a circle to the global variable "map". This function won't work for circles that encompass
-     * the North or South Pole. Also, there is a slight distortion in the upper-left, upper-right,
-     * lower-left, and lower-right sections of the circle that worsens as it gets larger and/or closer
-     * to a pole.
-     * @param lat Latitude in degrees
-     * @param lng Longitude in degrees
-     * @param radius Radius of the circle in statute miles
-     * @param {String} strokeColor Color of the circle outline in HTML hex style, e.g. "#FF0000"
-     * @param strokeWidth Width of the circle outline in pixels
-     * @param strokeOpacity Opacity of the circle outline between 0.0 and 1.0
-     * @param {String} fillColor Color of the inside of the circle in HTML hex style, e.g. "#FF0000"
-     * @param fillOpacity Opacity of the inside of the circle between 0.0 and 1.0
-     */
+var lonLat = new OpenLayers.LonLat(22.5854, 114.1088).transform(epsg4326, projectTo);
 
-	function drawCircle(lat, lng, radius, strokeColor, strokeWidth, strokeOpacity, fillColor, fillOpacity) {
-      var d2r = Math.PI/180;
-      var r2d = 180/Math.PI;
-      var Clat = radius * 0.014483;  // Convert statute miles into degrees latitude
-      var Clng = Clat/Math.cos(lat*d2r); 
-      var Cpoints = []; 
-      for (var i=0; i < 33; i++) { 
-        var theta = Math.PI * (i/16); 
-        Cy = lat + (Clat * Math.sin(theta)); 
-        Cx = lng + (Clng * Math.cos(theta)); 
-        var P = new GPoint(Cx,Cy); 
-        Cpoints.push(P); 
-      }
+var zoom = 6;
+map.setCenter(lonLat, zoom);
 
-      var polygon = new GPolygon(Cpoints, strokeColor, strokeWidth, strokeOpacity, fillColor, fillOpacity);
-      map.addOverlay(polygon);
-     }
-     drawCircle(22.5814, 114.2050, 80.0, "#555555", 1, 0.75, "#cccccc",.20);
-     drawCircle(22.5814, 114.2050, 200.0, "#888888", 1, 0.75, "#cccccc",.20);
-     
-     drawCircle(22.5555, 114.0542, 10.0, "#800000", 1, 0.75, "#FF0000",.2);
-	 drawCircle(22.5555, 114.0542, 20.0, "#008000", 1, 0.75, "#00FF00",.5);		
-	 drawCircle(22.5555, 114.0542, 30.0, "#000080", 1, 0.75, "#0000FF",.10);
-	 drawCircle(22.5555, 114.0542, 40.0, "#000080", 1, 0.75, "#0000FF",.15);
-	 drawCircle(22.5555, 114.0542, 5.0, "#800000", 1, 0.75, "#FF0000",.2);
-	 
-	 
+var vectorLayer = new OpenLayers.Layer.Vector("Overlay");
 
-	 
-		var opts = {text :"439.460"}; 
-        var marker = new PopupMarker(new GLatLng(22.5555, 114.0542), opts);
-        map.addOverlay(marker);	
-		var opts = {text :"梧桐山"}; 
-        var marker = new PopupMarker(new GLatLng(22.5814, 114.2050), opts);
-        map.addOverlay(marker);	
-     
-	}
-});
+var point = new OpenLayers.Geometry.Point(lonLat.lon, lonLat.lat);
+
+
+var mycircle = OpenLayers.Geometry.Polygon.createRegularPolygon
+(
+    point,
+    50000,
+    40,
+    0
+);
+
+var featurecircle = new OpenLayers.Feature.Vector(mycircle);
+
+var featurePoint = new OpenLayers.Feature.Vector(
+    point,
+    { description: 'info' },
+    { externalGraphic: 'img/marker.png', graphicHeight: 25, graphicWidth: 21, graphicXOffset: -12, graphicYOffset: -25 }
+);
+vectorLayer.addFeatures([featurePoint, featurecircle]);
+
+map.addLayer(vectorLayer);
+
+
 </script>
 
 		<div id="map_canvas" style="width: 650px; height: 300px"></div>
