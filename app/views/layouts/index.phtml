@@ -25,7 +25,13 @@ body,table,input,textarea,select {font-family:微软雅黑,Verdana,sans-serif,�
 
 		</div>
 		<div class="member">
-
+            <?php if($this->session->get('username')){?>
+            <a href="/member">编辑资料</a> |
+            <a href="/member/signout">注销</a>
+            <?php }else{?>
+            <a href="/member/signup">注册</a> |
+            <a href="/member/signin">登陆</a>
+            <?php }?>
 		</div>
 	</div>
 	<div id="masthead">

@@ -147,6 +147,10 @@ class TechnologyController extends HomeController
 	public function searchAction(){
 	
 	}
+    public function myipAction(){
+        print($_SERVER['REMOTE_ADDR']);
+        $this->view->disable();
+	}
     public function ipAction(){
         $this->view->result = null;
         if($this->request->getPost()){
@@ -156,7 +160,7 @@ class TechnologyController extends HomeController
             $result = json_decode(file_get_contents($url), TRUE);
             $this->view->result = $result;
             //print_r($result);
-            //$this->view->disable();
+            
         }
     }
 }

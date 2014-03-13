@@ -1,0 +1,38 @@
+<?php use Phalcon\Tag; ?>
+
+<?php if(empty($status)){ ?>
+
+<?php echo Tag::form("member/signup"); ?>
+
+<p>
+    <label for="username">用户名</label>
+    <?php echo Tag::textField("username") ?>
+</p>
+
+<p>
+    <label for="password">密码</label>
+    <?php echo Tag::passwordField("password") ?>
+</p>
+
+<p>
+    <label for="password">确认密码</label>
+    <?php echo Tag::passwordField("password2") ?>
+</p>
+<p>
+    <label for="callsign">呼号</label>
+    <?php echo Tag::textField("callsign") ?>
+</p>
+<p>
+	<?php echo $status; ?>
+</p>
+
+<p>
+    <?php // echo Tag::submitButton("注册") ?>
+	<input value="注册" id="submit" type="submit" />
+</p>
+
+</form>
+
+<?php }else{ ?>
+	<?php echo $status; ?>
+<?php } ?>

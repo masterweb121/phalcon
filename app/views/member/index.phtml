@@ -1,0 +1,33 @@
+<?php use Phalcon\Tag; ?>
+<?php 
+if($member){
+Phalcon\Tag::setDefaults(array(
+    "username" => $member->username,
+    "password" => $member->password,
+    "callsign" => $member->callsign
+        ));
+?>
+
+<?php echo Tag::form("signup/register"); ?>
+
+ <p>
+    <label for="name">Username</label>
+    <?php echo Tag::textField("username") ?>
+ </p>
+
+ <p>
+    <label for="password">Password</label>
+    <?php echo Tag::textField("password") ?>
+ </p>
+ <p>
+    <label for="callsign">callsign</label>
+    <?php echo Tag::textField("callsign") ?>
+ </p>
+ <p>
+    <?php echo Tag::submitButton("Edit") ?>
+ </p>
+
+</form>
+<?php }else{?>
+
+<?php } ?>

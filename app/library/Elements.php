@@ -10,8 +10,6 @@ class Elements extends Component
 			'<a href="http://my.oschina.net/neochen/">OSChina 博客</a>',
 			'<a href="http://rline.blog.51cto.com/">51CTO 博客</a>'
 		);
-		
-		
 		return($links);
 	}
     public function getMenu()
@@ -59,8 +57,10 @@ class Elements extends Component
 			),
             'radio' => array(
 				array('title'=>'Repeater', 'link'=>'/radio/repeater'),
-				array('title'=>'Technology','link'=>'/technology/'),
-				array('title'=>'About','link'=>'/about/')
+				array('title'=>'Logging','link'=>'/radio/logging'),
+				array('title'=>'Morse','link'=>'/radio/morse'),
+                array('title'=>'Zone','link'=>'/radio/zone'),
+                array('title'=>'Software','link'=>'/radio/software')
 			),
 		);
 		if(array_key_exists($menu,$submenu)){

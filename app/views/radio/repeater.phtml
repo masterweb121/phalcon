@@ -1,65 +1,123 @@
 <div class="wrapper">
-
 <div class="mainWrap">
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=IoN3tUhZjq78v2DyeztYLQEO"></script>
 
-
+<?php if($stations){?>
 <div class="main-module">
-	<div class="head"><h2>{#repeater#} 439.460 信号覆盖区</h2></div>
+	<div class="head"><h2>全国中继台覆盖图</h2></div>
 	<div class="body"> 
+
 <style type="text/css">
 #map {
     /* height: 180px; */
-    width: 650px; 
-    height: 300px;
+    width: 700px; 
+    height: 600px;
 } 
 </style>
-<script src="http://www.openlayers.org/api/OpenLayers.js"></script>
+
 <div id="map"></div>
-<script>
 
-map = new OpenLayers.Map("map");
-map.addLayer(new OpenLayers.Layer.OSM());
-epsg4326 = new OpenLayers.Projection("EPSG:4326"); //WGS 1984 projection
-projectTo = map.getProjectionObject(); //The map projection (Spherical Mercator)
+<script type="text/javascript" src="http://api.map.baidu.com/library/TextIconOverlay/1.2/src/TextIconOverlay_min.js"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/library/MarkerClusterer/1.2/src/MarkerClusterer_min.js"></script>
+<script type="text/javascript">
+var map = new BMap.Map("map");
+var point = new BMap.Point(106.719674, 37.536179);
+map.centerAndZoom(point, 5);
+map.enableScrollWheelZoom();  
+var MAX = 10;
+var markers = [];
+var pt = null;
+var infoWindow = null;
+var circle = null;
+<?php foreach ($stations as $key=>$repeater){?>
+   point = new BMap.Point(<?php echo $repeater['point'][0]?>, <?php echo $repeater['point'][1]?>);
+   marker = new BMap.Marker(point)
+   infoWindow = new BMap.InfoWindow("<div style='width:400px'><h4 style='margin:0 0 5px 0;padding:0.2em 0'><?php echo $repeater['name']?></h4>" + 
+"<img style='float:right;margin:4px' id='imgDemo' src='http://app.baidu.com/map/images/tiananmen.jpg' width='139' height='104' title='天安门'/>" + 
+"<p style='margin:0;line-height:1.5;font-size:13px;'>频率: <?php echo $repeater['frequency']?><br />台主: <?php echo $repeater['owner']?><br />描述: <?php echo $repeater['description']?>...</p>" + 
+"<p><a href='/radio/repeater/<?php echo $key;?>'>查看信号覆盖情况</a></div>");  // 创建信息窗口对象
+    marker.addEventListener("click", function(){          
+        this.openInfoWindow(infoWindow);
+        //图片加载完毕重绘infowindow
+        document.getElementById('imgDemo').onload = function (){
+        infoWindow.redraw();   //防止在网速较慢，图片未加载时，生成的信息框高度比图片的总高度小，导致图片部分被隐藏
+        }
+    });
+    circle = new BMap.Circle(point,10000,{strokeColor:"blue",fillColor:"red",strokeWeight:1, strokeStyle:"dashed", strokeOpacity:0.5, fillOpacity: 0.05});
+    map.addOverlay(circle);
+    markers.push(marker);
+<?php }?>
+//最简单的用法，生成一个marker数组，然后调用markerClusterer类即可。
+var markerClusterer = new BMapLib.MarkerClusterer(map, {markers:markers});
+</script>
 
-var lonLat = new OpenLayers.LonLat(22.5854, 114.1088).transform(epsg4326, projectTo);
+	</div>
+	<div class=foot></div>
+</div>	
 
-var zoom = 6;
-map.setCenter(lonLat, zoom);
+<?php }else if($repeater){?>
 
-var vectorLayer = new OpenLayers.Layer.Vector("Overlay");
+<div class="main-module">
+	<div class="head"><h2><?php echo $repeater['name']?> 中继台信号覆盖区</h2></div>
+	<div class="body"> 
 
-var point = new OpenLayers.Geometry.Point(lonLat.lon, lonLat.lat);
+<style type="text/css">
+#map {
+    /* height: 180px; */
+    width: 700px; 
+    height: 600px;
+} 
+</style>
 
+<div id="map"></div>
 
-var mycircle = OpenLayers.Geometry.Polygon.createRegularPolygon
-(
-    point,
-    50000,
-    40,
-    0
-);
-
-var featurecircle = new OpenLayers.Feature.Vector(mycircle);
-
-var featurePoint = new OpenLayers.Feature.Vector(
-    point,
-    { description: 'info' },
-    { externalGraphic: 'img/marker.png', graphicHeight: 25, graphicWidth: 21, graphicXOffset: -12, graphicYOffset: -25 }
-);
-vectorLayer.addFeatures([featurePoint, featurecircle]);
-
-map.addLayer(vectorLayer);
-
+<script type="text/javascript">
+var map = new BMap.Map("map");
+var point = new BMap.Point(<?php echo $repeater['point'][0]?>, <?php echo $repeater['point'][1]?>);
+map.centerAndZoom(point, 12);
+map.enableScrollWheelZoom();  
+var marker = new BMap.Marker(point);
+map.addOverlay(marker);
+var circle = new BMap.Circle(point,70000,{strokeColor:"blue",fillColor:"blue",strokeWeight:1, strokeStyle:"dashed", strokeOpacity:0.5, fillOpacity: 0.05});
+map.addOverlay(circle);
+var circle = new BMap.Circle(point,40000,{strokeColor:"yellow",fillColor:"yellow",strokeWeight:1, strokeStyle:"dashed", strokeOpacity:0.5, fillOpacity: 0.2});
+map.addOverlay(circle);
+var circle = new BMap.Circle(point,20000,{strokeColor:"blue",fillColor:"blue",strokeWeight:1, strokeStyle:"solid", strokeOpacity:0.5, fillOpacity: 0.1});
+map.addOverlay(circle);
+var circle = new BMap.Circle(point,10000,{strokeColor:"green",fillColor:"green",strokeWeight:1, strokeStyle:"solid", strokeOpacity:0.5, fillOpacity: 0.1});
+map.addOverlay(circle);
+var circle = new BMap.Circle(point,5000,{strokeColor:"red",fillColor:"red",strokeWeight:1, strokeStyle:"solid", strokeOpacity:0.5, fillOpacity: 0.2});
+map.addOverlay(circle);
 
 </script>
 
-		<div id="map_canvas" style="width: 650px; height: 300px"></div>
 		从最内测向外依次是,0.5w 手台,2W手台,5W手台+Yagi/5W车台+GP天线，车台全功率，罕见的成功通联。
 		最外侧两个灰色覆盖区是，梧桐山顶手台覆盖区和罕见成功通联，曾经有火腿通联成功。
 	</div>
 	<div class=foot></div>
-</div>	
+</div>	        
+   
+
+<div class="side-module">
+	<div class="head"><h2><?php echo $repeater['name']?></h2></div>
+	<div class="body">
+        <ul>
+            <li>频率: <?php echo $repeater['frequency']?></li>
+            <li>台主: <?php echo $repeater['owner']?></li>
+            <li>描述: <?php echo $repeater['description']?></li>
+        </ul> 	
+   	</div>
+	<div class="foot"></div>
+</div>
+<?php }?>     
+
+<pre>
+<?php
+print_r($repeater);
+?>
+</pre>    
+
+
 <?php if ($is_manager){ ?>
 <div class="side-module">
 	<div class="head"><h2>Repeater Manager</h2></div>
@@ -83,14 +141,16 @@ map.addLayer(vectorLayer);
    	</div>
 	<div class="foot"></div>
 </div>
-<?php } ?>
+    
 <div class="side-module">
 	<div class="head"><h2>Hongkong VHF/UHF repeater</h2></div>
 	<div class="body">
 		<img src="http://i206.photobucket.com/albums/bb279/vr2xlb/Table-0.jpg" /> 	
    	</div>
 	<div class="foot"></div>
-</div>
+</div>    
+<?php } ?>
+
 
 
 
@@ -101,25 +161,15 @@ map.addLayer(vectorLayer);
 		<h2>业余无线电中继台</h2>
 	  </div>
 	  <div class="body">
-	  		<ul>
+	  	<ul>
+        <?php foreach ($lists as $key=>$value){?>
 			<li>
-				<a href="/radio/repeater/439.460">439.460</a>
+                <a href="/radio/repeater/<?php echo $key;?>"><?php echo $value;?></a>
 			</li>
-			<li>
-				<a href="/photography/view/2014/BBBB/">BBBB</a>
-			</li>
-			<li>
-				<a href="/photography/view/2014/KKK/">KKK</a>
-			</li>
-			<li>
-				<a href="/photography/view/2014/aaa/">aaa</a>
-			</li>
-			<li>
-				<a href="/photography/view/2014/golden/">golden</a>
-			</li>
+        <?php }?>
 			</ul>
 			<div class="divider solid"></div>
-		<div class="foot-links"><a href="">添加中继</a> </div>
+		<div class="foot-links"><a href="/radio/repeater/">全国中继台覆盖图</a> </div>
 	  </div>
 	  <div class="foot"></div>
 	</div>

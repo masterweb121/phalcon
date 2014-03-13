@@ -1,0 +1,24 @@
+<?php use Phalcon\Tag; ?>
+<?php if(empty($status)){ ?>
+<?php echo Tag::form('member/signin') ?>
+	<p>
+    	<label for="username">用户名</label>
+    	<?php echo Tag::textField("username") ?>
+    </p>
+
+    <p>
+    	<label for="password">密码</label>
+    	<?php echo Tag::passwordField("password") ?>
+    </p>
+
+    <p>
+    	<?php echo $status; ?>
+ 	</p>
+
+    <?php echo Tag::submitButton('登陆') ?>
+
+</form>
+
+<?php }else{ ?>
+    <?php echo $status; ?>
+<?php } ?>

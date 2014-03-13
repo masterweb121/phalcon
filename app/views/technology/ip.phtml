@@ -15,9 +15,12 @@
 
 </form>
 
-<?php if(empty($result)){ ?>
+<?php if(empty($result) || $result['status'] == 1){ ?>
 <p>没有查询到该IP的归属地<p>
-<?php }else {?>
+<?php 
+}else {
+    //print_r($result);
+?>
 <ul>
     <li><?php echo $result['content']['address_detail']['province'] ; ?></li>
     <li><?php echo $result['content']['address_detail']['city'] ; ?></li>

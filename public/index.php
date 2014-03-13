@@ -34,7 +34,15 @@ try {
             "dbname" => $config->database->name
         ));
     });
-
+    $di->set('radio', function() {
+        $mongo = new Mongo("mongodb://neo:chen@192.168.6.1");
+        return $mongo->selectDb("radio");
+    }, true);
+    // Setting up the collection Manager
+    $di->set('collectionManager', function(){
+        return new Phalcon\Mvc\Collection\Manager();
+    }, true);
+    
     //Setup the view component
     $di->set('view', function(){
         $view = new \Phalcon\Mvc\View();
