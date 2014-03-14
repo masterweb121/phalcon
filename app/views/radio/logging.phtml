@@ -66,66 +66,6 @@ $(document).ready(function(){
 {/if}
 {if $session.callsign and $session.callsign eq $callsign}
 
-<div class="main-module">
-	<div class="head"><h2>{#logging#}</h2></div>
-	<div class="body"> 
-<form id="radio_logging" name="radio_logging" method="post" action="">
-<table width="200" border="1">
-  <tr>
-    <td><label for="date">date</label></td>
-    <td><label for="time">time</label></td>
-    <td><label for="frequency">frequency</label></td>
-    <td><label for="mode">mode</label></td>
-    <td><label for="call">call</label></td>
-    <td><label for="rst">rst</label></td>
-    <td><label for="watt">watt</label></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td><input name="date" type="text" id="date" value="<?php echo $post['date']?>" size="10" maxlength="10" /> </td>
-    <td><input name="time" type="text" id="time" value="<?php echo $post['time']?>" size="5" maxlength="8" /></td>
-    <td><input name="frequency" type="text" id="frequency" value="<?php echo $post['frequency']?>" size="8" maxlength="8" /></td>
-    <td><select name="mode" id="mode">
-    		<option value="FM" {if $mode eq 'FM'}selected="selected"{/if}>FM</option>
-    		<option value="USB" {if $mode eq 'USB'}selected="selected"{/if}>USB</option>
-    		<option value="LSB" {if $mode eq 'LSB'}selected="selected"{/if}>LSB</option>
-    		<option value="CW" {if $mode eq 'CW'}selected="selected"{/if}>CW</option>
-    		<option value="RTTY" {if $mode eq 'RTTY'}selected="selected"{/if}>RTTY</option>
-    		<option value="SSTV" {if $mode eq 'SSTV'}selected="selected"{/if}>SSTV</option>
-    		<option value="AM" {if $mode eq 'AM'}selected="selected"{/if}>AM</option>
-    		<option value="PSK" {if $mode eq 'PSK'}selected="selected"{/if}>PSK</option>
-    		<option value="FSK" {if $mode eq 'PSK'}selected="selected"{/if}>PSK</option>
-  		</select>
-    </td>
-    <td><input name="call" type="text" id="call" value="" size="6" maxlength="6" /></td>
-    <td><input name="rst" type="text" id="rst" value="" size="3" maxlength="3" /></td>
-    <td>
-        <select name="watt" id="watt">
-    		<option value="0.05">0.05</option>
-    		<option value="0.5">0.5</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="10">10</option>
-            <option value="20">20</option>
-            <option value="25">25</option>
-            <option value="40">40</option>
-  		</select>
-    </td>
-    <td><input type="submit" name="submit" id="submit" value="提交" /></td>
-  </tr>
-  <tr>
-    <td colspan="8">
-      <label for="notes">notes</label><input name="notes" type="text" id="notes" value="" size="50" maxlength="255" />
-      <input type="reset" name="reset" id="reset" value="重置" />
-    </td>
-  </tr>
-</table>
-</form>
-	</div>
-	<div class=foot></div>
-</div>
 
 {/if}
 
@@ -158,42 +98,40 @@ $(document).ready(function(){
 
 {if $logs}
 
-<div class="main-module">
-	<div class="head"><h2>logging</h2></div>
-	<div class="body"> 
-
-<table>
-	<thead>
-		{if !$callsign}<th>callsign</th>{/if}
-		<th>date</th>
-		<th>time</th>
-		<th>frequency</th>
-		<th>mode</th>
-		<th>call</th>
-		<th>rst</th>
-		<th>watt</th>
-		<th>notes</th>
-	</thead>
-	<tbody>
-		<?php foreach($loggings as $log){ ?>
-		<tr>
-			{if !$callsign}<td><a href="/{$locale}/radio/logs/{$log->callsign|lower}.html"><?php echo $log->callsign ?></td>{/if}
-			<td><?php echo $log->date ?></td>
-			<td><?php echo $log->time ?></td>
-			<td><?php echo $log->frequency ?></td>
-			<td><?php echo $log->mode ?></td>
-			<td><a href="/{$locale}/radio/qrz/{$log->call|lower}.html"><?php echo $log->call ?></td>
-			<td><?php echo $log->rst ?></td>
-			<td><?php echo $log->watt ?></td>
-			<td><?php echo $log->notes ?></td>
-		</tr>
-        <?php }?>
-	</tbody>
-</table>
-
-	</div>
-	<div class=foot></div>
-</div>
+        <div class="main-module">
+            <div class="head"><h2>业余电台通联日志</h2></div>
+            <div class="body"> 
+            <table>
+               <thead>
+                   <th>callsign</th>
+                   <th>date</th>
+                   <th>time</th>
+                   <th>frequency(Mhz)</th>
+                   <th>mode</th>
+                   <th>call</th>
+                   <th>rst</th>
+                   <th>watt</th>
+                   <th>notes</th>
+               </thead>
+               <tbody>
+                   <?php foreach($loggings as $log){ ?>
+                   <tr>
+                       <td><a href="/{$locale}/radio/logs/{$log->callsign|lower}.html"><?php echo $log->callsign ?></td>
+                       <td><?php echo $log->date ?></td>
+                       <td><?php echo $log->time ?></td>
+                       <td><?php echo $log->frequency ?></td>
+                       <td><?php echo $log->mode ?></td>
+                       <td><a href="/{$locale}/radio/qrz/{$log->call|lower}.html"><?php echo $log->call ?></td>
+                       <td><?php echo $log->rst ?></td>
+                       <td><?php echo $log->watt ?></td>
+                       <td><?php echo $log->notes ?></td>
+                   </tr>
+                   <?php }?>
+               </tbody>
+            </table>
+            </div>
+            <div class=foot></div>
+        </div>
 {else}
 
 {$callsign} 没有在本站留下通联日志信息. <br />
@@ -204,5 +142,5 @@ $(document).ready(function(){
 
 
 <pre>        
-<?php print_r($loggings)?>
+<?//php print_r($loggings)?>
 </pre>

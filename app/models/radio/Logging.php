@@ -1,5 +1,5 @@
 <?php
-
+namespace Radio;
 class Logging extends \Phalcon\Mvc\Collection
 {
     public function initialize()

@@ -30,40 +30,35 @@
 			</p>
 		</div>
 	</div>
-
-	<div class="main-module">
-		<div class="head"><h2>{$feeds.ham.headline}</h2></div>
-		<div class="body">
-		<ol style="background-image:url(/images/bg7nyt.jpg);background-repeat:no-repeat; background-position:right;">
-		{foreach from=$feeds.ham.items item=i}
-			<li><a href="{$i.link}" target="_blank">{$i.title}</a></li>
-		{/foreach}
-		</ol>
-	   	</div>
-		<div class="foot"></div>
-	</div>
+    <div class="main-module">
+        <div class=head><H2>LATEST NEWS</H2></div>
+        <div class=body>
+            <ol style="background-image:url(/img/bg7nyt.jpg);background-repeat:no-repeat; background-position:right;">
+            <?php foreach ($messages as $message){?>
+                <li><?php echo $message->datetime;?> <?php echo $message->content;?></li>
+            <?php }?>
+            </ol>
+        </div>
+        <div class="foot"></div>
+    </div>
 
 </div>
 
 <div id="smallContainer">
-{strip}
+
 <div class="side-module">
-	<div class="head"><h2>{#search#}</h2></div>
+	<div class="head"><h2>å‘¼å·æŸ¥è¯¢</h2></div>
 	<div class="body">
-		<form method="post" name="qrzform" id="qrzform">
-		{#callsign#} <input type="text" id="qrz" name="qrz" value="" size="6" maxlength="6" />
-		<input type="submit" value="{#search#}" id="go" name="go"/>
+		<form method="get" name="qrz" id="qrz">
+		callsign <input type="text" id="qrz" name="qrz" value="" size="6" maxlength="6" />
+		<input type="submit" value="search" id="go" name="go"/>
 		</form>
 	</div>
 	<div class=foot></div>
 </div>
 <div id="dashboard">
 </div>
-{if $session.callsign}
 
-	 {else}
-
-{/if}
 
 <div class="side-module">
 	<div class="head"><h2>QSO {#ranging#}</h2></div>
@@ -71,18 +66,12 @@
 		<form method="post" name="qsoform" id="qsoform">
 		{#callsign#} <input type="text" id="qso" name="qso" value="BG7NYT-BI7JMS-BH7MXG" onclick="this.value='';"size="18" maxlength="20" />
 		<input type="submit" value="{#ranging#}" id="ranging" name="ranging"/><br />
-		Ê¹ÓÃ¡°-¡±·Ö¸îºôºÅ,ºôºÅ¸öÊı²»ÏŞÖÆ¡£
+		ä½¿ç”¨â€œ-â€åˆ†å‰²å‘¼å·,å‘¼å·ä¸ªæ•°ä¸é™åˆ¶ã€‚
 		<form>
 	</div>
 	<div class=foot></div>
 </div>
 
-{if $action eq 'album'}
-	{include file="radio/block/album.tpl"}
-{/if}
-{if $action eq 'repeater'}
-	{include file="radio/block/repeater.tpl"}
-{/if}
 <div class=side-module>
 	<div class=head><H2>Welcome to QSO</H2></div>
 	<div class=body>

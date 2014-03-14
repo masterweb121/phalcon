@@ -1,0 +1,25 @@
+<div class="wrapper">
+    <div class="mainWrap">
+        
+        <div class="main-module">
+            <div class=head><H2>QRZ</H2></div>
+            <div class=body>
+                <?php echo $qrz->callsign ?>
+                <?php echo $qrz->qth ?>
+            </div>
+        </div>
+
+    </div>
+    <div class="sideWrap">
+        <div class="side-module">
+            <div class="head"><h2>呼号查询</h2></div>
+            <div class="body">
+                <form method="get" name="qrz" id="qrz" action="/radio/qrz/">
+                callsign <input type="text" id="qrz" name="qrz" value="" size="6" maxlength="6" />
+                <input type="submit" value="search" id="go" name="go"/>
+                </form>
+            </div>
+            <div class=foot></div>
+        </div>        
+    </div>
+</div>        

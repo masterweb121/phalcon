@@ -18,7 +18,12 @@ try {
             $config->application->modelsDir,
         )
     )->register();
-
+    $loader->registerNamespaces(
+        array(
+           'Radio'          => $config->application->modelsDir."/radio/",
+           'Photograpy'   =>  $config->application->modelsDir."/radio/",
+        )
+    );
     //Create a DI
     // The FactoryDefault Dependency Injector automatically registers the
     // right services providing a full-stack framework
@@ -47,6 +52,7 @@ try {
     $di->set('view', function(){
         $view = new \Phalcon\Mvc\View();
         $view->setViewsDir('../app/views/');
+        /*$view->registerEngines(array(".tpl" => 'Phalcon\Mvc\View\Engine\Smarty'));*/
         return $view;
     });
 

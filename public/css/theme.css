@@ -58,12 +58,12 @@ input.error { border: 1px dotted red; }
 #global-header #channel{
 	padding-right: 8px; 
 	padding-left: 8px; 
-	BACKGROUND: url(/img/css/top_bar_bg2.gif) 50% bottom; 
+    padding-top: 1px; 
 	padding-bottom: 0px; 
-	font: 10px/15px Arial, sans-serif; 
+    BACKGROUND: url(/img/css/top_bar_bg2.gif) 50% bottom; 
+	font: 12px/15px Arial, sans-serif; 
 	color: #999; 
-	padding-top: 0px; 
-	height: 18px;
+	height: 20px;
 }
 #global-header #channel .language , .member{
 	float: left;

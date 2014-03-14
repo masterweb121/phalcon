@@ -1,3 +1,42 @@
+<div class="wrapper">
+    <div class="mainWrap">
+        <div class="main-module">
+            <div class=head><H2>Zone map</H2></div>
+            <div class=body>
+
+<style type="text/css">
+#map{height:500px;width:700px;float:left;border-right:2px solid #bcbcbc;}
+</style>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=IoN3tUhZjq78v2DyeztYLQEO"></script>
+
+<div id="map"></div>
+
+<script type="text/javascript">
+
+// 百度地图API功能
+var map = new BMap.Map("map");
+var point   = null;
+var marker  = null;
+map.centerAndZoom("中国",5);                   // 初始化地图,设置城市和地图级别。
+map.enableScrollWheelZoom();                            //启用滚轮放大缩小
+<?php if($repeater){?>
+point = new BMap.Point(<?php echo $repeater->coordinate ?>);
+marker = new BMap.Marker(point);
+map.addOverlay(marker);
+<?php } ?>
+map.addEventListener("click", function(e){
+    map.removeOverlay(marker);
+    point = new BMap.Point(e.point.lng, e.point.lat);
+    marker = new BMap.Marker(point);
+    map.addOverlay(marker);
+  document.getElementById("coordinate").value = e.point.lng + ", " + e.point.lat;
+});
+
+</script>                    
+                
+            </div>
+        </div>  
+
 <?php use Phalcon\Tag; ?>
 <?php 
 if($member){
@@ -31,3 +70,10 @@ Phalcon\Tag::setDefaults(array(
 <?php }else{?>
 
 <?php } ?>
+
+    </div>
+    <div class="sideWrap">
+        <?php $this->partial("member/sidebar") ?>
+    </div>
+</div>
+        

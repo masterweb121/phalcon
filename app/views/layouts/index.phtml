@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<?php echo $this->tag->getTitle() ?>
+<?php echo $this->tag->getTitle() ?>
 <link href="/css/theme.css" rel="stylesheet" rev="stylesheet" type="text/css" media="all">
 <style type="text/css">
 body,table,input,textarea,select {font-family:微软雅黑,Verdana,sans-serif,宋体;}  
@@ -13,11 +13,14 @@ body,table,input,textarea,select {font-family:微软雅黑,Verdana,sans-serif,�
 <div id="global-header">
 	<div id="channel">
 		<div class="language">
-		<?php 
-		foreach ($this->elements->getChannel() as $link) {
-			echo "$link\n";
-		}
-		?>
+            <a class="" href="/">Home</a>
+			<a href="http://netkiller-github-com.iteye.com/">ITEYE 博客</a>
+			<a href="http://my.oschina.net/neochen/">OSChina 博客</a>
+			<a href="http://rline.blog.51cto.com/">51CTO 博客</a>
+            <?php foreach( $this->elements->getChannel() as $menu) {?>
+                |<?php echo Phalcon\Tag::linkTo(array( $menu['link'], $menu['title'], 'target'=>"_parent"/*, 'class' => ''*/));?></a>
+            <?php }?>
+
 			<a href="http://netkiller.users.sourceforge.net/zh-cn/%7B$uri_string%7D">{#chinese#}</a> |
 			<a href="http://netkiller.users.sourceforge.net/zh-tw/%7B$uri_string%7D">{#taiwan#}</a> |
 			<a href="http://netkiller.users.sourceforge.net/en-us/%7B$uri_string%7D">{#english#}</a> |
@@ -26,7 +29,7 @@ body,table,input,textarea,select {font-family:微软雅黑,Verdana,sans-serif,�
 		</div>
 		<div class="member">
             <?php if($this->session->get('username')){?>
-            <a href="/member">编辑资料</a> |
+            <a href="/member/">编辑资料</a> |
             <a href="/member/signout">注销</a>
             <?php }else{?>
             <a href="/member/signup">注册</a> |
@@ -42,14 +45,24 @@ body,table,input,textarea,select {font-family:微软雅黑,Verdana,sans-serif,�
 			<img src="/img/gnu.png" height="75" alt="gnu logo">
 		</div>
 		<div id="banner">
-		
+            <a href="http://www.crsa.org"><img src="/img/radio/crsa.jpg" height="75" alt="CRSA"></a>
+            <a href="http://www.hkara.org.hk/"><img src="/img/radio/hkara.gif" height="75" alt="HKARA"></a>
+            <a href="http://www.arrl.org/"><img src="/img/radio/arrl.png" height="75" alt="ARRL"></a>
 		</div>
 	</div>
 	<div class="navigation">
 		<ul>
-		<?php foreach( $this->elements->getMenu() as $menu) {?>
-			<li class="on"><a href="<?php echo $menu['link']?>" target="_parent"><?php echo $menu['title']?></a></li>
-		<?php }?>
+		<?php 
+            if(count($this->elements->getMenu($_GET['_url'])) > 1){
+                $menuitem = $this->elements->getMenu($_GET['_url']);
+            }else{
+                $menuitem = $this->elements->getChannel();
+            }
+            ?>
+            <li class="on"><?php echo Phalcon\Tag::linkTo( '','Home');?></a></li>
+            <?php  foreach( $menuitem as $menu) {?>
+			<li class="on"><?php echo Phalcon\Tag::linkTo(array( $menu['link'], $menu['title'], 'target'=>"_parent"/*, 'class' => ''*/));?></a></li>
+            <?php }?>
 		<!--
 		<li {if="" $mainmenu="" eq="" ''="" or="" 'index'}="" class="on" {="" if}=""><a href="/index.html" target="_parent">{#home#}</a></li>
 		<li {if="" $mainmenu="" eq="" 'technology'}="" class="on" {="" if}=""><a href="/technology/index.html" target="_parent">{#technology#}</a></li>
@@ -77,10 +90,10 @@ body,table,input,textarea,select {font-family:微软雅黑,Verdana,sans-serif,�
 		</li>
 	</ul>
 </div>
-<?php if($this->elements->getMenuitem($_GET['_url'])){ ?>
+<?php if($this->elements->getSubmenu($_GET['_url'])){ ?>
 <div class="subnav">
 	<ul>
-	<?php foreach( $this->elements->getMenuitem($_GET['_url']) as $submenu) {?>
+	<?php foreach( $this->elements->getSubmenu($_GET['_url']) as $submenu) {?>
 	<li class="on"><a href="<?php echo $submenu['link']?>" target="_parent"><?php echo $submenu['title']?></a></li>
 	<?php }?>
 	<ul>

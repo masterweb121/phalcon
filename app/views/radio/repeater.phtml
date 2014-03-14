@@ -1,7 +1,11 @@
 <div class="wrapper">
-<div class="mainWrap">
-<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=IoN3tUhZjq78v2DyeztYLQEO"></script>
-
+    <div class="mainWrap">
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=IoN3tUhZjq78v2DyeztYLQEO"></script>
+<pre>
+<?php
+//print_r($stations);
+?>
+</pre>   
 <?php if($stations){?>
 <div class="main-module">
 	<div class="head"><h2>全国中继台覆盖图</h2></div>
@@ -29,13 +33,13 @@ var markers = [];
 var pt = null;
 var infoWindow = null;
 var circle = null;
-<?php foreach ($stations as $key=>$repeater){?>
-   point = new BMap.Point(<?php echo $repeater['point'][0]?>, <?php echo $repeater['point'][1]?>);
+<?php foreach ($stations as $station){?>
+   point = new BMap.Point(<?php echo $station->coordinate?>);
    marker = new BMap.Marker(point)
-   infoWindow = new BMap.InfoWindow("<div style='width:400px'><h4 style='margin:0 0 5px 0;padding:0.2em 0'><?php echo $repeater['name']?></h4>" + 
+   infoWindow = new BMap.InfoWindow("<div style='width:400px'><h4 style='margin:0 0 5px 0;padding:0.2em 0'><?php echo $station->name?></h4>" + 
 "<img style='float:right;margin:4px' id='imgDemo' src='http://app.baidu.com/map/images/tiananmen.jpg' width='139' height='104' title='天安门'/>" + 
-"<p style='margin:0;line-height:1.5;font-size:13px;'>频率: <?php echo $repeater['frequency']?><br />台主: <?php echo $repeater['owner']?><br />描述: <?php echo $repeater['description']?>...</p>" + 
-"<p><a href='/radio/repeater/<?php echo $key;?>'>查看信号覆盖情况</a></div>");  // 创建信息窗口对象
+"<p style='margin:0;line-height:1.5;font-size:13px;'>频率: <?php echo $station->frequency?><br />台主: <?php echo $station->owner?><br />描述: <?php echo $station->description?>...</p>" + 
+"<p><a href='/radio/repeater/<?php echo $station->_id;?>'>查看信号覆盖情况</a></div>");  // 创建信息窗口对象
     marker.addEventListener("click", function(){          
         this.openInfoWindow(infoWindow);
         //图片加载完毕重绘infowindow
@@ -58,7 +62,7 @@ var markerClusterer = new BMapLib.MarkerClusterer(map, {markers:markers});
 <?php }else if($repeater){?>
 
 <div class="main-module">
-	<div class="head"><h2><?php echo $repeater['name']?> 中继台信号覆盖区</h2></div>
+	<div class="head"><h2><?php echo $repeater->name?> 中继台信号覆盖区</h2></div>
 	<div class="body"> 
 
 <style type="text/css">
@@ -73,7 +77,7 @@ var markerClusterer = new BMapLib.MarkerClusterer(map, {markers:markers});
 
 <script type="text/javascript">
 var map = new BMap.Map("map");
-var point = new BMap.Point(<?php echo $repeater['point'][0]?>, <?php echo $repeater['point'][1]?>);
+var point = new BMap.Point(<?php echo $repeater->coordinate?>);
 map.centerAndZoom(point, 12);
 map.enableScrollWheelZoom();  
 var marker = new BMap.Marker(point);
@@ -99,80 +103,56 @@ map.addOverlay(circle);
    
 
 <div class="side-module">
-	<div class="head"><h2><?php echo $repeater['name']?></h2></div>
+	<div class="head"><h2><?php echo $repeater->name?></h2></div>
 	<div class="body">
         <ul>
-            <li>频率: <?php echo $repeater['frequency']?></li>
-            <li>台主: <?php echo $repeater['owner']?></li>
-            <li>描述: <?php echo $repeater['description']?></li>
+            
+            <li>位置: <?php echo $repeater->province?> <?php echo $repeater->city?></li>
+            <li>频率: <?php echo $repeater->frequency?></li>
+            <li>差频: <?php echo $repeater->shift?></li>
+            <li>静噪: <?php echo $repeater->squelch?></li>
+            <li>哑音: <?php echo $repeater->code?></li>
+            <li>坐标: <?php echo $repeater->coordinate?></li>
+            <li>分区: <?php echo $repeater->zone['cq']?>,<?php echo $repeater->zone['itu']?></li>
+            <li>台主: <?php echo $repeater->owner?></li>
+            <li>图片: <?php echo $repeater->image?></li>
+            <li>状态: <?php echo $repeater->status?></li>
+            <li>描述: <?php echo $repeater->description?></li>
         </ul> 	
    	</div>
 	<div class="foot"></div>
 </div>
 <?php }?>     
 
-<pre>
-<?php
-print_r($repeater);
-?>
-</pre>    
+ 
+        <div class="side-module">
+            <div class="head"><h2>Hongkong VHF/UHF repeater</h2></div>
+            <div class="body">
+                <img src="http://i206.photobucket.com/albums/bb279/vr2xlb/Table-0.jpg" /> 	
+            </div>
+            <div class="foot"></div>
+        </div>
 
 
-<?php if ($is_manager){ ?>
-<div class="side-module">
-	<div class="head"><h2>Repeater Manager</h2></div>
-	<div class="body">
-
-<form id="radio.repeater" name="radio.repeater" method="post" action=""> 
-<label for="mastership">{#mastership#}</label><input name="mastership" type="text" id="mastership" value="" size="-1" maxlength="" /><br /> 
-<label for="province">{#province#}</label><input name="province" type="text" id="province" value="" size="4" maxlength="" /><br /> 
-<label for="city">{#city#}</label><input name="city" type="text" id="city" value="" size="4" maxlength="" /><br /> 
-<label for="frequency">{#frequency#}</label><input name="frequency" type="text" id="frequency" value="" size="-1" maxlength="" /><br /> 
-<label for="shift">{#shift#}</label><input name="shift" type="text" id="shift" value="" size="2" maxlength="" /><br /> 
-<label for="tone">{#tone#}</label><input name="tone" type="text" id="tone" value="" size="-1" maxlength="" /><br /> 
-<label for="code">{#code#}</label><input name="code" type="text" id="code" value="" size="-1" maxlength="" /><br /> 
-<label for="coordinate">{#coordinate#}</label><input name="coordinate" type="text" id="coordinate" value="" size="16" maxlength="" /><br /> 
-<label for="status">{#status#}</label><input name="status" type="text" id="status" value="" size="1" maxlength="" /><br /> 
-<label for="updated">{#updated#}</label><input name="updated" type="text" id="updated" value="" size="4" maxlength="" /><br /> 
-<input type="submit" name="submit" id="submit" value="{#submit#}" /> 
-<input type="reset" name="reset" id="reset" value="{#reset#}" /> 
-</form> 
-
-   	</div>
-	<div class="foot"></div>
-</div>
-    
-<div class="side-module">
-	<div class="head"><h2>Hongkong VHF/UHF repeater</h2></div>
-	<div class="body">
-		<img src="http://i206.photobucket.com/albums/bb279/vr2xlb/Table-0.jpg" /> 	
-   	</div>
-	<div class="foot"></div>
-</div>    
-<?php } ?>
-
-
-
-
-</div>
-<div class="sideWrap">
-	<div class="side-module">
-	  <div class="head">
-		<h2>业余无线电中继台</h2>
-	  </div>
-	  <div class="body">
-	  	<ul>
-        <?php foreach ($lists as $key=>$value){?>
-			<li>
-                <a href="/radio/repeater/<?php echo $key;?>"><?php echo $value;?></a>
-			</li>
-        <?php }?>
-			</ul>
-			<div class="divider solid"></div>
-		<div class="foot-links"><a href="/radio/repeater/">全国中继台覆盖图</a> </div>
-	  </div>
-	  <div class="foot"></div>
-	</div>
-</div>
+    </div>
+    <div class="sideWrap">
+        <div class="side-module">
+          <div class="head">
+            <h2>业余无线电中继台</h2>
+          </div>
+          <div class="body">
+                <ul>
+                <?php foreach ($stationlists as $station){?>
+                    <li>
+                         <a href="/radio/repeater/<?php echo $station->_id;?>"><?php echo $station->frequency;?> <?php echo $station->name;?></a>
+                    </li>
+                <?php }?>
+                </ul>
+                <div class="divider solid"></div>
+            <div class="foot-links"><a href="/radio/repeater/">全国中继台覆盖图</a> </div>
+          </div>
+          <div class="foot"></div>
+        </div>
+    </div>
 
 </div>

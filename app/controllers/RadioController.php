@@ -4,7 +4,7 @@ class RadioController extends HomeController
 {
 	public function initialize()
     {
-        //$this->view->setTemplateAfter('radio');
+        $this->view->setTemplateAfter('index');
 		//Set the document title
         $this->tag->setTitle('Amateur Radio');
         parent::initialize();
@@ -12,68 +12,55 @@ class RadioController extends HomeController
 	
     public function indexAction()
     {
-		//$this->view->disable();
+        if($this->request->get('qrz')){
+            $this->view->disable();
+            $this->response->redirect("radio/qrz/".$this->request->get('qrz'));
+        }
+		// 消息列表
+        $messages = Radio\Message::find(array(
+                'fields' => array('datetime','content'),
+                'sort' => array('datetime'=>-1),
+                'limit' => 50
+            ));
+        $this->view->messages = $messages;
+        
+        
+    }
+     public function qrzAction($callsign){
+        if($this->request->get('qrz')){
+            $this->view->disable();
+            $this->response->redirect("radio/qrz/".$this->request->get('qrz'));
+        }
+        $member = Member::findFirst(array(
+                'fields' => array('username','name','callsign'),
+                array("callsign" => $callsign)
+        ));
+        $this->view->qrz = $member;
+        $message = new Radio\Message();
+        $message->datetime = date('Y-m-d H:i:s');
+        $message->content = sprintf("%s 您的呼号被查询了一次.", $callsign);
+        $message->save();
     }
     public function repeaterAction($id){
-        $stations = array(
-            '439.460'=>array(
-                'frequency' => '439.460',
-                'name' => '深圳业余无线电中继',
-                'description' => '深圳业余无线电中继',
-                'owner' => 'BG7JAX',
-                'point' => array(114.055309, 22.559879),
-                ),
-            '439.790'=>array(
-                'frequency' => '439.790',
-                'name' => '深圳业余无线电数字中继',
-                'description' => '深圳业余无线电数字中继，DMR制式',
-                'owner' => 'BG7MEO',
-                'point' => array(114.121281, 22.549048),
-                ),
-            '439.220'=>array(
-                'frequency' => '439.220',
-                'name' => '深圳北模拟中继',
-                'description' => '深圳业余无线电数字中继',
-                'owner' => 'BG7IVQ',
-                'point' => array(114.077371, 22.633201),
-                ),            
-        );
         $this->view->stations = null;
         $this->view->repeater = null;
-        foreach($stations as $key=>$value){
-            $lists[$key] = $key.' '.$value['name'];
-        }
-        $this->view->lists = $lists;
+
         if(empty($id)){
+            // 中继列表
+            $stations = Radio\Repeater::find();
             $this->view->stations = $stations;
         }else{
-            $this->view->repeater = $stations[$id];
+            $repeater = Radio\Repeater::findById($id);
+            $this->view->repeater = $repeater;
         }
-        
+        $stations = Radio\Repeater::find(array('fields' => array('frequency','name')));
+        $this->view->stationlists = $stations;
     }
     public function beaconAction(){
         
     }
     public function loggingAction(){
-
-        $this->view->post = null;
-        if($this->request->isPost()){
-            $logging       = new Logging();
-            $logging->callsign = 'BG7NYT'; //$this->request->getPost("callsign", "string");
-            $logging->date = $this->request->getPost("date", "string");
-            $logging->time = $this->request->getPost("time", "string");
-            $logging->frequency = $this->request->getPost("frequency", "string");
-            $logging->mode = $this->request->getPost("mode", "string");
-            $logging->call = $this->request->getPost("call", "string");
-            $logging->rst = $this->request->getPost("rst", "string");
-            $logging->watt = $this->request->getPost("watt", "string");
-            $logging->notes = $this->request->getPost("notes", "string");
-            $logging->save();
-            $this->view->post = $this->request->getPost();
-        }
-        //print_r($logging);
-        //$this->view->disable();
-        $logging = Logging::find(
+        $logging = Radio\Logging::find(
             array( 'fields' => array('callsign','date','time','frequency','mode','call','rst','watt','notes'),
                     'limit' => 100
             )
@@ -84,6 +71,9 @@ class RadioController extends HomeController
         
     }
     public function zoneAction(){
+        
+    }
+    public function aprsAction(){
         
     }
     public function softwareAction(){

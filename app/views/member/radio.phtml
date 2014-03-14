@@ -1,0 +1,86 @@
+<?php use Phalcon\Tag; ?>
+<div class="wrapper">
+    <div class="mainWrap">
+        
+        <div class="main-module">
+            <div class=head><H2>LATEST NEWS</H2></div>
+            <div class=body>
+                <ol>
+                <?php foreach ($messages as $message){?>
+                    <li><?php echo $message->datetime;?> <?php echo $message->content;?></li>
+                <?php }?>
+                </ol>
+            </div>
+        </div>    
+        <div class="side-module">
+            <div class="head"><h2>QSL 通联卡片展示区</h2></div>
+            <div class="body">
+<?php 
+if($member){
+Phalcon\Tag::setDefaults(array(
+    "username" => $member->username,
+    "password" => $member->password,
+    "callsign" => $member->callsign
+        ));
+?>
+
+<?php echo Tag::form("signup/register"); ?>
+
+ <p>
+    <label for="name">Username</label>
+    <?php echo Tag::textField("username") ?>
+ </p>
+
+ <p>
+    <label for="password">Password</label>
+    <?php echo Tag::textField("password") ?>
+ </p>
+ <p>
+    <label for="callsign">callsign</label>
+    <?php echo Tag::textField("callsign") ?>
+ </p>
+ <p>
+    <?php echo Tag::submitButton("Edit") ?>
+ </p>
+
+</form>
+<?php }else{?>
+
+<?php } ?>
+                <div class="divider solid"></div>
+                <div class="foot-links"><a href="/member/qsl/">制作QSL卡片</a> </div>
+            </div>
+            <div class="foot"></div>
+        </div> 
+    </div>
+    <div class="sideWrap">
+        <div class="side-module">
+            <div class="head"><h2>下列Ham曾与你通联</h2></div>
+            <div class="body">
+                <ul>
+            <?php foreach ($callings as $calling){?>
+                    <li><?php echo $calling->callsign;?> <a href="/radio/qrz/<?php echo $calling->callsign;?>">查看</a></li>
+            <?php }?>
+                </ul>
+                <div class="divider solid"></div>
+                <div class="foot-links"><a href="/member/logging/">我的电台日志</a></div>
+            </div>
+            <div class="foot"></div>
+        </div>
+        <div class="side-module">
+            <div class="head"><h2>业余无线电中继站管理</h2></div>
+            <div class="body">
+            <ul>
+            <?php foreach ($stations as $station){?>
+                <li>
+                    <a href="/radio/repeater/<?php echo $station->frequency;?>"><?php echo $station->frequency;?></a>
+                </li>
+            <?php }?>
+                </ul>
+                <div class="divider solid"></div>
+                <div class="foot-links"><a href="/member/repeater/">新增中继台</a> </div>
+            </div>
+            <div class="foot"></div>
+        </div>
+    </div>
+</div>

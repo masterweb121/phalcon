@@ -1,0 +1,130 @@
+<?php use Phalcon\Tag; ?>
+<div class="wrapper">
+    <div class="mainWrap">
+        <div class="main-module">
+            <div class="head"><h2><?php echo $callsign?> 电台通联日志</h2></div>
+            <div class="body"> 
+            <table>
+               <thead>
+                   <th>callsign</th>
+                   <th>date</th>
+                   <th>time</th>
+                   <th>frequency(Mhz)</th>
+                   <th>mode</th>
+                   <th>call</th>
+                   <th>rst</th>
+                   <th>watt</th>
+                   <th>notes</th>
+               </thead>
+               <tbody>
+                   <?php foreach($loggings as $log){ ?>
+                   <tr>
+                       <td><a href="/{$locale}/radio/logs/{$log->callsign|lower}.html"><?php echo $log->callsign ?></td>
+                       <td><?php echo $log->date ?></td>
+                       <td><?php echo $log->time ?></td>
+                       <td><?php echo $log->frequency ?></td>
+                       <td><?php echo $log->mode ?></td>
+                       <td><a href="/{$locale}/radio/qrz/{$log->call|lower}.html"><?php echo $log->call ?></td>
+                       <td><?php echo $log->rst ?></td>
+                       <td><?php echo $log->watt ?></td>
+                       <td><?php echo $log->notes ?></td>
+                   </tr>
+                   <?php }?>
+               </tbody>
+            </table>
+            </div>
+            <div class=foot></div>
+        </div>
+
+        
+        <div class="side-module">
+            <div class="head"><h2>新增一条通联日志</h2></div>
+            <div class="body">
+           <?php 
+            if($logging)
+            Phalcon\Tag::setDefaults(array(
+                "frequency" => $logging->frequency,
+                "mode" => $logging->mode,
+                "rst" => $logging->rst,
+                "watt" => $logging->watt
+                 ));
+            ?>
+            <?php echo Tag::form("member/logging"); ?>
+            <datalist id="rst_datalist">
+                <?php foreach ($datalist['rst'] as $frequency){?>
+                <option value="<?php echo $frequency;?>"><?php echo $frequency;?></option>
+                <?php }?>
+            </datalist>
+            <datalist id="frequency_datalist">
+                <?php foreach ($datalist['frequency'] as $frequency){?>
+                <option value="<?php echo $frequency;?>"><?php echo $frequency;?></option>
+                <?php }?>
+            </datalist>                
+            <table width="200" border="1">
+              <tr>
+                <td><label for="date">date</label></td>
+                <td><label for="time">time</label></td>
+                <td><label for="frequency">frequency</label></td>
+                <td><label for="mode">mode</label></td>
+                <td><label for="call">call</label></td>
+                <td><label for="rst">rst</label></td>
+                <td><label for="watt">watt</label></td>
+              </tr>
+              <tr>
+                <td><?php echo Phalcon\Tag::dateField(array("date", 'size'=>12, "value" => date('Y-m-d'))) ?></td>
+                <td><?php echo \Phalcon\Tag::tagHtml('input type="time" name="time" id="time" size=8 value="'.date('H:i:s').'"');?></td>
+                <td><?php echo \Phalcon\Tag::textField(array("frequency", 'size'=>10, "min" => "0.1", 'list'=>'frequency_datalist',  'required'=>'')); ?>
+
+                </td>
+                <td><?php echo Phalcon\Tag::selectStatic("mode", array("FM", "AM", "USB", 'LSB', 'CW', 'RTTY', 'SSTV', 'PSK', 'FSK', 'AFSK', 'C4FM', 'DMR', 'D-STAR'))?></td>
+                <td><?php echo Tag::textField(array('call','size'=>"6", 'length'=>7)) ?></td>
+                <td><?php echo Tag::textField(array("rst", 'size'=>3, 'list'=>'rst_datalist')) ?></td>
+                <td><?php echo \Phalcon\Tag::textField(array('watt', 'size'=>5, "min" => "0.01", 'list'=>'wattlst', 'required'=>'ture')) ?>
+                    <datalist id="wattlst">
+                        <option value="0.05">0.05</option>
+                        <option value="0.5">0.5</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="20">20</option>
+                        <option value="25">25</option>
+                        <option value="40">40</option>
+                    </datalist>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="8">
+                    <label for="notes">notes</label><?php echo Tag::textField(array("notes", 'size'=>50)) ?>
+                    <?php echo Tag::submitButton("提交") ?><input type="reset" name="reset" id="reset" value="重置" />
+                </td>
+              </tr>
+            </table>
+            </form>                
+            </div>
+            <div class="foot"></div>
+        </div>
+<?php //}else{?>
+
+<?php //} ?>
+
+    </div>
+    <div class="sideWrap">
+        <div class="side-module">
+            <div class="head"><h2>业余无线电被叫清单</h2></div>
+            <div class="body">
+                <ul>
+            <?php foreach ($callings as $calling){?>
+                <li>
+                    <?php echo $calling->callsign;?> <a href="/radio/repeater/<?php echo $calling->_id;?>">查看</a>
+                </li>
+            <?php }?>
+                </ul>
+                <div class="divider solid"></div>
+                <div class="foot-links"><a href="/member/logging/">进入电台操作日志</a></div>
+            </div>
+            <div class="foot"></div>
+        </div>
+    </div>
+</div>
