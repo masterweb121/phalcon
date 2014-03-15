@@ -40,7 +40,7 @@ try {
         ));
     });
     $di->set('radio', function() {
-        $mongo = new Mongo("mongodb://neo:chen@192.168.6.1");
+        $mongo = new Mongo("mongodb://neo:chen@192.168.6.1:27017/radio");
         return $mongo->selectDb("radio");
     }, true);
     // Setting up the collection Manager
