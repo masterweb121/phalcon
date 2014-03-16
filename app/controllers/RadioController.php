@@ -1,5 +1,4 @@
 <?php
-
 class RadioController extends HomeController
 {
 	public function initialize()

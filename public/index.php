@@ -3,6 +3,8 @@
 //print_r($_SERVER);
 //print_r($_POST);
 //die();
+//if(!extension_loaded ( 'phalcon' )) print('OK');
+//if(!extension_loaded ( 'mongo' )) print('mongo cannot load');
 try {
 
     //Read the configuration
@@ -39,8 +41,8 @@ try {
             "dbname" => $config->database->name
         ));
     });
-    $di->set('radio', function() {
-        $mongo = new Mongo("mongodb://neo:chen@192.168.6.1:27017/radio");
+    $di->set('radio', function() use ($config){
+        $mongo = new Mongo($config->mongodb->dsn);
         return $mongo->selectDb("radio");
     }, true);
     // Setting up the collection Manager
@@ -49,9 +51,9 @@ try {
     }, true);
     
     //Setup the view component
-    $di->set('view', function(){
+    $di->set('view', function() use ($config){
         $view = new \Phalcon\Mvc\View();
-        $view->setViewsDir('../app/views/');
+        $view->setViewsDir($config->application->viewsDir);
         /*$view->registerEngines(array(".tpl" => 'Phalcon\Mvc\View\Engine\Smarty'));*/
         return $view;
     });

@@ -148,17 +148,38 @@ class TechnologyController extends HomeController
 	
 	}
 	// crypt and htpasswd
-	public function cryptAction($password){
-        	print(crypt($password));
-        	$this->view->disable();
+	public function cryptAction($password = null){
+
+		if($password){
+			print(crypt($password));
+			$this->view->disable();
+		}else if ($this->request->isPost() == true) {
+			$password = $this->request->getPost("password", "string");
+			if($salt = $this->request->getPost('salt','string')){
+				$encrypt = crypt($password, $salt);
+			}else{
+				$encrypt = crypt($password);
+			}
+			$this->view->encrypt = $encrypt;
+		}
 	}
-	public function md5Action($digst){
-        	print(md5($digst));
+	public function md5Action($string){
+		if($string){
+        	print(md5($string));
         	$this->view->disable();
+        }else if ($this->request->isPost() == true) {
+			$string = $this->request->getPost("string", "string");
+			$this->view->digest = md5($string);
+		}
 	}
-	public function sha1Action($digst){
-        	print(sha1($digst));
+	public function sha1Action($string){
+		if($string){
+        	print(sha1($string));
         	$this->view->disable();
+        }else if ($this->request->isPost() == true) {
+			$string = $this->request->getPost("string", "string");
+			$this->view->digest = sha1($string);
+		}        	
 	}
     public function myipAction(){
         print($_SERVER['REMOTE_ADDR']);
