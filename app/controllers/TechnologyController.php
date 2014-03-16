@@ -147,6 +147,19 @@ class TechnologyController extends HomeController
 	public function searchAction(){
 	
 	}
+	// crypt and htpasswd
+	public function cryptAction($password){
+        	print(crypt($password));
+        	$this->view->disable();
+	}
+	public function md5Action($digst){
+        	print(md5($digst));
+        	$this->view->disable();
+	}
+	public function sha1Action($digst){
+        	print(sha1($digst));
+        	$this->view->disable();
+	}
     public function myipAction(){
         print($_SERVER['REMOTE_ADDR']);
         $this->view->disable();
