@@ -29,7 +29,10 @@
 <p>
 	<?php echo $status; ?>
 </p>
-
+               <tr>
+                <td><label for="sex">性别</label></td>
+                <td><?php echo Phalcon\Tag::radioField(array("sex", "value" => "男", 'checked'=>''));?><label for="sex">男</label><?php echo Phalcon\Tag::radioField(array("sex", "value" => "女")) ?><label for="sex">女</label></td>
+              </tr>
 <p>
     <?php // echo Tag::submitButton("注册") ?>
 	<input value="注册" id="submit" type="submit" />

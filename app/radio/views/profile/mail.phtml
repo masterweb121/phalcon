@@ -1,0 +1,74 @@
+<?php use Phalcon\Tag; ?>
+<div class="wrapper">
+    <div class="mainWrap">
+        <div class="main-module">
+            <div class="head"><h2>业余无线电设台QSL卡片邮寄地址</h2></div>
+            <div class="body"> 
+            <?php if($mail){
+                print(sprintf("地址：%s<br> 邮编：%s <br>收件人：%s<br>",$mail->address, $mail->zipcode, $mail->addressee));
+            }?>
+            </div>
+            <div class=foot></div>
+        </div>
+
+        
+        <div class="side-module">
+            <div class="head"><h2>下列地址仅用于邮寄QSL卡片</h2></div>
+            <div class="body">
+           <?php 
+            if($mail)
+            Phalcon\Tag::setDefaults(array(
+                "addressee" => $mail->addressee,
+                "address"   => $mail->address,
+                "zipcode"   => $mail->zipcode,
+                "description" => $mail->description
+                 ));
+            ?>
+            <?php echo Tag::form("radio/profile/mail"); echo Phalcon\Tag::hiddenField(array("id", "value" => @$mail->_id));?>
+            <table width="100%" border="0">
+               <tr>
+                <td><label for="address">地址</label></td>
+                <td><?php echo \Phalcon\Tag::textField(array("address", 'size'=>50, 'required'=>'')); ?></td>
+              </tr>
+                <td><label for="zipcode">邮编</label></td>
+                <td><?php echo \Phalcon\Tag::textField(array("zipcode", 'size'=>6, 'required'=>'')); ?></td>
+              </tr>
+              <tr>
+                <td><label for="addressee">收件人姓名</label></td>
+                <td><?php echo Phalcon\Tag::textField(array("addressee", 'size'=>12, 'required'=>'')) ?></td>
+              </tr>              
+              <tr>
+                  <td><label for="description">description</label></td>
+                  <td><?php echo Phalcon\Tag::textArea(array("description", "cols" => 90, "rows" => 4))?></td>
+              </tr>
+              <tr>
+                <td colspan="2">
+                    <?php echo Tag::submitButton("编辑") ?>
+                </td>
+              </tr>
+            </table>
+            </form>                
+            </div>
+            <div class="foot"></div>
+        </div>
+
+
+    </div>
+    <div class="sideWrap">
+        <div class="side-module">
+            <div class="head"><h2>业余无线电被叫清单</h2></div>
+            <div class="body">
+                <ul>
+            <?php foreach ($callings as $calling){?>
+                <li>
+                    <?php echo $calling->callsign;?> <a href="/radio/index/qrz/<?php echo $calling->callsign;?>">查看</a>
+                </li>
+            <?php }?>
+                </ul>
+                <div class="divider solid"></div>
+                <div class="foot-links"><a href="/radio/logging/">电台操作日志</a></div>
+            </div>
+            <div class="foot"></div>
+        </div>
+    </div>
+</div>
