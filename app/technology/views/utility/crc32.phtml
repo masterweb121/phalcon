@@ -1,0 +1,22 @@
+
+		<div class="main-module">
+            <div class=head><H2>CRC32</H2></div>
+            <div class=body>
+<?php echo $digest ?> <br />
+
+<?php use Phalcon\Tag; ?>
+
+<?php echo Tag::form('technology/crc32'); ?>
+
+ <p>
+    <label for="string">String</label>
+    <?php echo Tag::textField("string") ?>
+ </p>
+
+ <p>
+    <?php echo Tag::submitButton("Submit") ?>
+ </p>
+
+</form>
+            </div>
+        </div>  

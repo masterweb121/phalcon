@@ -1,4 +1,5 @@
 <?php
+//namespace Home\Controllers;
 class MemberController extends HomeController
 {
 	public function initialize()
@@ -56,8 +57,6 @@ class MemberController extends HomeController
                 $this->view->status = 'Sorry!';
             }
 		}
-
-        
     }
     public function signinAction(){
     	$this->view->module = Null;
@@ -142,116 +141,8 @@ class MemberController extends HomeController
         );
         $this->view->callings = $callings;
     }
-    public function repeaterAction($id){
-        $this->tag->setTitle('Radio');
-        $this->view->callsign = $this->session->get('callsign');
-        
-        $this->view->repeater = null;
-        if($id){
-            $this->view->id = $id;
-        }else{
-            $this->view->id = null;
-        }
-        
-        if ($this->request->isPost() == true) {
-            //$this->view->repeater = (Object)$this->request->getPost();
-            if($id){
-                $repeater = Radio\Repeater::findById($id);
-            }else{
-                $repeater = new Radio\Repeater();
-            }
-            $repeater->name     = $this->request->getPost('name');
-            $repeater->owner    = $this->request->getPost('owner');
-            $repeater->province = $this->request->getPost('province');
-            $repeater->city     = $this->request->getPost('city');
-            $repeater->frequency= $this->request->getPost('frequency');
-            $repeater->shift    = $this->request->getPost('shift');
-            $repeater->squelch  = $this->request->getPost('squelch');
-            $repeater->code     = $this->request->getPost('code');
-            $repeater->coordinate = $this->request->getPost('coordinate');
-            $repeater->image    = $this->request->getPost('image');
-            $repeater->description   = $this->request->getPost('description');
-            $repeater->status   = $this->request->getPost('status');
-            $repeater->zone     = array('cq' => $this->request->getPost('cq'), 'itu' => $this->request->getPost('itu'));
-            $repeater->save();
-            
-            $message = new Radio\Message();
-            $message->datetime = date('Y-m-d H:i:s');
-            if($id){
-                $message->content = sprintf("%s %s 业余中继台，频率 %s 参数更新了！", $repeater->province, $repeater->city, $repeater->owner, $repeater->frequency);
-            }else{
-                $message->content = sprintf("%s %s %s 新增中继站，频率 %s 快来看看吧！", $repeater->province, $repeater->city, $repeater->owner, $repeater->frequency);
-            }
-            $message->save();
-        }
-        
-        $stations = Radio\Repeater::find(array('fields' => array('frequency')));
-        $this->view->stations = $stations;
-        
-        if($id){
-            $repeater = Radio\Repeater::findById($id);
-            //  'fields' => array('owner','province','city','frequency','shift','tone','code','coordinate','status')
-            $this->view->repeater = $repeater;
-        }
-    }
-    public function loggingAction(){
-        date_default_timezone_set("UTC");
-        $this->tag->setTitle('Radio Logging');
-
-        if($this->request->isPost()){
-            $logging       = new Radio\Logging();
-            $logging->callsign  = $this->session->get('callsign'); //$this->request->getPost("callsign", "string");
-            $logging->date      = $this->request->getPost("date", "string");
-            $logging->time      = $this->request->getPost("time", "string");
-            $logging->frequency = $this->request->getPost("frequency", "string");
-            $logging->mode      = $this->request->getPost("mode", "string");
-            $logging->call      = $this->request->getPost("call", "string");
-            $logging->rst       = $this->request->getPost("rst", "string");
-            $logging->watt      = $this->request->getPost("watt", "string");
-            $logging->notes     = $this->request->getPost("notes", "string");
-            $logging->save();
-            $this->view->logging = (object)$this->request->getPost();
-            
-            $message = new Radio\Message();
-            $message->datetime = date('Y-m-d H:i:s');
-            $message->content = $logging->callsign .'与'.$logging->call.'做了一个通联';
-            $message->save();
-        }
-
-        $this->view->logging = null;
-        
-        $this->view->callsign  = $this->session->get('callsign');
-        $callings = Radio\Logging::find(
-            array(
-                array('call' => $this->session->get('callsign')),
-                'fields' => array('callsign','date','time','frequency','mode','call','rst','watt','notes'),
-                'limit' => 100
-            )
-        );
-        $this->view->callings = $callings;
-        $loggings = Radio\Logging::find(
-            array(
-                array('callsign' => $this->session->get('callsign')),
-                'fields' => array('callsign','date','time','frequency','mode','call','rst','watt','notes'),
-                "sort" => array("date" => -1),
-                'limit' => 100
-            )
-        );
-        $this->view->loggings = $loggings;
-        
-        $incoming =  Radio\Logging::find(array(
-                array('call' => $this->session->get('callsign')),
-                'fields' => array('callsign','date','time','frequency','mode','call','rst','watt','notes'),
-                "sort" => array("date" => -1),
-                'limit' => 100
-            ));
-        $this->view->incoming = $incoming;
-                
-        $datalist = array('frequency'=> array('439.460','439.850','438.275','438.200'),
-            'rst'=> array('59','59','55','58')
-            );
-        $this->view->datalist = $datalist;
-    }
+    
+    
     public function qslAction(){
         
     }

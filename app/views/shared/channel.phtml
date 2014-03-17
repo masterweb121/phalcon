@@ -1,0 +1,23 @@
+	<div id="channel">
+		<div class="language">
+            <a class="" href="/">Home</a>
+            <?php foreach( $this->elements->getChannel() as $menu) {?>
+                | <?php echo Phalcon\Tag::linkTo(array( $menu['link'], $menu['title'], 'target'=>"_parent"/*, 'class' => ''*/));?></a>
+            <?php }?>
+            <!--
+			<a href="http://netkiller.users.sourceforge.net/zh-cn/%7B$uri_string%7D">{#chinese#}</a> |
+			<a href="http://netkiller.users.sourceforge.net/zh-tw/%7B$uri_string%7D">{#taiwan#}</a> |
+			<a href="http://netkiller.users.sourceforge.net/en-us/%7B$uri_string%7D">{#english#}</a> |
+			<a title="点击以繁体中文方式浏览" name="StranLink" href="http://netkiller.users.sourceforge.net/#">繁體中文</a>
+            -->
+		</div>
+		<div class="member">
+            <?php if($this->session->get('username')){?>
+            <a href="/member/">编辑资料</a> |
+            <a href="/member/signout">注销</a>
+            <?php }else{?>
+            <a href="/member/signup">注册</a> |
+            <a href="/member/signin">登陆</a>
+            <?php }?>
+		</div>
+	</div>

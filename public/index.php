@@ -83,9 +83,76 @@ try {
 		return $component;
 	});
 
+    $di->set('router', function() {
+
+        $router = new \Phalcon\Mvc\Router();
+        //$router->setDefaultModule("home");
+        //$router->setDefaultNamespace('Home\Controllers');
+        //$router->setDefaultController('index');
+        $router->setDefaultAction('index');
+        $router->add('/:module(/?)', array(
+            'module' => 1,
+            'controller' => 'index',
+            'action' => 'index',
+        ));
+        $router->add('/:module/:controller(/?)', array(
+            'module' => 1,
+            'controller' => 2,
+            'action' => 'index',
+        ));
+        $router->add('/:module/:controller/:action/:params', array(
+            'module' => 1,
+            'controller' => 2,
+            'action' => 3,
+            'params' => 4
+        ));
+        $router->add("/member(/?)", array(
+            /*'module'     => 'home',*/
+            'controller' => 'member',
+            'action'     => 'index',
+            'params' => 2
+        ));
+        $router->add("/member/:action/:params", array(
+            /*'module'     => 'home',*/
+            'controller' => 'member',
+            'action'     => 1,
+            'params' => 2
+        ));
+        return $router;
+    });
+    
     //Handle the request
     $application = new \Phalcon\Mvc\Application($di);
 
+    // Register the installed modules
+    $application->registerModules(
+        array(
+            /*
+            'home'  => array(
+                'className' => 'Home\Module',
+                'path'      => $config->home->module.'/Module.php',
+            ),*/
+            'technology' => array(
+                'className' => 'Technology\Module',
+                'path'      => $config->technology->module.'/Module.php',
+            ),
+            'radio'  => array(
+                'className' => 'Radio\Module',
+                'path'      => $config->radio->module.'/Module.php',
+            ),
+            'outdoor'  => array(
+                'className' => 'Outdoor\Module',
+                'path'      => $config->outdoor->module.'/Module.php',
+            )
+            /*,
+            'member'  => array(
+                'className' => 'Member\Module',
+                'path'      => $config->member->module.'/Module.php',
+            )
+            */
+        )
+    );
+    
     echo $application->handle()->getContent();
 
 } catch(\Phalcon\Exception $e) {

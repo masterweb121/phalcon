@@ -1,6 +1,6 @@
 <?php
-
-class Member extends \Phalcon\Mvc\Collection
+namespace Radio\Models;
+class Repeater extends \Phalcon\Mvc\Collection
 {
     public function initialize()
     {

@@ -11,7 +11,7 @@ body,table,input,textarea,select {font-family:微软雅黑,Verdana,sans-serif,�
     </head>
 <body>
 <div id="global-header">
-    <?php $this->partial("shared/channel") ?>	
+    <?php $this->partial("../../home/views/shared/channel") ?>	
 	<div id="masthead">
 		<div id="logo">
 			<img src="/img/freebsd.png" height="75" alt="freebsd logo">
@@ -20,9 +20,11 @@ body,table,input,textarea,select {font-family:微软雅黑,Verdana,sans-serif,�
 			<img src="/img/gnu.png" height="75" alt="gnu logo">
 		</div>
 		<div id="banner">
+            <!--
             <a href="http://www.crsa.org"><img src="/img/radio/crsa.jpg" height="75" alt="CRSA"></a>
             <a href="http://www.hkara.org.hk/"><img src="/img/radio/hkara.gif" height="75" alt="HKARA"></a>
             <a href="http://www.arrl.org/"><img src="/img/radio/arrl.png" height="75" alt="ARRL"></a>
+            -->
 		</div>
 	</div>
 	<div class="navigation">
@@ -88,10 +90,12 @@ body,table,input,textarea,select {font-family:微软雅黑,Verdana,sans-serif,�
 -->
 
 <div id="container">
-<?php echo $this->getContent() ?>
+
+    <?php echo $this->getContent() ?>
+
 </div>
 
 <br clear="all">
-    <?php $this->partial("shared/footer") ?>
+    <?php $this->partial("../../home/views/shared/footer") ?>
 </body>
 </html>

@@ -1,0 +1,87 @@
+<div class="wrapper">    
+    <div class="mainWrap">
+
+<?php if($stations){?>
+<div class="main-module">
+	<div class="head"><h2>全国中继台覆盖图</h2></div>
+	<div class="body"> 
+<style type="text/css">
+#map {
+    /* height: 180px; */
+    width: 700px; 
+    height: 600px;
+} 
+</style>
+
+<div id="map"></div>
+<script type="text/javascript" src="http://api.map.baidu.com/library/TextIconOverlay/1.2/src/TextIconOverlay_min.js"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/library/MarkerClusterer/1.2/src/MarkerClusterer_min.js"></script>
+<script type="text/javascript">
+var map = new BMap.Map("map");
+var point = new BMap.Point(106.719674, 37.536179);
+map.centerAndZoom(point, 5);
+map.enableScrollWheelZoom();  
+var MAX = 10;
+var markers = [];
+var pt = null;
+var infoWindow = null;
+var circle = null;
+<?php foreach ($stations as $station){?>
+   point = new BMap.Point(<?php echo $station->coordinate?>);
+   marker = new BMap.Marker(point)
+   infoWindow = new BMap.InfoWindow("<div style='width:400px'><h4 style='margin:0 0 5px 0;padding:0.2em 0'><?php echo $station->name?></h4>" + 
+"<img style='float:right;margin:4px' id='imgDemo' src='http://app.baidu.com/map/images/tiananmen.jpg' width='139' height='104' title='天安门'/>" + 
+"<p style='margin:0;line-height:1.5;font-size:13px;'>频率: <?php echo $station->frequency?><br />台主: <?php echo $station->owner?><br />描述: <?php echo $station->description?>...</p>" + 
+"<p><a href='/radio/repeater/<?php echo $station->_id;?>'>查看信号覆盖情况</a></div>");  // 创建信息窗口对象
+    marker.addEventListener("click", function(){          
+        this.openInfoWindow(infoWindow);
+        //图片加载完毕重绘infowindow
+        document.getElementById('imgDemo').onload = function (){
+        infoWindow.redraw();   //防止在网速较慢，图片未加载时，生成的信息框高度比图片的总高度小，导致图片部分被隐藏
+        }
+    });
+    circle = new BMap.Circle(point,10000,{strokeColor:"blue",fillColor:"red",strokeWeight:1, strokeStyle:"dashed", strokeOpacity:0.5, fillOpacity: 0.05});
+    map.addOverlay(circle);
+    markers.push(marker);
+<?php }?>
+//最简单的用法，生成一个marker数组，然后调用markerClusterer类即可。
+var markerClusterer = new BMapLib.MarkerClusterer(map, {markers:markers});
+</script>
+
+	</div>
+	<div class=foot></div>
+</div>	
+
+<?php }?>
+
+ 
+        <div class="side-module">
+            <div class="head"><h2>Hongkong VHF/UHF repeater</h2></div>
+            <div class="body">
+                <img src="http://i206.photobucket.com/albums/bb279/vr2xlb/Table-0.jpg" /> 	
+            </div>
+            <div class="foot"></div>
+        </div>
+
+
+    </div>
+    <div class="sideWrap">
+        <div class="side-module">
+          <div class="head">
+            <h2>业余无线电中继台</h2>
+          </div>
+          <div class="body">
+                <ul>
+                <?php foreach ($stationlists as $station){?>
+                    <li>
+                         <a href="/radio/repeater/details/<?php echo $station->_id;?>"><?php echo $station->frequency;?> <?php echo $station->name;?></a>
+                    </li>
+                <?php }?>
+                </ul>
+                <div class="divider solid"></div>
+            <div class="foot-links"><a href="/radio/repeater/">全国中继台覆盖图</a> </div>
+          </div>
+          <div class="foot"></div>
+        </div>
+    </div>
+</div>

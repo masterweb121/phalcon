@@ -1,0 +1,28 @@
+		<div class="main-module">
+            <div class=head><H2>Base64 Encode/Decode</H2></div>
+            <div class=body>
+<?php echo $text ?> <br />
+
+<?php use Phalcon\Tag; ?>
+
+<?php echo Tag::form('technology/base64'); ?>
+
+ <p>
+    <label for="type">encode</label>
+    <?php echo Phalcon\Tag::radioField(array("type", "value" => "encode")) ?>
+    <label for="type">decode</label>
+    <?php echo Phalcon\Tag::radioField(array("type", "value" => "decode")) ?>
+ </p>
+
+ <p>
+    <label for="url">URL:</label>
+    <?php echo Tag::textArea(array("text", "cols" => 100, "rows" => 10)) ?>
+ </p>
+
+ <p>
+    <?php echo Tag::submitButton("Submit") ?>
+ </p>
+
+</form>
+            </div>
+        </div>  

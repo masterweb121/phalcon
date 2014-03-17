@@ -96,8 +96,8 @@ class Elements extends Component
 				array('title'=>'2010','link'=>'/photography/album/2010/')
 			),
             'repeater' => array(
-				array('title'=>'Repeater', 'link'=>'/radio/repeater'),
-				array('title'=>'Logging','link'=>'/radio/logging'),
+				array('title'=>'UHF', 'link'=>'/radio/repeater'),
+				array('title'=>'VHF','link'=>'/radio/logging'),
 				array('title'=>'Morse','link'=>'/radio/morse'),
                 array('title'=>'Zone','link'=>'/radio/zone'),
                 array('title'=>'APRS','link'=>'/radio/aprs'),

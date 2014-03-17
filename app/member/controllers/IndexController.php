@@ -1,18 +1,18 @@
 <?php
-//namespace Home\Controllers;
+namespace Home\Controllers;
 class IndexController extends \Phalcon\Mvc\Controller
 {
 	public function initialize()
     {
-        //$this->view->setTemplateAfter('common');
+        $this->view->setTemplateAfter('theme');
 		//Set the document title
-        $this->tag->setTitle('Home');
+        $this->tag->setTitle('Member');
         //parent::initialize();
     }
 	
     public function indexAction()
     {
-//        echo "<h1>Hello!</h1>";
+        
     }
 
 }
