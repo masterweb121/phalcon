@@ -10,7 +10,7 @@ class Menu extends Component
     }
     public function getChannel(){
 		$links = array(
-				array('title'=>'Home', 'link'=>'/'),
+				array('title'=>'Home', 'link'=>'index'),
 				array('title'=>'Technology','link'=>'technology'),
 				array('title'=>'Photography','link'=>'photography'),
 				array('title'=>'Radio','link'=>'radio'),
@@ -23,14 +23,17 @@ class Menu extends Component
 		$menu = array(
             array('title'=>'Home', 'link'=>'photography'),
             array('title'=>'相册', 'link'=>'photography/album'),
-            array('title'=>'镜头','link'=>'photography/lens'),
-            array('title'=>'相机','link'=>'photography/camera'),
+
 		);
 		return( $menu );
     }
 	public function getSubmenu($menu = null)
     {
 		$submenu = array(
+			'index' => array(
+				array('title'=>'镜头','link'=>'photography/lens'),
+				array('title'=>'相机','link'=>'photography/camera'),
+			),
             'photography' => array(
 				array('title'=>'2014','link'=>'/photography/album/2014/'),
 				array('title'=>'2013','link'=>'/photography/album/2013/'),

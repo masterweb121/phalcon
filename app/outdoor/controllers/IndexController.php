@@ -1,5 +1,5 @@
 <?php
-namespace Multiple\Outdoor\Controllers;
+namespace Outdoor\Controllers;
 class IndexController extends \Phalcon\Mvc\Controller
 {
 	public function initialize()
@@ -7,12 +7,12 @@ class IndexController extends \Phalcon\Mvc\Controller
         //$this->view->setTemplateAfter('common');
 		//Set the document title
         //$this->tag->setTitle('Home');
-        parent::initialize();
+        //parent::initialize();
     }
 	
     public function indexAction()
     {
-        echo "<h1>Hello!</h1>";
+        
     }
 
 }

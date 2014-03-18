@@ -10,10 +10,11 @@ class Elements extends Component
 //    }
     public function getChannel(){
 		$links = array(
-				array('title'=>'Home', 'link'=>'/'),
+				array('title'=>'Home', 'link'=>''),
 				array('title'=>'Technology','link'=>'technology'),
 				array('title'=>'Photography','link'=>'photography'),
 				array('title'=>'Radio','link'=>'radio'),
+				array('title'=>'Outdoor','link'=>'outdoor'),
 				array('title'=>'About','link'=>'about')
 		);
 		return($links);

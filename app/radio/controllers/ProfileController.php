@@ -162,6 +162,9 @@ class ProfileController  extends \Phalcon\Mvc\Controller {
             array("username" => $username)
             )); 
     }
+    public function equipmentAction(){
+		
+	}
     public function testAction(){
         $this->view->disable();
         print_r($this->dispatcher->getActionName());
