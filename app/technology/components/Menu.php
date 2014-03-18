@@ -23,13 +23,9 @@ class Menu extends Component
 		$menu = array(
             array('title'=>'Home', 'link'=>'technology'),
             array('title'=>'电子书', 'link'=>'technology/book/'),
-            array('title'=>'Linux', 'link'=>'technology/book/linux/index.html'),
-            array('title'=>'CentOS','link'=>'/technology/book/centos/index.html'),
-            array('title'=>'MySQL','link'=>'/technology/book/mysql/index.html'),
-            array('title'=>'FreeBSD','link'=>'/technology/book/freebsd/index.html'),
-            array('title'=>'Architect','link'=>'/technology/book/architect/index.html')  
+
             /*
-            array('title'=>'操作系统', 'link'=>'technology/repeater'),
+            
             array('title'=>'编程语言','link'=>'technology/logging'),
             array('title'=>'数据库','link'=>'technology/net'),
             array('title'=>'安全','link'=>'technology/beacon'),
@@ -50,12 +46,12 @@ class Menu extends Component
 				array('title'=>'FreeBSD','link'=>'/technology/freebsd/'),
 				array('title'=>'Architect','link'=>'/technology/architect/')
 			),            
-			'logging' => array(
-				array('title'=>'HF','link'=>'/photography/album/2011/'),
-                array('title'=>'VHF','link'=>'/photography/album/2013/'),
-                array('title'=>'UHF','link'=>'/photography/album/2014/'),
-				array('title'=>'KUHF','link'=>'/photography/album/2012/'),
-				array('title'=>'FSK','link'=>'/photography/album/2010/')
+			'book' => array(
+            array('title'=>'Linux', 'link'=>'linux/index.html'),
+            array('title'=>'CentOS','link'=>'centos/index.html'),
+            array('title'=>'MySQL','link'=>'mysql/index.html'),
+            array('title'=>'FreeBSD','link'=>'freebsd/index.html'),
+            array('title'=>'Architect','link'=>'architect/index.html')  
 			),
             'repeater' => array(
 				array('title'=>'UHF', 'link'=>'/radio/repeater'),

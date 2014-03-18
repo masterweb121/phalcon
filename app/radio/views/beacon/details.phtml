@@ -1,0 +1,71 @@
+<div class="wrapper">    
+    <div class="mainWrap">
+
+<?php if($beacon){?>
+<div class="main-module">
+	<div class="head"><h2><?php echo $beacon->name?> 中继台信号覆盖区</h2></div>
+	<div class="body"> 
+
+<style type="text/css">
+#map {
+    /* height: 180px; */
+    width: 700px; 
+    height: 600px;
+} 
+</style>
+
+<div id="map"></div>
+
+<script type="text/javascript">
+var map = new BMap.Map("map");
+var point = new BMap.Point(<?php echo $beacon->coordinate?>);
+map.centerAndZoom(point, 4);
+map.enableScrollWheelZoom();  
+var marker = new BMap.Marker(point);
+map.addOverlay(marker);
+var circle = new BMap.Circle(point,80000000000,{strokeColor:"red",fillColor:"pink",strokeWeight:1, strokeStyle:"solid", strokeOpacity:0.5, fillOpacity: 0.05});
+map.addOverlay(circle);
+var circle = new BMap.Circle(point,50000000000,{strokeColor:"blue",fillColor:"blue",strokeWeight:1, strokeStyle:"dashed", strokeOpacity:0.5, fillOpacity: 0.05});
+map.addOverlay(circle);
+var circle = new BMap.Circle(point,5000000000,{strokeColor:"blue",fillColor:"blue",strokeWeight:1, strokeStyle:"dashed", strokeOpacity:0.5, fillOpacity: 0.05});
+map.addOverlay(circle);
+var circle = new BMap.Circle(point,500000000,{strokeColor:"blue",fillColor:"blue",strokeWeight:1, strokeStyle:"dashed", strokeOpacity:0.5, fillOpacity: 0.05});
+map.addOverlay(circle);
+var circle = new BMap.Circle(point,50000000,{strokeColor:"yellow",fillColor:"yellow",strokeWeight:1, strokeStyle:"dashed", strokeOpacity:0.5, fillOpacity: 0.2});
+map.addOverlay(circle);
+var circle = new BMap.Circle(point,5000000,{strokeColor:"blue",fillColor:"blue",strokeWeight:1, strokeStyle:"solid", strokeOpacity:0.5, fillOpacity: 0.1});
+map.addOverlay(circle);
+var circle = new BMap.Circle(point,500000,{strokeColor:"green",fillColor:"green",strokeWeight:1, strokeStyle:"solid", strokeOpacity:0.5, fillOpacity: 0.1});
+map.addOverlay(circle);
+</script>
+
+	</div>
+	<div class=foot></div>
+</div>	        
+   
+
+        <div class="side-module">
+            <div class="head"><h2><?php echo $beacon->name?></h2></div>
+            <div class="body">
+                <ul>
+
+                    <li>位置: <?php echo $beacon->province?> <?php echo $beacon->city?></li>
+                    <li>频率: <?php echo $beacon->frequency?></li>
+                    <li>差频: <?php echo $beacon->watt?>W</li>
+                    <li>波段: <?php echo $beacon->band?></li>
+                    <li>坐标: <?php echo $beacon->coordinate?></li>
+                    <li>分区: <?php echo $beacon->zone['cq']?>,<?php echo $beacon->zone['itu']?></li>
+                    <li>图片: <?php echo $beacon->image?></li>
+                    <li>状态: <?php echo $beacon->status?></li>
+                    <li>描述: <?php echo $beacon->description?></li>
+                </ul> 	
+            </div>
+            <div class="foot"></div>
+        </div>
+<?php }?>     
+
+    </div>
+    <div class="sideWrap">
+        <?php $this->partial("beacon/sidebar") ?>	
+    </div>
+</div>

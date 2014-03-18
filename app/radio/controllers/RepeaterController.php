@@ -32,6 +32,25 @@ class RepeaterController extends \Phalcon\Mvc\Controller{
         $this->view->stationlists = $this->stations;        
         //$this->view->pick('repeater/index');
     }
+    public function downloadAction(){
+        $this->response->setHeader('Content-type', 'text/csv');
+        $this->response->setHeader('Content-Disposition:', 'attachment; filename="repeater.csv"');
+        $this->view->disable();
+        $repeaters = \Radio\Models\Repeater::find(array('fields' => array('name','province','city','frequency','shift','squelch','code','band')));
+        foreach ($repeaters as $repeater){
+            $row = (array)$repeater;
+            unset($row['_id']);
+            $line = implode ( ',' , $row );
+            printf("%s\n",$line);
+        }
+//        $this->view->repeater = null;
+//        if($id){
+//            
+//            $this->view->repeater = $repeater;
+//        }
+//        $this->view->stationlists = $this->stations;        
+        //$this->view->pick('repeater/index');
+    }
     public function mgmtAction($id){
         //$this->view->setTemplateAfter('maximize');
         if(!$this->session->get('callsign')){
@@ -54,8 +73,8 @@ class RepeaterController extends \Phalcon\Mvc\Controller{
             }else{
                 $repeater = new \Radio\Models\Repeater();
             }
+            $repeater->callsign = $this->request->getPost('callsign');
             $repeater->name     = $this->request->getPost('name');
-            $repeater->owner    = $this->request->getPost('owner');
             $repeater->province = $this->request->getPost('province');
             $repeater->city     = $this->request->getPost('city');
             $repeater->frequency= $this->request->getPost('frequency');
@@ -73,14 +92,14 @@ class RepeaterController extends \Phalcon\Mvc\Controller{
             $message = new \Radio\Models\Message();
             $message->datetime = date('Y-m-d H:i:s');
             if($id){
-                $message->content = sprintf("%s %s 业余中继台，频率 %s 参数更新了！", $repeater->province, $repeater->city, $repeater->owner, $repeater->frequency);
+                $message->content = sprintf("%s %s 业余中继台，频率 %s 参数更新了！", $repeater->province, $repeater->city, $repeater->callsign, $repeater->frequency);
             }else{
-                $message->content = sprintf("%s %s %s 新增中继站，频率 %s 快来看看吧！", $repeater->province, $repeater->city, $repeater->owner, $repeater->frequency);
+                $message->content = sprintf("%s %s %s 新增中继站，频率 %s 快来看看吧！", $repeater->province, $repeater->city, $repeater->callsign, $repeater->frequency);
             }
             $message->save();
         }
         
-        $stations = \Radio\Models\Repeater::find(array('fields' => array('frequency')));
+        $stations = \Radio\Models\Repeater::find(array('fields' => array('name','frequency')));
         $this->view->stations = $stations;
         
         if($id){

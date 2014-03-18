@@ -143,7 +143,10 @@ class MemberController extends HomeController
     }
     
     
-    public function qslAction(){
+    public function unsubscribeAction(){
+        
+    }
+    public function subscribeAction(){
         
     }
 }

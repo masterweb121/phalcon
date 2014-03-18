@@ -2,9 +2,45 @@
         <div class="main-module">
             <div class="head"><h2>业余无线电设台QSL卡片邮寄地址</h2></div>
             <div class="body"> 
-            <?php if($qth){
-                print(sprintf("地址：%s<br> 邮编：%s <br>收件人：%s<br>",$qth->address, $qth->zipcode, $qth->addressee));
-            }?>
+
+<style type="text/css">
+#map{height:500px;width:700px;float:left;border-right:2px solid #bcbcbc;}
+</style>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=IoN3tUhZjq78v2DyeztYLQEO"></script>
+
+<div id="map"></div>
+
+<script type="text/javascript">
+
+// 百度地图API功能
+var map = new BMap.Map("map");
+var point   = null;
+var marker  = null;
+
+map.enableScrollWheelZoom();                            //启用滚轮放大缩小
+<?php if($qth){?>
+point = new BMap.Point(<?php echo $qth->coordinate ?>);
+map.centerAndZoom(point,12);
+marker = new BMap.Marker(point);
+map.addOverlay(marker);
+<?php }else{ ?>
+map.centerAndZoom("中国",5);                   // 初始化地图,设置城市和地图级别。    
+<?php } ?>
+map.addEventListener("click", function(e){
+    map.removeOverlay(marker);
+    point = new BMap.Point(e.point.lng, e.point.lat);
+    marker = new BMap.Marker(point);
+    map.addOverlay(marker);
+  document.getElementById("coordinate").value = e.point.lng + ", " + e.point.lat;
+});
+
+</script>                    
+                                
+                
+            <?php if($qth){ 
+                print(sprintf("地址：%s<br> 坐标：%s <br>CQ：%s, ITU: %s<br> 描述：%s <br>",$qth->address, $qth->coordinate, $qth->zone['cq'], $qth->zone['itu'], $qth->description));
+             }?>
+                
             </div>
             <div class=foot></div>
         </div>
@@ -16,9 +52,10 @@
            <?php 
             if($qth)
             Phalcon\Tag::setDefaults(array(
-                "addressee" => $qth->addressee,
                 "address"   => $qth->address,
-                "zipcode"   => $qth->zipcode,
+                "coordinate"   => $qth->coordinate,
+                "itu" => $qth->zone['itu'],
+                "cq" => $qth->zone['cq'],
                 "description" => $qth->description
                  ));
             ?>
@@ -28,12 +65,12 @@
                 <td><label for="address">地址</label></td>
                 <td><?php echo \Phalcon\Tag::textField(array("address", 'size'=>50, 'required'=>'')); ?></td>
               </tr>
-                <td><label for="zipcode">邮编</label></td>
-                <td><?php echo \Phalcon\Tag::textField(array("zipcode", 'size'=>6, 'required'=>'')); ?></td>
+                <td><label for="coordinate">坐标</label></td>
+                <td><?php echo Tag::textField("coordinate") ?></td>
               </tr>
               <tr>
-                <td><label for="addressee">收件人姓名</label></td>
-                <td><?php echo Phalcon\Tag::textField(array("addressee", 'size'=>12, 'required'=>'')) ?></td>
+                <td><label for="zone">Zone</label></td>
+                <td><label for="zone">cq zone</label><?php echo Tag::textField("cq") ?><label for="zone">itu zone</label><?php echo Tag::textField("itu") ?><br /></td>
               </tr>              
               <tr>
                   <td><label for="description">description</label></td>

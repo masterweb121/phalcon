@@ -30,9 +30,9 @@
 	<div class="main-module">
 	    <div class="head"><h2>电台设台地址(QTH)</h2></div>
 	    <div class="body">
-            <?php if($qth){
-                print(sprintf("地址：%s<br> 邮编：%s <br>收件人：%s<br>",$mail->address, $mail->zipcode, $mail->addressee));
-            }?>
+            <?php if($qth){ 
+                print(sprintf("地址：%s<br> 坐标：%s <br>CQ：%s, ITU: %s<br> 描述：%s <br>",$qth->address, $qth->coordinate, $qth->zone['cq'], $qth->zone['itu'], $qth->description));
+             }?>
         </div>
         <div class="foot"></div>
 	</div>

@@ -1,0 +1,15 @@
+<div class="side-module">
+    <div class="head"><h2>业余无线电中继台</h2></div>
+    <div class="body">
+          <ul>
+          <?php foreach ($stations as $station){?>
+              <li>
+                   <a href="/radio/beacon/details/<?php echo $station->_id;?>"><?php echo $station->frequency;?> <?php echo $station->name;?></a>
+              </li>
+          <?php }?>
+          </ul>
+          <div class="divider solid"></div>
+        <div class="foot-links"><a href="/radio/beacon/">信标台覆盖图</a> </div>
+    </div>
+    <div class="foot"></div>
+</div>

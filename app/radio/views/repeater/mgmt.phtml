@@ -49,7 +49,7 @@ map.addEventListener("click", function(e){
             <?php 
             if($repeater){
                 Phalcon\Tag::setDefaults(array(
-                    "owner"     => $repeater->owner?$repeater->owner:$callsign,
+                    "callsign"     => $repeater->callsign?$repeater->callsign:$callsign,
                     "name"     => $repeater->name,
                     "province"  => $repeater->province,
                     "city"      => $repeater->city,
@@ -77,15 +77,15 @@ map.addEventListener("click", function(e){
                 <?php }?>
             </datalist>
 
-            <?php echo Tag::form("member/repeater/$id"); ?>
+            <?php echo Tag::form("radio/repeater/mgmt/$id"); ?>
+<!--            <label for="callsign">owner</label> --><?php echo Tag::hiddenField("callsign") ?><br />
             <label for="name">name</label><?php echo Tag::textField("name") ?><br /> 
-            <label for="owner">owner</label><?php echo Tag::textField("owner") ?><br /> 
             <label for="province">province</label><?php echo Tag::textField("province") ?>
             <label for="city">city</label><?php echo Tag::textField("city") ?><br /> 
             <label for="frequency">frequency</label><?php echo Tag::textField("frequency") ?>
             <label for="shift">shift</label><?php echo Tag::textField(array("shift", 'size'=>5, 'value'=>-5)) ?>
             <?php echo Phalcon\Tag::radioField(array("squelch", "value" => "CTCSS", 'checked'=>''));?><label for="CTCSS">CTCSS</label><?php echo Phalcon\Tag::radioField(array("squelch", "value" => "DCS")) ?><label for="DCS">DCS</label>
-            <label for="band">band</label><?php echo Phalcon\Tag::selectStatic("band", array("VHF", "UHF", "KUHF"))?><br /> 
+            <label for="band">band</label><?php echo Phalcon\Tag::selectStatic("band", array("VHF"=>'VHF', "UHF"=>'UHF', "KUHF"=>'KUHF'))?><br /> 
             <label for="code">code</label><?php echo Tag::textField(array("code", 'size'=>6, 'value'=>'88.5', 'list'=>'datalist_code')) ?><br />
             <label for="zone">cq zone</label><?php echo Tag::textField("cq") ?><label for="zone">itu zone</label><?php echo Tag::textField("itu") ?><br />
             <label for="coordinate">coordinate</label><?php echo Tag::textField("coordinate") ?><br /> 
@@ -115,12 +115,12 @@ map.addEventListener("click", function(e){
                 <ul>
             <?php foreach ($stations as $station){?>
                 <li>
-                    <?php echo $station->frequency;?> <a href="/radio/repeater/<?php echo $station->frequency;?>">预览</a>|<a href="/member/repeater/<?php echo $station->_id;?>">编辑</a>
+                    <?php echo $station->frequency;?> <?php echo $station->name;?> <a href="/radio/repeater/details/<?php echo $station->_id;?>">预览</a>|<a href="/radio/repeater/mgmt/<?php echo $station->_id;?>">编辑</a>
                 </li>
             <?php }?>
                 </ul>
                 <div class="divider solid"></div>
-                <div class="foot-links"><a href="/member/repeater/">新增中继台</a> </div>
+                <div class="foot-links"><a href="/radio/repeater/mgmt/">新增中继台</a> | <a href="/radio/profile/">返回</a> </div>
             </div>
             <div class="foot"></div>
         </div>

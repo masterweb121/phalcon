@@ -33,13 +33,13 @@ class ProfileController  extends \Phalcon\Mvc\Controller {
                 array("callsign" => $callsign)
             ));  
         $this->view->qth = \Radio\Models\Qth::findFirst(array(
-                'fields' => array('callsign','addressee','address','zipcode','description'),
+                'fields' => array('callsign','address','coordinate','zone','description'),
                 array("callsign" => $callsign)
             ));
         
         $this->view->repeaters = \Radio\Models\Repeater::find(array(
+            'fields' => array('frequency','name'),
             array("callsign" => $callsign),
-            'fields' => array('frequency','name')
             ));
         $this->view->loggings = \Radio\Models\Logging::find(
             array(
@@ -123,7 +123,8 @@ class ProfileController  extends \Phalcon\Mvc\Controller {
             $qth->callsign  = $this->session->get('callsign'); //$this->request->getPost("callsign", "string");
             $qth->addressee = $this->request->getPost("addressee", "string");
             $qth->address   = $this->request->getPost("address", "string");
-            $qth->zipcode   = $this->request->getPost("zipcode", "string");
+            $qth->coordinate = $this->request->getPost('coordinate');
+            $qth->zone     = array('cq' => $this->request->getPost('cq'), 'itu' => $this->request->getPost('itu'));
             $qth->description  = $this->request->getPost("description", "string");
             $qth->save();
             //$this->view->logging = (object)$this->request->getPost();
@@ -136,7 +137,7 @@ class ProfileController  extends \Phalcon\Mvc\Controller {
         
         $callsign = $this->session->get('callsign');
         $qth = \Radio\Models\Qth::findFirst(array(
-                'fields' => array('callsign','addressee','address','zipcode','description'),
+                'fields' => array('callsign','address','coordinate','zone','description'),
                 array("callsign" => $callsign)
             ));
         if($qth){

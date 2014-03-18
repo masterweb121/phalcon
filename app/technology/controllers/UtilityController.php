@@ -7,7 +7,7 @@ class UtilityController extends \Phalcon\Mvc\Controller
         $this->view->setTemplateAfter('theme');
 		//Set the document title
         $this->tag->setTitle('Technology - Utility Programs');
-        $this->view->menu = new \Technology\Component\Menu($this->dispatcher->getControllerName(), $this->dispatcher->getActionName());
+        $this->view->menu = new \Technology\Components\Menu($this->dispatcher->getControllerName(), $this->dispatcher->getActionName());
     }
 	
     public function indexAction()

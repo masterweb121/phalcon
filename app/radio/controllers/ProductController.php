@@ -15,4 +15,29 @@ class ProductController extends \Phalcon\Mvc\Controller {
     {
 
     }
+    public function yaesuAction()
+    {
+
+    }
+    public function icomAction()
+    {
+
+    }
+    public function kenwoodAction()
+    {
+
+    }
+    public function alincoAction()
+    {
+
+    }
+    public function motorolaAction()
+    {
+
+    }
+    public function hyteraAction()
+    {
+
+    }
+    
 }

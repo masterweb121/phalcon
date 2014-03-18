@@ -28,7 +28,7 @@ class Elements extends Component
 		$submenu = array(
 			'member' => array(
 				array('title'=>'相册管理', 'link'=>'/member/'),
-				array('title'=>'电台管理','link'=>'/member/radio'),
+				array('title'=>'电台管理','link'=>'radio/profile'),
 				array('title'=>'活动管理','link'=>'')
 			),
 			'about' => array(

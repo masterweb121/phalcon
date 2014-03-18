@@ -1,4 +1,5 @@
 <?php
+namespace Photography\Components;
 use Phalcon\Mvc\User\Component;
 
 class Browse extends Component{

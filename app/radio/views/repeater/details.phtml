@@ -1,6 +1,5 @@
 <div class="wrapper">    
     <div class="mainWrap">
-        <div class="wrapper">
 
 <?php if($repeater){?>
 <div class="main-module">
@@ -44,27 +43,27 @@ map.addOverlay(circle);
 </div>	        
    
 
-<div class="side-module">
-	<div class="head"><h2><?php echo $repeater->name?></h2></div>
-	<div class="body">
-        <ul>
-            
-            <li>位置: <?php echo $repeater->province?> <?php echo $repeater->city?></li>
-            <li>频率: <?php echo $repeater->frequency?></li>
-            <li>差频: <?php echo $repeater->shift?></li>
-            <li>静噪: <?php echo $repeater->squelch?></li>
-            <li>哑音: <?php echo $repeater->code?></li>
-            <li>波段: <?php echo $repeater->band?></li>
-            <li>坐标: <?php echo $repeater->coordinate?></li>
-            <li>分区: <?php echo $repeater->zone['cq']?>,<?php echo $repeater->zone['itu']?></li>
-            <li>台主: <?php echo $repeater->owner?></li>
-            <li>图片: <?php echo $repeater->image?></li>
-            <li>状态: <?php echo $repeater->status?></li>
-            <li>描述: <?php echo $repeater->description?></li>
-        </ul> 	
-   	</div>
-	<div class="foot"></div>
-</div>
+        <div class="side-module">
+            <div class="head"><h2><?php echo $repeater->name?></h2></div>
+            <div class="body">
+                <ul>
+
+                    <li>位置: <?php echo $repeater->province?> <?php echo $repeater->city?></li>
+                    <li>频率: <?php echo $repeater->frequency?></li>
+                    <li>差频: <?php echo $repeater->shift?></li>
+                    <li>静噪: <?php echo $repeater->squelch?></li>
+                    <li>哑音: <?php echo $repeater->code?></li>
+                    <li>波段: <?php echo $repeater->band?></li>
+                    <li>坐标: <?php echo $repeater->coordinate?></li>
+                    <li>分区: <?php echo $repeater->zone['cq']?>,<?php echo $repeater->zone['itu']?></li>
+                    <li>台主: <?php echo $repeater->callsign?></li>
+                    <li>图片: <?php echo $repeater->image?></li>
+                    <li>状态: <?php echo $repeater->status?></li>
+                    <li>描述: <?php echo $repeater->description?></li>
+                </ul> 	
+            </div>
+            <div class="foot"></div>
+        </div>
 <?php }?>     
 
     </div>

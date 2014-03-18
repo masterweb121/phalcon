@@ -21,14 +21,11 @@ class Menu extends Component
     public function getMenu()
     {
 		$menu = array(
-            array('title'=>'Home', 'link'=>'radio'),
+            array('title'=>'Home', 'link'=>'radio/index'),
             array('title'=>'Repeater', 'link'=>'radio/repeater'),
             array('title'=>'Logging','link'=>'radio/logging'),
             array('title'=>'台网','link'=>'radio/net'),
             array('title'=>'信标','link'=>'radio/beacon'),
-            array('title'=>'Morse','link'=>'radio/morse'),
-            array('title'=>'Zone','link'=>'radio/zone'),
-            array('title'=>'APRS','link'=>'radio/aprs'),
             array('title'=>'产品','link'=>'radio/product'),
             array('title'=>'Contesting','link'=>'radio/contesting'),
             array('title'=>'Propagation','link'=>'radio/contesting'),
@@ -39,6 +36,11 @@ class Menu extends Component
 	public function getSubmenu($menu = null)
     {
 		$submenu = array(
+            'index' => array(
+                array('title'=>'Morse','link'=>'radio/morse'),
+                array('title'=>'Zone','link'=>'radio/zone'),
+                array('title'=>'APRS','link'=>'radio/aprs'),
+            ),    
 			'logging' => array(
 				array('title'=>'HF','link'=>'/photography/album/2011/'),
                 array('title'=>'VHF','link'=>'/photography/album/2013/'),
@@ -47,20 +49,20 @@ class Menu extends Component
 				array('title'=>'FSK','link'=>'/photography/album/2010/')
 			),
             'repeater' => array(
-				array('title'=>'UHF', 'link'=>'/radio/repeater'),
+				array('title'=>'Download','link'=>'/radio/repeater/download'),
+                array('title'=>'UHF', 'link'=>'/radio/repeater'),
 				array('title'=>'VHF','link'=>'/radio/logging'),
-				array('title'=>'Morse','link'=>'/radio/morse'),
                 array('title'=>'Zone','link'=>'/radio/zone'),
                 array('title'=>'APRS','link'=>'/radio/aprs'),
                 array('title'=>'Software','link'=>'/radio/software')
 			),
              'product' => array(
-				array('title'=>'Yaesu', 'link'=>'/radio/repeater'),
-				array('title'=>'ICOM','link'=>'/radio/logging'),
-				array('title'=>'Kenwood','link'=>'/radio/morse'),
-                array('title'=>'Alinco','link'=>'/radio/aprs'),
-                array('title'=>'Motorola','link'=>'/radio/zone'),
-                array('title'=>'Hytera','link'=>'/radio/software')
+				array('title'=>'Yaesu', 'link'=>'/radio/product/yaesu'),
+				array('title'=>'ICOM','link'=>'/radio/product/icom'),
+				array('title'=>'Kenwood','link'=>'/radio/product/kenwood'),
+                array('title'=>'Alinco','link'=>'/radio/product/alinco'),
+                array('title'=>'Motorola','link'=>'/radio/product/motorola'),
+                array('title'=>'Hytera','link'=>'/radio/product/hytera')
 			),
 		);
 		if(array_key_exists($this->controller,$submenu)){
