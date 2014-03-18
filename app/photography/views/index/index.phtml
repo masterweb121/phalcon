@@ -1,0 +1,116 @@
+<div id="fullContainer">
+<div id="bigContainer">
+	<div class=main-module id=tagging>
+		<div class=head><H2>Popular Lens</H2></div>
+		<div class=body>
+			<img width="200" src="/img/equipment/Canon%20EF%2016-35MM%20F2.8L%20II%20USM.jpg"/>
+			<img width="200" src="/img/equipment/Canon%20EF%2016-35MM%20F2.8L%20II%20USM%20(MTF).jpg"/>
+			<br/>
+			<img width="200" src="/img/equipment/Canon EF 24-105 f4.0L IS USM.jpg"/>
+			<img width="200" src="/img/equipment/Canon EF 24-105 f4.0L IS USM (MTF).jpg"/>
+		</div>
+	</div>
+	<div class="main-module">
+		<div class="head"><h2>原创文档</h2></div>
+		<div class="body">
+
+	   	</div>
+		<div class="foot"></div>
+	</div>
+</div>
+<div id="smallContainer">
+<div class="side-module">
+	<div class="head"><h2> 最进更新 </h2></div>
+	<div class="body">
+		<a href="/{$locale}/photography/gallery/album/2009/4de8f1e29555b75ac78e0cf5b1bd9d7d/"><img src="/{$locale}/photography/home/images/slides.jpg" width="278" /></a>
+   	</div>
+	<div class=foot></div>
+</div>
+
+<div class="side-module">
+	<div class="head"><h2> 最进更新 </h2></div>
+	<div class="body">
+		<ul>
+			<li><a href="http://picasaweb.google.com/bg7nyt/">摄影作品</a></li> 
+			<li><a href="http://openx.photo.163.com">我的相册</a></li>
+			<li><a href="http://www.youtube.com/user/bg7nyt">我的视频</a></li> 		
+		<ul>
+   	</div>
+	<div class="foot"></div>
+</div>
+
+	<div class="side-module">
+		<div class=head><h2> Sort by lens </h2></div>
+		<div class=body>
+			<ul>
+			{foreach from=$Categorys item=category}
+	      		<li {if $photocategory eq $category->id} class="on" {/if} ><a href="/{$locale}/photography/category/{$category->id}/">{$category->title}</a> </li>
+			{/foreach}
+			</ul>
+	   	</div>
+		<div class=foot></div>
+	</div>
+	
+	<div class="side-module">
+	  <div class=head> <h2> Sort By camera </h2> </div>
+	  <div class=body>
+	  	<ul>
+	  		<li {if $mainmenu eq 'photo'} class="on" {/if} ><a href="/{$locale}/photography/library/"  target="_parent">{#photo_library#}</a></li>
+			<li {if $mainmenu eq 'trip'} class="on" {/if} ><a href="/{$locale}/trip/" target="_parent">{#travel_photography#}</a></li>
+			<li><a href="/{$locale}/purchase/" target="_parent">{#purchase#}</a></li>
+		</ul>    
+	    <div class="divider solid"></div>
+	    <div class=foot-links><a href="#">100 most popular photos</a></div>
+	  </div>
+	  <div class=foot></div>
+	</div>
+
+<div class="side-module">
+  <div class="head">
+    <h2>My Photography Equipment</h2>
+  </div>
+  <div class="body">
+
+<ul> 
+  <li>Canon EOS 350D</li> 
+  <li>Canon EF 16-35MM F2.8L II USM</li>				
+  <li>Canon EF 24-105MM F4L IS USM</li>			
+  <li>Canon EF 85MM F1.8 USM</li>			
+  <li>Canon EF-s 18-55MM F3.5/5.6</li>	
+  <li>Canon Speedlite 430EX + OC-E3a</li> 
+  <li>BENRO MP-68 n6</li> 
+  <li>Nokia N73 Carl Zeiss Tessar 2.8/5.6 AF 3.2 megapixel</li> 
+</ul> 
+
+    <div class="divider solid"></div>
+    <div class="foot-links"><a href="">Canon EF 70-200MM F2.8L II USM</a> </div>
+  </div>
+  <div class="foot"></div>
+</div>
+
+<div class="side-module">
+  <div class="head">
+    <h2>Filter</h2>
+  </div>
+  <div class="body">
+
+<ul> 
+  <li>Kenko PRO 1Digital Protector(W) 77MM</li> 
+  <li>Kenko PRO 1Digital Protector(W) 82MM</li>				
+  <li>Kenko PRO 1Digital CPL 77MM</li>
+  <li>Kenko SKYLIGHT 1A 58MM</li>			
+  <li>Kenko UV(O) 58MM</li>			
+  <li>Kenko ND-4 58MM</li>
+  <li>Hoya CPL 58MM</li> 
+</ul> 
+
+    <div class="divider solid"></div>
+    <div class="foot-links">  </div>
+  </div>
+  <div class="foot"></div>
+</div>	
+	
+</div>
+</div>	
+
+

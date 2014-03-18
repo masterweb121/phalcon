@@ -1,6 +1,6 @@
 <?php
 
-namespace Home;
+namespace Photography;
 
 use Phalcon\Loader,
     Phalcon\Mvc\Dispatcher,
@@ -19,12 +19,13 @@ class Module implements ModuleDefinitionInterface
         $loader = new Loader();
         $loader->registerDirs(
         array(
-            '../app/home/controllers'
+            '../app/photography/controllers'
         ));
         $loader->registerNamespaces(
             array(
-                'Home\Controllers' => '../app/home/controllers/',
-                'Home\Models'      => '../app/home/models/',
+                'Photography\Controllers' => '../app/photography/controllers/',
+                'Photography\Models'      => '../app/photography/models/',
+                'Photography\Components'    => '../app/photography/components/',
             )
         );
 
@@ -40,14 +41,14 @@ class Module implements ModuleDefinitionInterface
         //Registering a dispatcher
         $di->set('dispatcher', function() {
             $dispatcher = new Dispatcher();
-            $dispatcher->setDefaultNamespace("Home\Controllers");
+            $dispatcher->setDefaultNamespace("Photography\Controllers");
             return $dispatcher;
         });
 
         //Registering the view component
         $di->set('view', function() {
             $view = new View();
-            $view->setViewsDir('../app/home/views/');
+            $view->setViewsDir('../app/photography/views/');
             return $view;
         });
     }

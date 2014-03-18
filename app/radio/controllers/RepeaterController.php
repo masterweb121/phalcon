@@ -12,7 +12,7 @@ class RepeaterController extends \Phalcon\Mvc\Controller{
 		//Set the document title
         $this->tag->setTitle('Radio - Repeater');
         //parent::initialize();
-        //
+        $this->view->menu = new \Radio\Component\Menu($this->dispatcher->getControllerName(), $this->dispatcher->getActionName());
         // 中继列表
         $this->stations = \Radio\Models\Repeater::find(array('fields' => array('frequency','name')));
     }
@@ -62,6 +62,7 @@ class RepeaterController extends \Phalcon\Mvc\Controller{
             $repeater->shift    = $this->request->getPost('shift');
             $repeater->squelch  = $this->request->getPost('squelch');
             $repeater->code     = $this->request->getPost('code');
+            $repeater->band     = $this->request->getPost('band');
             $repeater->coordinate = $this->request->getPost('coordinate');
             $repeater->image    = $this->request->getPost('image');
             $repeater->description   = $this->request->getPost('description');

@@ -127,11 +127,10 @@ try {
     // Register the installed modules
     $application->registerModules(
         array(
-            /*
-            'home'  => array(
-                'className' => 'Home\Module',
-                'path'      => $config->home->module.'/Module.php',
-            ),*/
+            'photography'  => array(
+                'className' => 'Photography\Module',
+                'path'      => $config->photography->module.'/Module.php',
+            ),
             'technology' => array(
                 'className' => 'Technology\Module',
                 'path'      => $config->technology->module.'/Module.php',

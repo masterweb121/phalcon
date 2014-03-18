@@ -8,6 +8,7 @@ class LoggingController extends \Phalcon\Mvc\Controller{
 		//Set the document title
         $this->tag->setTitle('Radio - Logging');
         //parent::initialize();
+        $this->view->menu = new \Radio\Component\Menu($this->dispatcher->getControllerName(), $this->dispatcher->getActionName());
     }
     public function indexAction(){
         $logging = \Radio\Models\Logging::find(

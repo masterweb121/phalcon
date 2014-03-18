@@ -1,3 +1,24 @@
 <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=IoN3tUhZjq78v2DyeztYLQEO"></script>
-
-<?php echo $this->getContent() ?>
+<div class="wrapper">
+    <div class="mainWrap">
+        <?php echo $this->getContent() ?>
+    </div>
+    <div class="sideWrap">
+        <div class="side-module">
+            <div class="head"><h2>业余无线电台</h2></div>
+            <div class="body">
+                <ul>
+                    <li><a href="/radio/profile/callsign">呼号管理</a></li>
+                    <li><a href="/radio/profile/qth">设台资料管理</a></li>
+                    <li><a href="/radio/logging/mgmt/">电台日志管理</a></li>
+                    <li><a href="/radio/repeater/mgmt/">中继台管理</a></li>
+                    <li><a href="/radio/profile/mail">QSL卡片邮寄地址管理</a></li>
+                    <li><a href="/radio/qsl">QSL卡片管理</a></li>
+                </ul>
+                <div class="divider solid"></div>
+                <div class="foot-links"><a href="/radio/">业余无线主页</a></div>
+            </div>
+            <div class="foot"></div>
+        </div>        
+    </div>
+</div>

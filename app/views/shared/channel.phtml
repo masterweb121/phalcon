@@ -1,8 +1,8 @@
 	<div id="channel">
 		<div class="language">
             <a class="" href="/">Home</a>
-            <?php foreach( $this->elements->getChannel() as $menu) {?>
-                | <?php echo Phalcon\Tag::linkTo(array( $menu['link'], $menu['title'], 'target'=>"_parent"/*, 'class' => ''*/));?></a>
+            <?php foreach( $this->elements->getChannel() as $channel) {?>
+                | <?php echo Phalcon\Tag::linkTo(array( $channel['link'], $channel['title'], 'target'=>"_parent"/*, 'class' => ''*/));?></a>
             <?php }?>
             <!--
 			<a href="http://netkiller.users.sourceforge.net/zh-cn/%7B$uri_string%7D">{#chinese#}</a> |

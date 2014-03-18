@@ -4,10 +4,10 @@ class BookController extends \Phalcon\Mvc\Controller
 {
 	public function initialize()
     {
-        $this->view->setTemplateAfter('index');
+        $this->view->setTemplateAfter('theme');
 		//Set the document title
         //$this->tag->setTitle('Home');
-        //parent::initialize();
+        $this->view->menu = new \Technology\Components\Menu($this->dispatcher->getControllerName(), $this->dispatcher->getActionName());
     }
 	
     public function indexAction()
@@ -38,6 +38,7 @@ class BookController extends \Phalcon\Mvc\Controller
 		$response->setExpires($expireDate);		
          * 
          */
+        //$this->view->partial('layouts/book');
 		echo $html;
 	}
 	public function mysqlAction(){

@@ -7,6 +7,7 @@ class IndexController extends \Phalcon\Mvc\Controller
         $this->view->setTemplateAfter('theme');
 		//Set the document title
         $this->tag->setTitle('Radio');
+        $this->view->menu = new \Radio\Component\Menu($this->dispatcher->getControllerName(), $this->dispatcher->getActionName());
         //parent::initialize();
     }
 	

@@ -25,6 +25,7 @@ class Module implements ModuleDefinitionInterface
             array(
                 'Technology\Controllers' => '../app/technology/controllers/',
                 'Technology\Models'      => '../app/technology/models/',
+                'Technology\Components'    => '../app/technology/components/',
             )
         );
 

@@ -1,6 +1,5 @@
 <?php use Phalcon\Tag; ?>
-<div class="wrapper">
-    <div class="mainWrap">
+
         <div class="main-module">
             <div class="head"><h2>业余无线电设台QSL卡片邮寄地址</h2></div>
             <div class="body"> 
@@ -52,23 +51,3 @@
             <div class="foot"></div>
         </div>
 
-
-    </div>
-    <div class="sideWrap">
-        <div class="side-module">
-            <div class="head"><h2>业余无线电被叫清单</h2></div>
-            <div class="body">
-                <ul>
-            <?php foreach ($callings as $calling){?>
-                <li>
-                    <?php echo $calling->callsign;?> <a href="/radio/index/qrz/<?php echo $calling->callsign;?>">查看</a>
-                </li>
-            <?php }?>
-                </ul>
-                <div class="divider solid"></div>
-                <div class="foot-links"><a href="/radio/logging/">电台操作日志</a></div>
-            </div>
-            <div class="foot"></div>
-        </div>
-    </div>
-</div>

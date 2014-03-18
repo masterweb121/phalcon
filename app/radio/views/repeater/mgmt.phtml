@@ -57,6 +57,7 @@ map.addEventListener("click", function(e){
                     "shift"     => $repeater->shift,
                     "squelch"   => $repeater->squelch,
                     "code"      => $repeater->code,
+                    'band'      => $repeater->band,
                     "coordinate"=> $repeater->coordinate,
                     "cq"        => $repeater->zone['cq'],
                     "itu"       => $repeater->zone['itu'],
@@ -84,6 +85,7 @@ map.addEventListener("click", function(e){
             <label for="frequency">frequency</label><?php echo Tag::textField("frequency") ?>
             <label for="shift">shift</label><?php echo Tag::textField(array("shift", 'size'=>5, 'value'=>-5)) ?>
             <?php echo Phalcon\Tag::radioField(array("squelch", "value" => "CTCSS", 'checked'=>''));?><label for="CTCSS">CTCSS</label><?php echo Phalcon\Tag::radioField(array("squelch", "value" => "DCS")) ?><label for="DCS">DCS</label>
+            <label for="band">band</label><?php echo Phalcon\Tag::selectStatic("band", array("VHF", "UHF", "KUHF"))?><br /> 
             <label for="code">code</label><?php echo Tag::textField(array("code", 'size'=>6, 'value'=>'88.5', 'list'=>'datalist_code')) ?><br />
             <label for="zone">cq zone</label><?php echo Tag::textField("cq") ?><label for="zone">itu zone</label><?php echo Tag::textField("itu") ?><br />
             <label for="coordinate">coordinate</label><?php echo Tag::textField("coordinate") ?><br /> 

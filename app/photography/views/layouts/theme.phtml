@@ -14,17 +14,10 @@ body,table,input,textarea,select {font-family:微软雅黑,Verdana,sans-serif,�
     <?php $this->partial("../../views/shared/channel") ?>	
 	<div id="masthead">
 		<div id="logo">
-			<img src="/img/freebsd.png" height="75" alt="freebsd logo">
-			<img src="/img/linux.png" height="75" alt="linux logo">
-			<img src="/img/openbsd.png" height="75" alt="openbsd logo">
-			<img src="/img/gnu.png" height="75" alt="gnu logo">
+
 		</div>
 		<div id="banner">
-            <!--
-            <a href="http://www.crsa.org"><img src="/img/technology/crsa.jpg" height="75" alt="CRSA"></a>
-            <a href="http://www.hkara.org.hk/"><img src="/img/technology/hkara.gif" height="75" alt="HKARA"></a>
-            <a href="http://www.arrl.org/"><img src="/img/technology/arrl.png" height="75" alt="ARRL"></a>
-            -->
+            
 		</div>
 	</div>
 	<div class="navigation">
@@ -39,7 +32,7 @@ body,table,input,textarea,select {font-family:微软雅黑,Verdana,sans-serif,�
             ?>
 
             <?php  foreach( $menuitem as $link) {?>
-            <li <?php if('technology/'.$this->dispatcher->getControllerName() == $link['link']) {?>class="on"<?php }?>><?php echo Phalcon\Tag::linkTo(array( $link['link'], $link['title'], 'target'=>"_parent"/*, 'class' => ''*/));?></a></li>
+            <li <?php if('radio/'.$this->dispatcher->getControllerName() == $link['link']) {?>class="on"<?php }?>><?php echo Phalcon\Tag::linkTo(array( $link['link'], $link['title'], 'target'=>"_parent"/*, 'class' => ''*/));?></a></li>
             <?php }?>
 		</ul>
 	<ul style="float:right;">
@@ -48,7 +41,7 @@ body,table,input,textarea,select {font-family:微软雅黑,Verdana,sans-serif,�
   <form id="searchbox_008589143145807374698:f5uprauilyy" action="/technology/search/">
     <input type="hidden" name="cx" value="008589143145807374698:f5uprauilyy" />
     <input type="hidden" name="cof" value="FORID:11" />
-    <input name="q" type="text" size="25" />
+    <input name="q" type="text" size="20" />
     <input type="submit" name="sa" value="Search" />
   </form>
   <script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=searchbox_008589143145807374698%3Af5uprauilyy"></script>
@@ -60,7 +53,7 @@ body,table,input,textarea,select {font-family:微软雅黑,Verdana,sans-serif,�
 <div class="subnav">
 	<ul>
 	<?php foreach( $menu->getSubmenu($_GET['_url']) as $submenu) {?>
-	<li <?php if('technology/'.$this->dispatcher->getActionName() == $link['link']) {?>class="on"<?php }?>><a href="<?php echo $submenu['link']?>" target="_parent"><?php echo $submenu['title']?></a></li>
+	<li <?php if('radio/'.$this->dispatcher->getActionName() == $link['link']) {?>class="on"<?php }?>><a href="<?php echo $submenu['link']?>" target="_parent"><?php echo $submenu['title']?></a></li>
 	<?php }?>
 	<ul>
 </div>
@@ -80,7 +73,7 @@ body,table,input,textarea,select {font-family:微软雅黑,Verdana,sans-serif,�
 
 <div id="container">
 
-    <?php echo $this->getContent() ?>
+<?php echo $this->getContent() ?>
 
 </div>
 

@@ -7,7 +7,7 @@ class IndexController extends \Phalcon\Mvc\Controller
         $this->view->setTemplateAfter('theme');
 		//Set the document title
         $this->tag->setTitle('Technology');
-        //parent::initialize();
+        $this->view->menu = new \Technology\Components\Menu($this->dispatcher->getControllerName(), $this->dispatcher->getActionName());
     }
 	
     public function indexAction()

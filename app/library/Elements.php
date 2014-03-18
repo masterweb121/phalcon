@@ -4,7 +4,11 @@ use Phalcon\Mvc\User\Component;
 
 class Elements extends Component
 {
-	public function getChannel(){
+//	public function __construct($controller, $action) {
+//        $this->controller = $controller;
+//        $this->action = $action;
+//    }
+    public function getChannel(){
 		$links = array(
 				array('title'=>'Home', 'link'=>'/'),
 				array('title'=>'Technology','link'=>'technology'),

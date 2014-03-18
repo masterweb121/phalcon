@@ -1,0 +1,85 @@
+	<div class="main-module">
+		<div class="head"><h2>呼号</h2></div>
+		<div class="body">
+        <table>
+           <thead>
+               <th>callsign</th>
+               <th>description</th>
+           </thead>
+           <tbody>
+               <?php foreach($callsigns as $callsign){ ?>
+               <tr>
+                   <td><a href="/radio/index/qrz/<?php echo $callsign->callsign ?>"><?php echo $callsign->callsign ?></td>
+                   <td><?php echo $callsign->description ?></td>
+               </tr>
+               <?php }?>
+           </tbody>
+        </table> 
+		</div>
+	</div>
+    <div class=main-module id=tagging>
+		<div class=head><h2>QSL 卡片邮寄地址</h2></div>
+		<div class=body>
+
+			<?php if($mail){
+                print(sprintf("地址：%s<br> 邮编：%s <br>收件人：%s<br>",$mail->address, $mail->zipcode, $mail->addressee));
+            }?>
+
+		</div>
+	</div>
+	<div class="main-module">
+	    <div class="head"><h2>电台设台地址(QTH)</h2></div>
+	    <div class="body">
+            <?php if($qth){
+                print(sprintf("地址：%s<br> 邮编：%s <br>收件人：%s<br>",$mail->address, $mail->zipcode, $mail->addressee));
+            }?>
+        </div>
+        <div class="foot"></div>
+	</div>
+
+        <div class="main-module">
+            <div class="head"><h2>业余电台通联日志</h2></div>
+            <div class="body"> 
+            <table>
+               <thead>
+                   <th>callsign</th>
+                   <th>date</th>
+                   <th>time</th>
+                   <th>frequency(Mhz)</th>
+                   <th>mode</th>
+                   <th>call</th>
+                   <th>rst</th>
+                   <th>watt</th>
+                   <th>notes</th>
+               </thead>
+               <tbody>
+                   <?php foreach($loggings as $log){ ?>
+                   <tr>
+                       <td><a href="/{$locale}/radio/logs/{$log->callsign|lower}.html"><?php echo $log->callsign ?></td>
+                       <td><?php echo $log->date ?></td>
+                       <td><?php echo $log->time ?></td>
+                       <td><?php echo $log->frequency ?></td>
+                       <td><?php echo $log->mode ?></td>
+                       <td><a href="/{$locale}/radio/qrz/{$log->call|lower}.html"><?php echo $log->call ?></td>
+                       <td><?php echo $log->rst ?></td>
+                       <td><?php echo $log->watt ?></td>
+                       <td><?php echo $log->notes ?></td>
+                   </tr>
+                   <?php }?>
+               </tbody>
+            </table>
+            </div>
+            <div class=foot></div>
+        </div>
+
+    <div class="main-module">
+        <div class=head><H2>我负责的中继站</H2></div>
+        <div class=body>
+            <ol>
+            <?php foreach ($repeaters as $repeater){?>
+                <li><?php echo $repeater->frequency;?> <?php echo $repeater->name;?></li>
+            <?php }?>
+            </ol>
+        </div>
+        <div class="foot"></div>
+    </div>
