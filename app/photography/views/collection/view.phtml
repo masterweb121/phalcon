@@ -14,8 +14,8 @@
 
           <div style="width:165px;height:200px;background:#EEE;border:1px solid #ccc;text-align:center;float:left;margin:0 0 5px 5px;display:inline;overflow:hidden;">
             <div style="width:128px;margin:5px;">
-                <a href="/photography/photo/<?php echo $collection?>/<?php echo $album ?>/<?php echo $photo ?>/" rel="nofollow">
-                    <img src="/photography/thumbnail/<?php echo $collection?>/<?php echo $album ?>/<?php echo $photo ?>" alt="Thumbnail..."/>
+                <a href="/photography/collection/photo/<?php echo $collection?>/<?php echo $album ?>/<?php echo $photo ?>/" rel="nofollow">
+                    <img src="/photography/collection/thumbnail/<?php echo $collection?>/<?php echo $album ?>/<?php echo $photo ?>" alt="Thumbnail..."/>
                 </a>
             </div>
           </div>		
@@ -39,10 +39,10 @@
 			Page <?php echo $pages['current'] ?> ... <?php echo $pages['count'] ?>
 			</div>
 			<div class="page_flipper">
-			<a href="/photography/view/<?php echo $collection?>/<?php echo $album ?>/<?php echo $pages['first'] ?>">first</a> 
-			<a href="/photography/view/<?php echo $collection?>/<?php echo $album ?>/<?php echo $pages['previous'] ?>">previous</a> 
-			<a href="/photography/view/<?php echo $collection?>/<?php echo $album ?>/<?php echo $pages['next'] ?>">next</a> 
-			<a href="/photography/view/<?php echo $collection?>/<?php echo $album ?>/<?php echo $pages['last'] ?>">last</a> 
+			<a href="/photography/collection/view/<?php echo $collection?>/<?php echo $album ?>/<?php echo $pages['first'] ?>">first</a> 
+			<a href="/photography/collection/view/<?php echo $collection?>/<?php echo $album ?>/<?php echo $pages['previous'] ?>">previous</a> 
+			<a href="/photography/collection/view/<?php echo $collection?>/<?php echo $album ?>/<?php echo $pages['next'] ?>">next</a> 
+			<a href="/photography/collection/view/<?php echo $collection?>/<?php echo $album ?>/<?php echo $pages['last'] ?>">last</a> 
 			</div>
 		</div>
 	</div>
@@ -59,7 +59,7 @@
 		<ul>
 		<?php  foreach ($albums as $photo) { ?>
 			<li>
-				<a href="/photography/view/<?php echo $collection?>/<?php echo $photo ?>/"><?php echo $photo ?></a>
+				<a href="/photography/collection/view/<?php echo $collection?>/<?php echo $photo ?>/"><?php echo $photo ?></a>
 			</li>
 		<?php } /* <a href="/{$locale}/photography/photo/photo/{$history}/{$md5}/"><b style="color:orange">{$photo}</b></a> */ ?>
 		</ul>

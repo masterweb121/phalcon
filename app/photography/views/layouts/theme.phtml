@@ -32,7 +32,7 @@ body,table,input,textarea,select {font-family:微软雅黑,Verdana,sans-serif,�
             ?>
 
             <?php  foreach( $menuitem as $link) {?>
-            <li <?php if('radio/'.$this->dispatcher->getControllerName() == $link['link']) {?>class="on"<?php }?>><?php echo Phalcon\Tag::linkTo(array( $link['link'], $link['title'], 'target'=>"_parent"/*, 'class' => ''*/));?></a></li>
+            <li <?php if('photography/'.$this->dispatcher->getControllerName() == $link['link']) {?>class="on"<?php }?>><?php echo Phalcon\Tag::linkTo(array( $link['link'], $link['title'], 'target'=>"_parent"/*, 'class' => ''*/));?></a></li>
             <?php }?>
 		</ul>
 	<ul style="float:right;">
@@ -53,7 +53,7 @@ body,table,input,textarea,select {font-family:微软雅黑,Verdana,sans-serif,�
 <div class="subnav">
 	<ul>
 	<?php foreach( $menu->getSubmenu($_GET['_url']) as $submenu) {?>
-	<li <?php if('radio/'.$this->dispatcher->getActionName() == $link['link']) {?>class="on"<?php }?>><a href="<?php echo $submenu['link']?>" target="_parent"><?php echo $submenu['title']?></a></li>
+	<li <?php if($this->dispatcher->getActionName() == $submenu['link']) {?>class="on"<?php }?>><a href="<?php echo $submenu['link']?>" target="_parent"><?php echo $submenu['title']?></a></li>
 	<?php }?>
 	<ul>
 </div>

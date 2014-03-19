@@ -13,6 +13,6 @@ namespace Radio\Controllers;
  *
  * @author neo
  */
-class ReportController {
+class ReportController extends RadioController {
     //put your code here
 }

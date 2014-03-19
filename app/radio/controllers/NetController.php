@@ -13,14 +13,14 @@ namespace Radio\Controllers;
  *
  * @author neo
  */
-class NetController extends \Phalcon\Mvc\Controller {
+class NetController extends RadioController {
     public function initialize()
     {
         $this->view->setTemplateAfter('theme');
 		//Set the document title
-        $this->tag->setTitle('Radio - Logging');
-        //parent::initialize();
-        $this->view->menu = new \Radio\Component\Menu($this->dispatcher->getControllerName(), $this->dispatcher->getActionName());
+        $this->tag->setTitle('- Net');
+        parent::initialize();
+        $this->view->menu = new \Radio\Components\Menu($this->dispatcher->getControllerName(), $this->dispatcher->getActionName());
     }
     public function indexAction(){
 //        $logging = \Radio\Models\Logging::find(
@@ -29,5 +29,8 @@ class NetController extends \Phalcon\Mvc\Controller {
 //            )
 //        );
 //        $this->view->loggings = $logging;
+    }
+    public function checkinAction(){
+        $this->tag->appendTitle('Check In');
     }
 }

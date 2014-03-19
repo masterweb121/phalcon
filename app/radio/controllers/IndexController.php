@@ -1,14 +1,12 @@
 <?php
 namespace Radio\Controllers;
-class IndexController extends \Phalcon\Mvc\Controller
-{
+class IndexController extends RadioController {
 	public function initialize()
     {
         $this->view->setTemplateAfter('theme');
 		//Set the document title
         $this->tag->setTitle('Radio');
-        $this->view->menu = new \Radio\Component\Menu($this->dispatcher->getControllerName(), $this->dispatcher->getActionName());
-        //parent::initialize();
+        parent::initialize();
     }
 	
     public function indexAction()

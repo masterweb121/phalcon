@@ -13,14 +13,15 @@ namespace Radio\Controllers;
  *
  * @author neo
  */
-class BeaconController extends \Phalcon\Mvc\Controller {
+class BeaconController extends RadioController {
     public function initialize()
     {
-        $this->view->setTemplateAfter('theme');
+        
+        //$this->view->setTemplateAfter('theme');
 		//Set the document title
-        $this->tag->setTitle('Radio - Beacon');
-        //parent::initialize();
-        $this->view->menu = new \Radio\Component\Menu($this->dispatcher->getControllerName(), $this->dispatcher->getActionName());
+        $this->tag->setTitle('- Beacon');
+        parent::initialize();
+        $this->view->menu = new \Radio\Components\Menu($this->dispatcher->getControllerName(), $this->dispatcher->getActionName());
         // 中继列表
         $this->stations = \Radio\Models\Beacon::find(array('fields' => array('name','frequency','callsign','coordinate','description')));
     }

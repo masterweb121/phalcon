@@ -27,8 +27,8 @@
 		{else}
 -->			
 			<div class="view">
-			<a href="/photography/slide/<?php echo $imagepath ?>">
-				<img id="photo" src="/photography/image/<?php echo $imagepath ?>" onload="javascript:if(this.width>670) this.width=670;" />
+			<a href="/photography/collection/slide/<?php echo $imagepath ?>">
+				<img id="photo" src="/photography/collection/image/<?php echo $imagepath ?>" onload="javascript:if(this.width>670) this.width=670;" />
 			</a>
 			</div>
 			
@@ -61,8 +61,8 @@
 <div class="photo_relate">
 	<?php foreach($related as $image) { ?>
 	<div class="relate">
-		<a href="/photography/photo/<?php echo $collection?>/<?php echo $album ?>/<?php echo $image ?>" rel="nofollow">
-        <img src="/photography/thumbnail/<?php echo $collection?>/<?php echo $album ?>/<?php echo $image ?>" alt="Thumbnail..."/>
+		<a href="/photography/collection/photo/<?php echo $collection?>/<?php echo $album ?>/<?php echo $image ?>" rel="nofollow">
+        <img src="/photography/collection/thumbnail/<?php echo $collection?>/<?php echo $album ?>/<?php echo $image ?>" alt="Thumbnail..."/>
 		</a>
 	</div>
 	<?php } ?>
@@ -121,7 +121,7 @@
     <h2>RGB Histogram</h2>
   </div>
   <div class="body" style="padding:0px;">
- 	<img src="/photography/histogram/<?php echo $imagepath?>" width=245 />
+ 	<img src="/photography/collection/histogram/<?php echo $imagepath?>" width=245 />
     <div class="divider solid"></div>
     <div class=foot-links><a href="/{$locale}/photography/home/about/histogram.html">About RGB Histogram</a> </div>
   </div>

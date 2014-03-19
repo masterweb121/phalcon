@@ -5,14 +5,13 @@ namespace Radio\Controllers;
  *
  * @author neo
  */
-class RepeaterController extends \Phalcon\Mvc\Controller{
+class RepeaterController extends RadioController {
     public function initialize()
     {
         $this->view->setTemplateAfter('theme');
-		//Set the document title
-        $this->tag->setTitle('Radio - Repeater');
-        //parent::initialize();
-        $this->view->menu = new \Radio\Component\Menu($this->dispatcher->getControllerName(), $this->dispatcher->getActionName());
+        $this->tag->setTitle('- Repeater');
+        parent::initialize();
+        $this->view->menu = new \Radio\Components\Menu($this->dispatcher->getControllerName(), $this->dispatcher->getActionName());
         // 中继列表
         $this->stations = \Radio\Models\Repeater::find(array('fields' => array('frequency','name')));
     }

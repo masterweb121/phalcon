@@ -78,10 +78,10 @@ try {
     });
 
 	//Register a controller as a service
-	$di->set('browse', function() {
-		$component = new Browse();
-		return $component;
-	});
+//	$di->set('browse', function() {
+//		$component = new Browse();
+//		return $component;
+//	});
 
     $di->set('router', function() {
 

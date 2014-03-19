@@ -25,7 +25,7 @@ class Module implements ModuleDefinitionInterface
             array(
                 'Radio\Controllers' => '../app/radio/controllers/',
                 'Radio\Models'      => '../app/radio/models/',
-                'Radio\Component'      => '../app/radio/component/',
+                'Radio\Components'      => '../app/radio/components/',
             )
         );
 

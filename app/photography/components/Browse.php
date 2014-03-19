@@ -118,5 +118,8 @@ class Browse extends Component{
 		}
 
 	}
+    public function test($str){
+        echo $str;
+    }
 
 }

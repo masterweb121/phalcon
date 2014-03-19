@@ -1,15 +1,13 @@
 <?php
 namespace Radio\Controllers;
-class RadioController extends HomeController
-{
+class RadioController extends \Phalcon\Mvc\Controller {
 	public function initialize()
     {
-        //$this->view->setTemplateAfter('index');
-		//Set the document title
-        $this->tag->setTitle('Amateur Radio');
-        parent::initialize();
+        $this->view->setTemplateAfter('theme'); 
+        $this->tag->prependTitle('Amateur Radio ');
+        $this->view->menu = new \Radio\Components\Menu($this->dispatcher->getControllerName(), $this->dispatcher->getActionName());
     }
-	
+    /*
     public function indexAction()
     {
         if($this->request->get('qrz')){
@@ -62,4 +60,6 @@ class RadioController extends HomeController
 
         $this->view->disable();
     }
+     * 
+     */
 }

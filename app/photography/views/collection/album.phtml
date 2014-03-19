@@ -1,0 +1,79 @@
+<div class="wrapper">
+
+<div class="mainWrap">
+
+	<div class="main-module">
+		<div class="head"><h2><?php echo $collection ?> - 著作权所有，禁止转载，禁止商业用途，商业用途，请联系本人。</h2></div>
+		<div class="body">
+		</div>
+	</div>
+	
+<?php foreach ($lattices as $lattice) { ?>
+	<div style="margin-left:5px;float:left;display:inline;">
+		
+
+          <div style="width:165px;height:120px;background:#EEE;border:1px solid #ccc;text-align:center;float:left;margin:0 0 5px 5px;display:inline;overflow:hidden;">
+            <div style="width:128px;margin:5px;">
+                <a href="/photography/collection/view/<?php echo $collection?>/<?php echo $lattice['album'] ?>/" rel="nofollow">
+                    <img src="/photography/collection/thumbnail/<?php echo $lattice['cover']?>" alt="view..."/>
+                </a>
+            </div>
+
+          </div>		
+		
+		<div><?php echo $lattice['album']?></div>
+        <div>(<?php echo $lattice['count']?>) photo</div>
+	</div>
+<?php } ?>
+		<!--
+		<div class="gumball">
+			<a href="/{$locale}/photography/album/maximize/{$history}/{$album_key}/{$row}">
+			<img src="/{$locale}/photography/album/view/{$history}/{$album_key}/{$row}" alt="loading view..."/>
+			</a>
+		</div>
+		-->
+	
+	<br clear="all" />
+	<div class="default_page_nav">
+		<div class="wrap">
+			<div class="pages">
+			Page {$pager.number} ... {$pager.total} 
+			</div>
+			<div class="page_flipper">
+			« {$pager.first} | {$pager.previous} | {$pager.next} | {$pager.last}»
+			</div>
+		</div>
+	</div>
+
+
+	
+
+</div>
+<div class="sideWrap">
+	<div class="side-module">
+	  <div class="head">
+		<h2>Photo albums - <?php echo $collection ?></h2>
+	  </div>
+	  <div class="body">
+	  <?php if($albums){ ?>
+		<ul>
+		<?php  foreach ($albums as $album) { ?>
+			<li>
+				<a href="/photography/collection/view/<?php echo $collection?>/<?php echo $album ?>/"><?php echo $album ?></a>
+			</li>
+		<?php } /* <a href="/{$locale}/photography/album/album/{$history}/{$md5}/"><b style="color:orange">{$album}</b></a> */ ?>
+		</ul>
+		<?php } ?>
+		<div class="divider solid"></div>
+		<div class="foot-links"><a href="/archives/public_html/photography/palm/index.html">Netkiller Photography 手札</a> </div>
+	  </div>
+	  <div class="foot"></div>
+	</div>
+</div>
+
+</div>
+
+
+
+
+

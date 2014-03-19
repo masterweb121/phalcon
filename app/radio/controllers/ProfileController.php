@@ -13,7 +13,7 @@ namespace Radio\Controllers;
  *
  * @author neo
  */
-class ProfileController  extends \Phalcon\Mvc\Controller {
+class ProfileController  extends RadioController {
     public function initialize()
     {
         $this->view->setTemplateAfter('theme');
@@ -23,7 +23,6 @@ class ProfileController  extends \Phalcon\Mvc\Controller {
         if(!$this->session->get('callsign')){
             $this->response->redirect("member/signin");
         }
-        $this->view->menu = new \Radio\Component\Menu($this->dispatcher->getControllerName(), $this->dispatcher->getActionName());
     }
     public function indexAction(){
         $callsign = $this->session->get('callsign');

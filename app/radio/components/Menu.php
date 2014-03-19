@@ -1,5 +1,5 @@
 <?php
-namespace Radio\Component;
+namespace Radio\Components;
 use Phalcon\Mvc\User\Component;
 
 class Menu extends Component
@@ -27,6 +27,7 @@ class Menu extends Component
             array('title'=>'台网','link'=>'radio/net'),
             array('title'=>'信标','link'=>'radio/beacon'),
             array('title'=>'产品','link'=>'radio/product'),
+            array('title'=>'知识','link'=>'radio/knowledge'),
             array('title'=>'Contesting','link'=>'radio/contesting'),
             array('title'=>'Propagation','link'=>'radio/contesting'),
             array('title'=>'Software','link'=>'/radio/software')
@@ -64,6 +65,12 @@ class Menu extends Component
                 array('title'=>'Motorola','link'=>'/radio/product/motorola'),
                 array('title'=>'Hytera','link'=>'/radio/product/hytera')
 			),
+            'knowledge' => array(
+                array('title'=>'Morse','link'=>'/radio/knowledge/morse'),
+                array('title'=>'Zone','link'=>'/radio/knowledge/zone'),
+                array('title'=>'APRS','link'=>'/radio/knowledge/aprs'),
+			),
+            
 		);
 		if(array_key_exists($this->controller,$submenu)){
 			

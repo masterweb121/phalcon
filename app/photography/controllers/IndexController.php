@@ -6,7 +6,7 @@ class IndexController extends \Phalcon\Mvc\Controller
     {
         $this->view->setTemplateAfter('theme');
 		//Set the document title
-        $this->tag->setTitle('Radio');
+        $this->tag->setTitle('Photography');
         $this->view->menu = new \Photography\Components\Menu($this->dispatcher->getControllerName(), $this->dispatcher->getActionName());
         //parent::initialize();
     }

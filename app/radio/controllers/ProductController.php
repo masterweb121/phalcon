@@ -1,13 +1,15 @@
 <?php
 namespace Radio\Controllers;
-class ProductController extends \Phalcon\Mvc\Controller {
+class ProductController extends RadioController {
 
     public function initialize()
     {
-        $this->view->setTemplateAfter('theme');
+        
+//        $this->view->setTemplateAfter('theme');
 		//Set the document title
-        $this->tag->setTitle('Radio product');
-        $this->view->menu = new \Radio\Component\Menu($this->dispatcher->getControllerName(), $this->dispatcher->getActionName());
+        $this->tag->setTitle('- Product');
+        parent::initialize();
+        
     }
 
     //...
