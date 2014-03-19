@@ -49,10 +49,11 @@ map.addEventListener("click", function(e){
             <?php 
             if($repeater){
                 Phalcon\Tag::setDefaults(array(
-                    "callsign"     => $repeater->callsign?$repeater->callsign:$callsign,
-                    "name"     => $repeater->name,
+                    "callsign"  => $repeater->callsign?$repeater->callsign:$callsign,
+                    "name"      => $repeater->name,
                     "province"  => $repeater->province,
                     "city"      => $repeater->city,
+                    "county"    => $repeater->county,
                     "frequency" => $repeater->frequency,
                     "shift"     => $repeater->shift,
                     "squelch"   => $repeater->squelch,
@@ -80,8 +81,9 @@ map.addEventListener("click", function(e){
             <?php echo Tag::form("radio/repeater/mgmt/$id"); ?>
 <!--            <label for="callsign">owner</label> --><?php echo Tag::hiddenField("callsign") ?><br />
             <label for="name">name</label><?php echo Tag::textField("name") ?><br /> 
-            <label for="province">province</label><?php echo Tag::textField("province") ?>
-            <label for="city">city</label><?php echo Tag::textField("city") ?><br /> 
+            <label for="province">province</label><?php echo Tag::selectStatic("province", array('')) ?>
+            <label for="city">city</label><?php echo Tag::selectStatic("city", array('')) ?>
+            <label for="county">county</label><?php echo Tag::selectStatic("county", array('')) ?><br /> 
             <label for="frequency">frequency</label><?php echo Tag::textField("frequency") ?>
             <label for="shift">shift</label><?php echo Tag::textField(array("shift", 'size'=>5, 'value'=>-5)) ?>
             <?php echo Phalcon\Tag::radioField(array("squelch", "value" => "CTCSS", 'checked'=>''));?><label for="CTCSS">CTCSS</label><?php echo Phalcon\Tag::radioField(array("squelch", "value" => "DCS")) ?><label for="DCS">DCS</label>
@@ -96,7 +98,46 @@ map.addEventListener("click", function(e){
             <?php echo Tag::submitButton("submit") ?>
             <?php echo Tag::submitButton("reset") ?>
             </form> 
+            <script>
+$.getJSON( "/radio/index/province", function( data ) {
+    $("#province").find("option:first").text("省");
+    $.each( data, function( key, val ) {
+        $("<option/>").attr("value", val).text(val).appendTo($("#province"));
+    });
+});
 
+$("#province").change(function () {
+    $("#city, #county").find("option:gt(0)").remove();
+    $("#city").find("option:first").text("Loading...");
+    $.getJSON("/radio/index/city", {
+        province: $(this).val()
+    }, function (json) {
+        $("#city").find("option:first").text("城市");
+        for (var i = 0; i < json.length; i++) {
+            $("<option/>").attr("value", json[i]).text(json[i]).appendTo($("#city"));
+        }
+    });
+});    
+
+$("#city").change(function () {
+    //$("#county).find("option:gt(0)").remove();
+    $("#county").find("option:first").text("Loading...");
+    
+    $.getJSON("/radio/index/county", {
+        province: $("#province").val(),
+        city: $(this).val()
+    }, function (json) {
+        if(json == null){
+            $("#county").find("option:first").text("");
+        }else{
+            $("#county").find("option:first").text("县城");
+            for (var i = 0; i < json.length; i++) {
+                $("<option/>").attr("value", json[i]).text(json[i]).appendTo($("#county"));
+            }
+        }
+    }); 
+}); 
+            </script>
             </div>
             <div class="foot"></div>
         </div>

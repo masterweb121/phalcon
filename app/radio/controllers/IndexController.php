@@ -73,4 +73,24 @@ class IndexController extends RadioController {
         );
         print(json_encode($transceiver[$brand]));
     }
+    public function provinceAction(){
+       $area = new \Radio\Components\Area();
+       $this->view->disable();
+       print($area->province());
+    }
+    public function cityAction($province = null){
+       if(empty($province)){
+           $province = $this->request->get('province');
+       }
+       $area = new \Radio\Components\Area();
+       $this->view->disable();
+       print($area->city($province));
+    }
+    public function countyAction($province = null){
+        $province = $this->request->get('province');
+        $city = $this->request->get('city');
+        $area = new \Radio\Components\Area();
+        $this->view->disable();
+        print($area->county($province,$city));
+    }
 }

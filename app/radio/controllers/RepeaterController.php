@@ -35,7 +35,7 @@ class RepeaterController extends RadioController {
         $this->response->setHeader('Content-type', 'text/csv');
         $this->response->setHeader('Content-Disposition:', 'attachment; filename="repeater.csv"');
         $this->view->disable();
-        $repeaters = \Radio\Models\Repeater::find(array('fields' => array('name','province','city','frequency','shift','squelch','code','band')));
+        $repeaters = \Radio\Models\Repeater::find(array('fields' => array('name','province','city','county','frequency','shift','squelch','code','band')));
         foreach ($repeaters as $repeater){
             $row = (array)$repeater;
             unset($row['_id']);
@@ -76,6 +76,7 @@ class RepeaterController extends RadioController {
             $repeater->name     = $this->request->getPost('name');
             $repeater->province = $this->request->getPost('province');
             $repeater->city     = $this->request->getPost('city');
+            $repeater->county     = $this->request->getPost('county');
             $repeater->frequency= $this->request->getPost('frequency');
             $repeater->shift    = $this->request->getPost('shift');
             $repeater->squelch  = $this->request->getPost('squelch');

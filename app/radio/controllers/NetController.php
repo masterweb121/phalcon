@@ -20,7 +20,6 @@ class NetController extends RadioController {
 		//Set the document title
         $this->tag->setTitle('- Net');
         parent::initialize();
-        $this->view->menu = new \Radio\Components\Menu($this->dispatcher->getControllerName(), $this->dispatcher->getActionName());
     }
     public function indexAction(){
 //        $logging = \Radio\Models\Logging::find(
@@ -32,5 +31,8 @@ class NetController extends RadioController {
     }
     public function checkinAction(){
         $this->tag->appendTitle('Check In');
+    }
+    public function startAction(){
+        
     }
 }

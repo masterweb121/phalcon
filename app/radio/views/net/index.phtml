@@ -1,0 +1,28 @@
+<div class="main-module">
+	<div class="head"><h2>{#net#}</h2></div>
+	<div class="body"> 
+
+<table>
+	<tr>
+		<td>{#number#}</td>
+		<td><label for="datetime">{#date#}</label></td>
+		<td><label for="datetime">{#time#}</label></td>
+		<td><label for="frequency">{#frequency#}</label></td>
+		<td><label for="topic">{#topic#}</label></td>
+		<td><label for="control">{#control#}</label></td> 
+	</tr>
+{foreach from=$nets item=net}
+	<tr>
+		<td>{counter}</td>
+		<td>{$net->datetime|date_format:"%Y:%m:%d"}</td>
+		<td>{$net->datetime|date_format:"%H:%M"}</td>
+		<td>{$net->frequency}</td>
+		<td><a href="/{$locale}/radio/nets/{$net->id}.html">{$net->topic}</a></td>
+		<td>{$net->control}</td>
+	</tr>
+{/foreach}
+</table>
+
+	</div>
+	<div class=foot></div>
+</div>

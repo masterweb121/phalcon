@@ -70,7 +70,11 @@ class Menu extends Component
                 array('title'=>'Zone','link'=>'/radio/knowledge/zone'),
                 array('title'=>'APRS','link'=>'/radio/knowledge/aprs'),
 			),
-            
+            'net' => array(
+                array('title'=>'什么是台网','link'=>'/radio/knowledge/net'),
+                array('title'=>'Zone','link'=>'/radio/knowledge/zone'),
+                array('title'=>'APRS','link'=>'/radio/knowledge/aprs'),
+			),
 		);
 		if(array_key_exists($this->controller,$submenu)){
 			
