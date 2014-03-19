@@ -19,7 +19,7 @@ class ProfileController  extends RadioController {
         $this->view->setTemplateAfter('theme');
 		//Set the document title
         $this->tag->prependTitle('Radio'); 
-        //parent::initialize();
+        parent::initialize();
         if(!$this->session->get('callsign')){
             $this->response->redirect("member/signin");
         }

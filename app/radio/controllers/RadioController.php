@@ -24,15 +24,6 @@ class RadioController extends \Phalcon\Mvc\Controller {
         
         
     }
-
-    
-    public function beaconAction(){
-        
-    }
-    
-    public function morseAction(){
-        
-    }
     public function zoneAction(){
         
     }
