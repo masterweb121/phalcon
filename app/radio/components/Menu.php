@@ -43,19 +43,24 @@ class Menu extends Component
                 array('title'=>'APRS','link'=>'radio/aprs'),
             ),    
 			'logging' => array(
-				array('title'=>'HF','link'=>'/photography/album/2011/'),
-                array('title'=>'VHF','link'=>'/photography/album/2013/'),
-                array('title'=>'UHF','link'=>'/photography/album/2014/'),
-				array('title'=>'KUHF','link'=>'/photography/album/2012/'),
-				array('title'=>'FSK','link'=>'/photography/album/2010/')
+				array('title'=>'HF','link'=>'/radio/logging'),
+                array('title'=>'VHF','link'=>'radio/logging'),
+                array('title'=>'UHF','link'=>'radio/logging'),
+				array('title'=>'KUHF','link'=>'radio/logging'),
+				array('title'=>'FSK','link'=>'radio/logging'),
+                array('title'=>'USB','link'=>'radio/logging'),
+                array('title'=>'LSB','link'=>'radio/logging'),
+                array('title'=>'SSB','link'=>'radio/logging'),
+                array('title'=>'FM','link'=>'radio/logging'),
+                array('title'=>'AM','link'=>'radio/logging'),
 			),
             'repeater' => array(
 				array('title'=>'Download','link'=>'/radio/repeater/download'),
-                array('title'=>'UHF', 'link'=>'/radio/repeater'),
-				array('title'=>'VHF','link'=>'/radio/logging'),
-                array('title'=>'Zone','link'=>'/radio/zone'),
-                array('title'=>'APRS','link'=>'/radio/aprs'),
-                array('title'=>'Software','link'=>'/radio/software')
+                array('title'=>'UHF', 'link'=>'/radio/repeater/uhf'),
+				array('title'=>'VHF','link'=>'/radio/repeater/vhf'),
+                array('title'=>'Digital','link'=>'/radio/repeater/digital'),
+                array('title'=>'TDMA','link'=>'/radio/repeater/digital'),
+                array('title'=>'FDMA','link'=>'/radio/repeater/digital')
 			),
              'product' => array(
 				array('title'=>'Yaesu', 'link'=>'/radio/product/yaesu'),

@@ -164,6 +164,9 @@ class ProfileController  extends RadioController {
     public function equipmentAction(){
 		
 	}
+    public function netAction(){
+		$this->view->nets = \Radio\Models\Net::find();
+	}
     public function testAction(){
         $this->view->disable();
         print_r($this->dispatcher->getActionName());

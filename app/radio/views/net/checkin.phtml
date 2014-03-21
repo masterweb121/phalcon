@@ -1,38 +1,44 @@
-{strip}
 <div class="side-module">
-	<div class="head"><h2>{#net#} - {$net->datetime}</h2></div>
+	<div class="head"><h2>{#net#} - <?php echo $net->datetime ?></h2></div>
 	<div class="body"> 
 
-<div>{$net->frequency} Radio net, {$net->topic}, control by <a href="/{$locale}/radio/qrz/{$net->control}.html">{$net->control}</a></div>
+<div><?php echo $net->frequency?> Radio net, <?php echo $net->topic ?>, control by <a href="/radio/index/qrz/<?php echo $net->host?>"><?php echo $net->host?></a></div>
 <span></span>
 
 	</div>
 	<div class=foot></div>
 </div>
-{/strip}
 
-{if $session.callsign}
+<?php use Phalcon\Tag; ?>
 
 <div class="main-module">
 	<div class="head"><h2>{#net#} - Check IN !</h2></div>
 	<div class="body"> 
 
-<form id="check" name="check" method="post" action=""> 
+<?php echo Tag::form("radio/net/checkin/".$id); ?>
 <table>
 	<tr>
-		<td><label for="callsign">{#callsign#}</label></td>
-		<td><label for="rst">{#rst#}</label></td>
+		<td><label for="callsign">callsign</label></td>
+		<td><label for="rst">rst</label></td>
 		<td><label for="qth">QTH</label></td>
-		<td><label for="device">{#device#}</label></td>
-		<td></td>
+		<td><label for="device">device</label></td>
+		<td><label for="watt">watt</label></td>
 	</tr>
 	<tr>
-		<td><input name="callsign" type="text" id="callsign" value="" size="6" maxlength="6" /></td>
-		<td><input name="rst" type="text" id="rst" value="" size="3" maxlength="3" /></td>
-		<td><input name="qth" type="text" id="qth" value="" size="30" maxlength="50" /></td>
-		<td><input name="device" type="text" id="device" value="" size="30" maxlength="50" /></td>
-		<td><input type="submit" name="submit" id="submit" value="Check In!" /> </td>
+		<td><input name="callsign" type="text" id="callsign" value="" size="6" maxlength="6" required /></td>
+		<td><input name="rst" type="text" id="rst" value="" size="3" maxlength="3" required /></td>
+		<td><input name="qth" type="text" id="qth" value="" size="30" maxlength="50" required /></td>
+		<td><input name="device" type="text" id="device" value="" size="30" maxlength="50" required /></td>
+		<td><?php echo Tag::textField(array("watt",'required '=>'')) ?></td>
 	</tr>
+    <tr>
+        <td colspan="4">
+            Leave a message <input name="message" type="text" id="device" value="" size="30" maxlength="50" />
+        </td>
+    </tr>
+    <tr>
+        <td colspan="4"><input type="submit" name="submit" id="submit" value="Check In!" /> </td>
+    </tr>
 </table>
 <input name="net_id" type="hidden" id="net_id" value="{$net->id}" /><br /> 
 </form> 
@@ -51,7 +57,6 @@
 	<div class=foot></div>
 </div>	
 
-{literal}
 <script type="text/javascript">
 $(document).ready(function(){
 	$('#check').submit(function() {
@@ -76,39 +81,34 @@ $(document).ready(function(){
 	});	
 });	
 </script>
-{/literal}
 
-{/if}
-
-{strip}
 <div class="main-module">
 	<div class="head"><h2>{#net#} {#logging#}</h2></div>
 	<div class="body"> 
 
 <table>
 	<tr>
-		<td>{#number#}</td>
-		<td>{#time#}</td>
-		<td>{#callsign#}</td>
-		<td>{#rst#}</td>
+		<td>time</td>
+		<td>callsign</td>
+		<td>rst</td>
 		<td>QTH</td>
-		<td>{#device#}</td>
-		<td>{#power#}</td>
+		<td>device</td>
+		<td>power</td>
+        <td>message</td>
 	</tr>
-{foreach from=$checks item=check}
+<?php foreach($checkins as $checkin) {?>
 	<tr>
-		<td>{counter}</td>
-		<td>{$check->time|date_format:"%H:%M"}</td>
-		<td><a href="/{$locale}/radio/qrz/{$check->callsign|lower}.html">{$check->callsign}</a></td>
-		<td>{$check->rst}</td>
-		<td>{$check->qth}</td>
-		<td>{$check->device}</td>
-		<td>{$check->power}</td>
+		<td><?php echo $checkin->datetime ?></td>
+        <td><?php echo $checkin->callsign ?></td>
+        <td><?php echo $checkin->rst ?></td>
+        <td><?php echo $checkin->qth ?></td>
+        <td><?php echo $checkin->device ?></td>
+        <td><?php echo $checkin->watt ?></td>
+        <td><?php echo $checkin->message ?></td>
 	</tr>
-{/foreach}
+<?php }?>
 </table>
 
 	</div>
 	<div class=foot></div>
 </div>
-{/strip}

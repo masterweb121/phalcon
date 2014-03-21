@@ -1,62 +1,43 @@
-{if $session.callsign}
-{strip}
+<style type="text/css">
+#map{height:500px;width:700px;float:left;border-right:2px solid #bcbcbc;}
+</style>
 <div class="main-module">
 	<div class="head"><h2>{#net#}</h2></div>
 	<div class="body"> 
 
-<table>
-	<tr>
-		<td>{#number#}</td>
-		<td><label for="datetime">{#date#}</label></td>
-		<td><label for="datetime">{#time#}</label></td>
-		<td><label for="frequency">{#frequency#}</label></td>
-		<td><label for="topic">{#topic#}</label></td>
-		<td><label for="control">{#control#}</label></td> 
-	</tr>
-{foreach from=$nets item=net}
-	<tr>
-		<td>{counter}</td>
-		<td>{$net->datetime|date_format:"%Y:%m:%d"}</td>
-		<td>{$net->datetime|date_format:"%H:%M"}</td>
-		<td>{$net->frequency}</td>
-		<td><a href="/{$locale}/radio/nets/check/{$net->id}.html">{$net->topic}</a></td>
-		<td>{$net->control}</td>
-	</tr>
-{/foreach}
-</table>
+<div id="map"></div>
+
+<script type="text/javascript">
+
+// 百度地图API功能
+var map = new BMap.Map("map");
+var point   = null;
+var marker  = null;
+
+map.enableScrollWheelZoom();                            //启用滚轮放大缩小
+<?php if($repeater){?>
+point = new BMap.Point(<?php echo $repeater->coordinate ?>);
+map.centerAndZoom(point,12);
+marker = new BMap.Marker(point);
+map.addOverlay(marker);
+<?php }else{ ?>
+map.centerAndZoom("中国",5);                   // 初始化地图,设置城市和地图级别。    
+<?php } ?>
+map.addEventListener("click", function(e){
+    map.removeOverlay(marker);
+    point = new BMap.Point(e.point.lng, e.point.lat);
+    marker = new BMap.Marker(point);
+    map.addOverlay(marker);
+  document.getElementById("coordinate").value = e.point.lng + ", " + e.point.lat;
+});
+
+</script>             
 
 	</div>
 	<div class=foot></div>
 </div>
-{/strip}
 
-{literal}
 <script type="text/javascript">
-$(document).ready(function(){
-	if (GBrowserIsCompatible()) {
-		var map = new GMap2(document.getElementById("map_canvas"));
-		map.addControl(new GLargeMapControl());
-        map.addControl(new GScaleControl());
-        map.enableScrollWheelZoom();
-        map.addControl(new GMapTypeControl());
-        map.addControl(new GOverviewMapControl());/*
-		map.setMapType(G_DEFAULT_MAP_TYPE);
-		*/
-		map.setCenter(new GLatLng(22.5345, 114.0610), 10);
-		
-        GEvent.addListener(map, "click", function(marker, point) {
-            if (marker) {
-                $("#coordinates").val('');
-                map.removeOverlay(marker);
-            } else {
-            	$("#coordinates").css("border","1px solid black");
-                $("#coordinates").val(point);
-                var coordinates = new GMarker(point);
-                map.clearOverlays();
-                map.addOverlay(coordinates);
-            }
-        });       
-	}
 	$('#net').submit(function() {
 		var error = false;
 		if(!$('#datetime').val()){
@@ -90,37 +71,64 @@ $(document).ready(function(){
 	});	
 });	
 </script>
-{/literal}
+
 <div class="main-module">
 	<div class="head"><h2>{#net#}</h2></div>
 	<div class="body"> 
-
-<form id="net" name="net" method="post" action=""> 
+<?php use Phalcon\Tag; ?>
+<?php 
+            if($repeater){
+                Phalcon\Tag::setDefaults(array(
+                    "callsign"  => $repeater->callsign?$repeater->callsign:$callsign,
+                    "province"  => $repeater->province,
+                    "city"      => $repeater->city,
+                    "county"    => $repeater->county,
+                    "frequency" => $repeater->frequency,
+                    "shift"     => $repeater->shift,
+                    "squelch"   => $repeater->squelch,
+                    "code"      => $repeater->code,
+                    'band'      => $repeater->band,
+                    "coordinate"=> $repeater->coordinate,
+                    "cq"        => $repeater->zone['cq'],
+                    "itu"       => $repeater->zone['itu'],
+                    "image"     => $repeater->image,
+                    "status"    => $repeater->status,
+                    "description" => $repeater->description
+                    
+                ));
+            }else{
+                Phalcon\Tag::setDefaults(array("host" => $callsign));
+            }
+            ?>
+<?php echo Tag::form("radio/net/start"); ?>
 <table>
 	<tr>
-		<td><label for="datetime">{#datetime#}</label></td>
-		<td><label for="frequency">{#frequency#}</label></td>
-		<td><label for="control">{#control#}</label></td> 
-		<td><label for="topic">{#topic#}</label></td>
+		<td><label for="datetime">datetime(UTC)</label></td>
+		<td><label for="frequency">frequency</label></td>
+		<td><label for="host">host</label></td> 
+		<td><label for="topic">topic</label></td>
 		<td></td>
 	</tr>
 	<tr>
-		<td><input name="datetime" type="text" id="datetime" value="{$datetime}" size="12" maxlength="16" /></td>
-		<td><input name="frequency" type="text" id="frequency" value="" size="8" maxlength="8" /></td>
-		<td><input name="control" type="text" id="control" value="{$session.callsign}" size="6" maxlength="6" /></td>
-		<td><input name="topic" type="text" id="topic" value="" size="50" maxlength="255" /></td>
-		<td><input type="submit" name="submit" id="submit" value="{#submit#}" /></td>
+		<td><?php echo \Phalcon\Tag::tagHtml('input type="datetime" name="datetime" id="datetime" size=20 value="'.date('Y-m-d H:i:s').'"');?></td>
+		<td><?php echo Tag::textField("frequency") ?></td>
+		<td><?php echo Tag::textField("host") ?></td>
+		<td><?php echo Tag::textField("topic") ?></td>
 	</tr>
 	<tr>
 		<td colspan="4">
-			<label for="coordinates">{#coordinates#}</label><input name="coordinates" type="text" id="coordinates" value="" size="40" maxlength="40" />
+			<label for="coordinates">coordinates</label><?php echo Tag::textField("coordinate") ?>
 		</td>
 	</tr>
+    <tr>
+        <td colspan="4">
+            <?php echo Tag::submitButton("submit") ?>
+        </td>
+    </tr>
 </table> 
 </form>
-	
-		<div id="map_canvas" style="width: 650px; height: 300px"></div>
 	</div>
 	<div class=foot></div>
 </div>	
-{/if}
+
+<?php $this->partial("net/index") ?>

@@ -4,23 +4,19 @@
 
 <table>
 	<tr>
-		<td>{#number#}</td>
-		<td><label for="datetime">{#date#}</label></td>
-		<td><label for="datetime">{#time#}</label></td>
-		<td><label for="frequency">{#frequency#}</label></td>
-		<td><label for="topic">{#topic#}</label></td>
-		<td><label for="control">{#control#}</label></td> 
+		<td><label for="datetime">datetime</label></td>
+		<td><label for="frequency">frequency</label></td>
+		<td><label for="topic">topic</label></td>
+        <td><label for="topic">host</label></td>
 	</tr>
-{foreach from=$nets item=net}
+<?php foreach($nets as $net){ ?>
 	<tr>
-		<td>{counter}</td>
-		<td>{$net->datetime|date_format:"%Y:%m:%d"}</td>
-		<td>{$net->datetime|date_format:"%H:%M"}</td>
-		<td>{$net->frequency}</td>
-		<td><a href="/{$locale}/radio/nets/{$net->id}.html">{$net->topic}</a></td>
-		<td>{$net->control}</td>
+        <td><a href="/radio/net/log/<?php echo $net->_id ?>"><?php echo $net->datetime ?></a></td>
+		<td><?php echo $net->frequency ?></td>
+		<td><?php echo $net->topic ?></td>
+		<td><a href="/radio/index/qrz/<?php echo $net->host ?>"><?php echo $net->host ?></a></td>
 	</tr>
-{/foreach}
+<?php }?>
 </table>
 
 	</div>
