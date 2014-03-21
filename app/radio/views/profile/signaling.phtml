@@ -1,0 +1,70 @@
+<?php use Phalcon\Tag; ?>
+<div class="main-module">
+    <div class="head"><h2>信令绑定</h2></div>
+    <div class="body">
+        <?php
+         if($signaling)
+            Phalcon\Tag::setDefaults(array(
+                "callsign" => $signaling->callsign,
+                "c4fm"      => $signaling->c4fm,
+                "mototrbo" => $signaling->mototrbo,
+                "mdc1200" => $signaling->mdc1200,
+                "qcii" => $signaling->qcii,
+                "dtmf" => $signaling->dtmf,
+                "selectv" => $signaling->selectv
+              ));
+         ?>
+         <?php echo Tag::form("radio/profile/signaling"); echo Phalcon\Tag::hiddenField(array("id", "value" => @$signaling->_id));?>
+         <table border="0">
+            <tr>
+             <td><label for="callsign">callsign</label></td>
+             <td><?php echo \Phalcon\Tag::textField(array("callsign", 'size'=>8, 'required'=>'', 'disabled'=>'true'));?></td>
+           </tr>
+           <tr>
+               <td><label for="c4fm">Yaesu C4FM</label></td>
+               <td><?php echo Phalcon\Tag::textField(array("c4fm", 'size'=>8))?></td>
+           </tr>
+           <tr>
+               <td><label for="mototrbo">Mototrbo</label></td>
+               <td><?php echo Phalcon\Tag::textField(array("mototrbo", 'size'=>8))?></td>
+           </tr>
+           <tr>
+               <td><label for="mdc1200">MDC1200</label></td>
+               <td><?php echo Phalcon\Tag::textField(array("mdc1200", 'size'=>8))?></td>
+           </tr>
+           <tr>
+               <td><label for="QCII">Quik-Call II</label></td>
+               <td><?php echo Phalcon\Tag::textField(array("qcii", 'size'=>8))?></td>
+           </tr>
+           <tr>
+               <td><label for="DTMF">DTMF</label></td>
+               <td><?php echo Phalcon\Tag::textField(array("dtmf", 'size'=>8))?></td>
+           </tr>
+           <tr>
+               <td><label for="SelectV">Select V</label></td>
+               <td><?php echo Phalcon\Tag::textField(array("selectv", 'size'=>8))?></td>
+           </tr>           
+           <tr>
+             <td colspan="2">
+                 <?php echo Tag::submitButton("编辑") ?>
+             </td>
+           </tr>
+         </table>
+         </form>   
+    </div>
+</div>	
+
+<div class="main-module">
+	<div class="head"><h2>常用信令简介</h2></div>
+	<div class="body"> 
+		<ul>
+			<li><a href="/radio"><span>MOTOTRBO</span></a></li>
+            <li><a href="/radio"><span>MDC1200</span></a></li>
+			<li><a href="/radio"><span>Quik-Call II</span></a></li>
+            <li><a href="/radio"><span>DTMF</span></a></li>
+            <li><a href="/radio"><span>Select V</span></a></li>
+		</ul>
+	</div>
+	<div class=foot></div>
+</div>
+

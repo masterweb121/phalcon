@@ -23,6 +23,7 @@ class ProfileController  extends RadioController {
         if(!$this->session->get('callsign')){
             $this->response->redirect("member/signin");
         }
+        $this->callsign = $this->session->get('callsign');
     }
     public function indexAction(){
         $callsign = $this->session->get('callsign');
@@ -167,6 +168,34 @@ class ProfileController  extends RadioController {
     public function netAction(){
 		$this->view->nets = \Radio\Models\Net::find();
 	}
+    public function digitalAction(){
+		
+	}
+    public function signalingAction(){
+
+		if($this->request->isPost()){
+            $id = $this->request->getPost("id", "string");
+            $signaling = null;
+            if($id){
+                $signaling        = \Radio\Models\Signaling::findById($id);
+            }else{
+                $signaling        = new \Radio\Models\Signaling();
+            }
+            $signaling->callsign    = $this->callsign;
+            $signaling->mototrbo    = $this->request->getPost("mototrbo", "string");
+            $signaling->mdc1200     = $this->request->getPost("mdc1200", "string");
+            $signaling->qcii        = $this->request->getPost("qcii", "string");
+            $signaling->dtmf        = $this->request->getPost("dtmf", "string");
+            $signaling->selectv     = $this->request->getPost("selectv", "string");
+            $signaling->c4fm        = $this->request->getPost("c4fm", "string");
+            $signaling->save();
+        }        
+        $this->view->signaling = \Radio\Models\Signaling::findFirst(array(
+            'fields' => array('callsign','c4fm','mototrbo','mdc1200','qcii','dtmf','selectv'),
+            array("callsign" => $this->callsign)
+            )); 
+	}
+    
     public function testAction(){
         $this->view->disable();
         print_r($this->dispatcher->getActionName());

@@ -1,0 +1,31 @@
+	<div class="main-module">
+		<div class="head"><h2>Ham Software</h2></div>
+		<div class="body">
+
+		</div>
+	</div>	
+
+<table>
+   <thead>
+       <th>callsign</th>
+       <th>Mototrbo</th>
+       <th>MDC1200</th>
+       <th>Quik-Call II</th>
+       <th>DTMF</th>
+       <th>Select V</th>
+       <th>Yaesu(C4FM)</th>
+   </thead>
+   <tbody>
+       <?php foreach($signalings as $signaling){ ?>
+       <tr>
+           <td><a href="/{$locale}/radio/logs/{$signaling->callsign|lower}.html"><?php echo $signaling->callsign ?></td>
+           <td><?php echo $signaling->mototrbo ?></td>
+           <td><?php echo $signaling->mdc1200 ?></td>
+           <td><?php echo $signaling->qcii ?></td>
+           <td><?php echo $signaling->dtmf ?></td>
+           <td><?php echo $signaling->selectv ?></td>
+           <td><?php echo $signaling->c4fm ?></td>
+       </tr>
+       <?php }?>
+   </tbody>
+</table>

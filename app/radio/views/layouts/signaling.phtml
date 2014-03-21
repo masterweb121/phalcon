@@ -1,0 +1,32 @@
+<div class="wrapper">
+    <div class="mainWrap">
+        <?php echo $this->getContent() ?>
+    </div>
+    <div class="sideWrap">
+        
+        <div class="side-module">
+            <div class="head"><h2>信令查询</h2></div>
+            <div class="body">
+                <form method="get" name="qrz" id="qrz">
+                callsign <input type="text" id="qrz" name="qrz" value="" size="6" maxlength="6" /><br />
+                信令：
+                <select name="signaling">
+                    <option value="mototrbo">Mototrbo</option>
+                    <option value="mdc1200">MDC1200</option>
+                    <option value="qcii">Quik-Call II</option>
+                    <option value="dtmf">DTMF</option>
+                    <option value="c4fm">Yaesu(C4FM)</option>
+                    <option value="selectv">Select V</option>
+                </select><br/>    
+                <input type="submit" value="search" id="go" name="go"/>
+                </form>                
+                你可以在这里查询已备案的信令ID
+                <div class="divider solid"></div>
+                <div class="foot-links"><a href="/radio/profile/signaling">我要备案信令ID</a></div>
+            </div>
+            <div class="foot"></div>
+        </div>       
+     
+    </div>
+</div>
+

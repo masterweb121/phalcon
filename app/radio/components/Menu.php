@@ -26,6 +26,7 @@ class Menu extends Component
             array('title'=>'Logging','link'=>'radio/logging'),
             array('title'=>'台网','link'=>'radio/net'),
             array('title'=>'信标','link'=>'radio/beacon'),
+            array('title'=>'信令','link'=>'radio/signaling'),
             array('title'=>'产品','link'=>'radio/product'),
             array('title'=>'知识','link'=>'radio/knowledge'),
             array('title'=>'Contesting','link'=>'radio/contesting'),
@@ -41,7 +42,7 @@ class Menu extends Component
                 array('title'=>'Morse','link'=>'radio/morse'),
                 array('title'=>'Zone','link'=>'radio/zone'),
                 array('title'=>'APRS','link'=>'radio/aprs'),
-            ),    
+            ),
 			'logging' => array(
 				array('title'=>'HF','link'=>'/radio/logging'),
                 array('title'=>'VHF','link'=>'radio/logging'),
@@ -80,6 +81,15 @@ class Menu extends Component
                 array('title'=>'Zone','link'=>'/radio/knowledge/zone'),
                 array('title'=>'APRS','link'=>'/radio/knowledge/aprs'),
 			),
+            'signaling' => array(
+                array('title'=>'Mototrbo','link'=>'/radio/signaling/mototrbo'),
+                array('title'=>'MDC1200','link'=>'/radio/signaling/mdc1200'),
+                array('title'=>'Quik-Call II','link'=>'/radio/signaling/qcii'),
+                array('title'=>'DTMF','link'=>'/radio/signaling/dtmf'),
+                array('title'=>'Select V','link'=>'/radio/signaling/selectv'),
+                array('title'=>'Yaesu(C4FM)','link'=>'/radio/signaling/c4fm'),
+                array('title'=>'Download','link'=>'/radio/signaling/download'),
+			),
 		);
 		if(array_key_exists($this->controller,$submenu)){
 			
@@ -93,3 +103,4 @@ class Menu extends Component
     }
 
 }
+
