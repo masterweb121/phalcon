@@ -84,12 +84,22 @@ map.addEventListener("click", function(e){
             <label for="province">province</label><?php echo Tag::selectStatic("province", array('')) ?>
             <label for="city">city</label><?php echo Tag::selectStatic("city", array('')) ?>
             <label for="county">county</label><?php echo Tag::selectStatic("county", array('')) ?><br /> 
+            <label for="band">band</label><?php echo Phalcon\Tag::selectStatic("band", array("VHF"=>'VHF', "UHF"=>'UHF', "KUHF"=>'KUHF'))?>
+                <?php echo Phalcon\Tag::radioField(array("mode", "value" => "Analog", 'checked'=>''));?><label for="mode">模拟</label>
+                <?php echo Phalcon\Tag::radioField(array("mode", "value" => "Digital")) ?><label for="mode">数字</label><br /> 
             <label for="frequency">frequency</label><?php echo Tag::textField("frequency") ?>
             <label for="shift">shift</label><?php echo Tag::textField(array("shift", 'size'=>5, 'value'=>-5)) ?>
-            <?php echo Phalcon\Tag::radioField(array("squelch", "value" => "CTCSS", 'checked'=>''));?><label for="CTCSS">CTCSS</label><?php echo Phalcon\Tag::radioField(array("squelch", "value" => "DCS")) ?><label for="DCS">DCS</label>
-            <label for="band">band</label><?php echo Phalcon\Tag::selectStatic("band", array("VHF"=>'VHF', "UHF"=>'UHF', "KUHF"=>'KUHF'))?><br /> 
-            <label for="code">code</label><?php echo Tag::textField(array("code", 'size'=>6, 'value'=>'88.5', 'list'=>'datalist_code')) ?><br />
-            <label for="zone">cq zone</label><?php echo Tag::textField("cq") ?><label for="zone">itu zone</label><?php echo Tag::textField("itu") ?><br />
+            <fieldset>
+                <legend>模拟中继</legend>
+                <?php echo Phalcon\Tag::radioField(array("squelch", "value" => "CTCSS", 'checked'=>''));?><label for="CTCSS">CTCSS</label><?php echo Phalcon\Tag::radioField(array("squelch", "value" => "DCS")) ?><label for="DCS">DCS</label>
+                <label for="code">code</label><?php echo Tag::textField(array("code", 'size'=>6, 'value'=>'88.5', 'list'=>'datalist_code')) ?><br />
+            </fieldset>
+            <fieldset>
+                <legend>数字中继</legend>
+                <label for="timeslot">timeslot</label><?php echo Phalcon\Tag::selectStatic("timeslot", array("1"=>'1', "2"=>'2', "3"=>'3', '4'=>'4'))?>
+                <label for="color">color</label><?php echo Tag::textField(array("color", 'size'=>6, 'value'=>'12', 'list'=>'color_code')) ?><br />        
+            </fieldset>
+            <label for="zone">cq zone</label><?php echo Tag::textField(array("cq",'size'=>'4')) ?><label for="zone">itu zone</label><?php echo Tag::textField(array("itu",'size'=>'4')) ?><br />
             <label for="coordinate">coordinate</label><?php echo Tag::textField("coordinate") ?><br /> 
             <label for="image">image</label><?php echo Phalcon\Tag::imageInput("image"); ?><img src="<?php echo $repeater->image?>" /><br /> 
             <label for="description">description</label><br /> <?php echo Phalcon\Tag::textArea(array("description", "cols" => 100, "rows" => 4))?><br /> 

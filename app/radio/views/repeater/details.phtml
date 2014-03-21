@@ -43,17 +43,29 @@ map.addOverlay(circle);
 </div>	        
    
 
+
+<?php }?>     
+
+    </div>
+    <div class="sideWrap">
+
         <div class="side-module">
             <div class="head"><h2><?php echo $repeater->name?></h2></div>
             <div class="body">
                 <ul>
-
                     <li>位置: <?php echo $repeater->province?> <?php echo $repeater->city?> <?php echo $repeater->county?></li>
+                    <li>波段: <?php echo $repeater->band?></li>
+                    <li>模式: <?php echo $repeater->mode?></li>
                     <li>频率: <?php echo $repeater->frequency?></li>
                     <li>差频: <?php echo $repeater->shift?></li>
+                    <?php if($repeater->mode =='Analog'){ ?>
                     <li>静噪: <?php echo $repeater->squelch?></li>
                     <li>哑音: <?php echo $repeater->code?></li>
-                    <li>波段: <?php echo $repeater->band?></li>
+                    <?php } ?>
+                    <?php if($repeater->mode =='Digital'){ ?>
+                    <li>时隙: <?php echo $repeater->timeslot?></li>
+                    <li>彩色码: <?php echo $repeater->color?></li>
+                    <?php } ?>
                     <li>坐标: <?php echo $repeater->coordinate?></li>
                     <li>分区: <?php echo $repeater->zone['cq']?>,<?php echo $repeater->zone['itu']?></li>
                     <li>台主: <?php echo $repeater->callsign?></li>
@@ -63,27 +75,7 @@ map.addOverlay(circle);
                 </ul> 	
             </div>
             <div class="foot"></div>
-        </div>
-<?php }?>     
-
-    </div>
-    <div class="sideWrap">
-        <div class="side-module">
-          <div class="head">
-            <h2>业余无线电中继台</h2>
-          </div>
-          <div class="body">
-                <ul>
-                <?php foreach ($stationlists as $station){?>
-                    <li>
-                         <a href="/radio/repeater/details/<?php echo $station->_id;?>"><?php echo $station->frequency;?> <?php echo $station->name;?></a>
-                    </li>
-                <?php }?>
-                </ul>
-                <div class="divider solid"></div>
-            <div class="foot-links"><a href="/radio/repeater/">全国中继台覆盖图</a> </div>
-          </div>
-          <div class="foot"></div>
-        </div>
+        </div>        
+        
     </div>
 </div>

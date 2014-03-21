@@ -37,6 +37,11 @@ class BeaconController extends RadioController {
         $this->view->stations = $this->stations;        
         //$this->view->pick('repeater/index');
     }
+    public function propagationAction(){
+        $this->tag->appendTitle(' - Propagation');
+//        $this->view->stations = $this->stations;
+    }
+    
     public function mgmtAction($id){
         //$this->view->setTemplateAfter('maximize');
         if(!$this->session->get('callsign')){

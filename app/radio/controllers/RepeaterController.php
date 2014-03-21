@@ -13,13 +13,13 @@ class RepeaterController extends RadioController {
         parent::initialize();
         $this->view->menu = new \Radio\Components\Menu($this->dispatcher->getControllerName(), $this->dispatcher->getActionName());
         // 中继列表
-        $this->stations = \Radio\Models\Repeater::find(array('fields' => array('frequency','name')));
+//        $this->stations = \Radio\Models\Repeater::find(array('fields' => array('frequency','name')));
     }
     public function indexAction(){
         $this->view->stations = null;
         $stations = \Radio\Models\Repeater::find();
         $this->view->stations = $stations;
-        $this->view->stationlists = $this->stations;
+        $this->view->stationlists = \Radio\Models\Repeater::find(array('fields' => array('frequency','name')));
        
     }
     public function detailsAction($id = null){
@@ -28,8 +28,45 @@ class RepeaterController extends RadioController {
             $repeater = \Radio\Models\Repeater::findById($id);
             $this->view->repeater = $repeater;
         }
-        $this->view->stationlists = $this->stations;        
+        //$this->view->stationlists = $this->stations;        
         //$this->view->pick('repeater/index');
+    }
+    
+    public function AnalogAction(){
+        $this->view->stations = null;
+        $stations = \Radio\Models\Repeater::find(array(
+                array('mode'=>'Analog')
+            ));
+        $this->view->stations = $stations;
+        $this->view->stationlists = \Radio\Models\Repeater::find(array('fields' => array('frequency','name'),array('mode'=>'Analog')));;
+       
+    }
+    public function digitalAction(){
+        $this->view->stations = null;
+        $stations = \Radio\Models\Repeater::find(array(
+            array('mode'=>'Digital')
+            ));
+        $this->view->stations = $stations;
+        $this->view->stationlists = \Radio\Models\Repeater::find(array('fields' => array('frequency','name'),array('mode'=>'Digital')));
+       
+    }
+    public function uhfAction(){
+        $this->view->stations = null;
+        $stations = \Radio\Models\Repeater::find(array(
+            array('band'=>'UHF')
+            ));
+        $this->view->stations = $stations;
+        $this->view->stationlists = \Radio\Models\Repeater::find(array('fields' => array('frequency','name'),array('band'=>'UHF')));
+       
+    }
+    public function vhfAction(){
+        $this->view->stations = null;
+        $stations = \Radio\Models\Repeater::find(array(
+            array('band'=>'VHF')
+            ));
+        $this->view->stations = $stations;
+        $this->view->stationlists = \Radio\Models\Repeater::find(array('fields' => array('frequency','name'),array('band'=>'VHF')));
+       
     }
     public function downloadAction(){
         $this->response->setHeader('Content-type', 'text/csv');
@@ -77,6 +114,9 @@ class RepeaterController extends RadioController {
             $repeater->province = $this->request->getPost('province');
             $repeater->city     = $this->request->getPost('city');
             $repeater->county     = $this->request->getPost('county');
+            $repeater->mode      = $this->request->getPost('mode');
+            $repeater->timeslot  = $this->request->getPost('timeslot');
+            $repeater->color  = $this->request->getPost('color');
             $repeater->frequency= $this->request->getPost('frequency');
             $repeater->shift    = $this->request->getPost('shift');
             $repeater->squelch  = $this->request->getPost('squelch');

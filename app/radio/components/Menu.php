@@ -30,7 +30,7 @@ class Menu extends Component
             array('title'=>'产品','link'=>'radio/product'),
             array('title'=>'知识','link'=>'radio/knowledge'),
             array('title'=>'Contesting','link'=>'radio/contesting'),
-            array('title'=>'Propagation','link'=>'radio/contesting'),
+            array('title'=>'奖状','link'=>'radio/awards'),
             array('title'=>'Software','link'=>'/radio/software')
 		);
 		return( $menu );
@@ -56,10 +56,14 @@ class Menu extends Component
                 array('title'=>'AM','link'=>'radio/logging'),
 			),
             'repeater' => array(
-				array('title'=>'Download','link'=>'/radio/repeater/download'),
+                array('title'=>'Download','link'=>'/radio/repeater/download'),
+                array('title'=>'Analog','link'=>'/radio/repeater/analog'),
+                array('title'=>'Digital','link'=>'/radio/repeater/digital'),
+				
                 array('title'=>'UHF', 'link'=>'/radio/repeater/uhf'),
 				array('title'=>'VHF','link'=>'/radio/repeater/vhf'),
-                array('title'=>'Digital','link'=>'/radio/repeater/digital'),
+                array('title'=>'DMR','link'=>'/radio/repeater/digital'),
+                array('title'=>'C4FM','link'=>'/radio/repeater/digital'),
                 array('title'=>'TDMA','link'=>'/radio/repeater/digital'),
                 array('title'=>'FDMA','link'=>'/radio/repeater/digital')
 			),
@@ -89,6 +93,9 @@ class Menu extends Component
                 array('title'=>'Select V','link'=>'/radio/signaling/selectv'),
                 array('title'=>'Yaesu(C4FM)','link'=>'/radio/signaling/c4fm'),
                 array('title'=>'Download','link'=>'/radio/signaling/download'),
+			),
+            'beacon' => array(
+                array('title'=>'Propagation','link'=>'/radio/beacon/propagation'),
 			),
 		);
 		if(array_key_exists($this->controller,$submenu)){
