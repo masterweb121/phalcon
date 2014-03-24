@@ -23,16 +23,11 @@ class Menu extends Component
 		$menu = array(
             array('title'=>'Home', 'link'=>'technology'),
             array('title'=>'电子书', 'link'=>'technology/book/'),
-
-            /*
-            
-            array('title'=>'编程语言','link'=>'technology/logging'),
-            array('title'=>'数据库','link'=>'technology/net'),
+            array('title'=>'编程语言','link'=>'technology/language'),
+            array('title'=>'数据库','link'=>'technology/database'),
             array('title'=>'安全','link'=>'technology/beacon'),
             array('title'=>'性能','link'=>'technology/morse'),
             array('title'=>'Software','link'=>'/technology/software')
-             * 
-             */
 		);
 		return( $menu );
     }
@@ -53,18 +48,16 @@ class Menu extends Component
             array('title'=>'FreeBSD','link'=>'freebsd/index.html'),
             array('title'=>'Architect','link'=>'architect/index.html')  
 			),
-            'repeater' => array(
-				array('title'=>'UHF', 'link'=>'/radio/repeater'),
-				array('title'=>'VHF','link'=>'/radio/logging'),
-				array('title'=>'Morse','link'=>'/radio/morse'),
-                array('title'=>'Zone','link'=>'/radio/zone'),
-                array('title'=>'APRS','link'=>'/radio/aprs'),
-                array('title'=>'Software','link'=>'/radio/software')
+            'language' => array(
+				array('title'=>'PHP', 'link'=>'/radio/repeater'),
+				array('title'=>'Python','link'=>'/radio/logging'),
 			),
-             'product' => array(
-				array('title'=>'Yaesu', 'link'=>'/radio/repeater'),
-				array('title'=>'ICOM','link'=>'/radio/logging'),
-				array('title'=>'Kenwood','link'=>'/radio/morse'),
+             'database' => array(
+				array('title'=>'PostgreSQL', 'link'=>'/radio/repeater'),
+				array('title'=>'MySQL','link'=>'/radio/logging'),
+				array('title'=>'MongoDB','link'=>'/radio/morse'),
+            ),
+            'software' => array(                 
                 array('title'=>'Alinco','link'=>'/radio/aprs'),
                 array('title'=>'Motorola','link'=>'/radio/zone'),
                 array('title'=>'Hytera','link'=>'/radio/software')

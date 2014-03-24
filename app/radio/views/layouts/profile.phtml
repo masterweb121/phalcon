@@ -22,22 +22,7 @@
             </div>
             <div class="foot"></div>
         </div>       
-        
-        <div class="side-module">
-            <div class="head"><h2>中继，信标，台网管理</h2></div>
-            <div class="body">
-                <ul>
-                    
-                    <li><a href="/radio/repeater/mgmt/">中继台管理</a></li>
-                    <li><a href="/radio/beacon/mgmt/">信标台管理</a></li>
-                    <li><a href="/radio/profile/net">无线电台网</a></li>
-                </ul>
-                <div class="divider solid"></div>
-                <div class="foot-links"><a href="/radio/">业余无线主页</a></div>
-            </div>
-            <div class="foot"></div>
-        </div>    
-        
+
         <div class="side-module">
             <div class="head"><h2>业余无线电台日志管理</h2></div>
             <div class="body">
@@ -49,6 +34,23 @@
             </div>
             <div class="foot"></div>
         </div>            
+        
+        <div class="side-module">
+            <div class="head"><h2>中继，信标，台网管理</h2></div>
+            <div class="body">
+                <ul>
+                    
+                    <li><a href="/radio/profile/repeater">中继台管理</a></li>
+                    <li><a href="/radio/beacon/mgmt/">信标台管理</a></li>
+                    <li><a href="/radio/profile/net">无线电台网</a></li>
+                </ul>
+                <div class="divider solid"></div>
+                <div class="foot-links"><a href="/radio/">业余无线主页</a></div>
+            </div>
+            <div class="foot"></div>
+        </div>    
+        
+        
         <?php if($callings) {?>
         <div class="side-module">
             <div class="head"><h2>业余无线电被叫清单</h2></div>
@@ -66,5 +68,23 @@
             <div class="foot"></div>
         </div>                
         <?php }?>
+        
+        <?php if ($stations){ ?>   
+        <div class="side-module">
+            <div class="head"><h2>业余无线电中继站管理</h2></div>
+            <div class="body">
+                <ul>
+            <?php foreach ($stations as $station){?>
+                <li>
+                    <?php echo $station->frequency;?> <?php echo $station->name;?> <a href="/radio/repeater/details/<?php echo $station->_id;?>">预览</a>|<a href="/radio/repeater/mgmt/<?php echo $station->_id;?>">编辑</a>
+                </li>
+            <?php }?>
+                </ul>
+                <div class="divider solid"></div>
+                <div class="foot-links"><a href="/radio/repeater/mgmt/">新增中继台</a> | <a href="/radio/profile/">返回</a> </div>
+            </div>
+            <div class="foot"></div>
+        </div>
+        <?php } ?>
     </div>
 </div>

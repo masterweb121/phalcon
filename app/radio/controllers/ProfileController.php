@@ -24,6 +24,8 @@ class ProfileController  extends RadioController {
             $this->response->redirect("member/signin");
         }
         $this->callsign = $this->session->get('callsign');
+        $this->view->stations = null;
+        $this->view->callings = null;
     }
     public function indexAction(){
         $callsign = $this->session->get('callsign');
@@ -226,7 +228,7 @@ class ProfileController  extends RadioController {
             $this->response->redirect("member/signin");
         }
         date_default_timezone_set("UTC");
-        $this->tag->appendTitle(' - Management');
+        $this->tag->appendTitle(' - Logging - Management');
 //        $this->view->setRenderLevel(View::LEVEL_LAYOUT);
         if($this->request->isPost()){
             $logging       = new \Radio\Models\Logging();
@@ -239,13 +241,13 @@ class ProfileController  extends RadioController {
             $logging->rst       = $this->request->getPost("rst", "string");
             $logging->watt      = $this->request->getPost("watt", "string");
             $logging->notes     = $this->request->getPost("notes", "string");
-            $logging->save();
+            if($logging->save()){
+                $message = new \Radio\Models\Message();
+                $message->datetime = date('Y-m-d H:i:s');
+                $message->content = $logging->callsign .'与'.$logging->call.'做了一个通联';
+                $message->save();                
+            }
             $this->view->logging = (object)$this->request->getPost();
-            
-            $message = new \Radio\Models\Message();
-            $message->datetime = date('Y-m-d H:i:s');
-            $message->content = $logging->callsign .'与'.$logging->call.'做了一个通联';
-            $message->save();
         }
 
         $this->view->logging = null;
@@ -282,6 +284,67 @@ class ProfileController  extends RadioController {
             );
         $this->view->datalist = $datalist;
     }
+    public function repeaterAction($id){
+        //$this->view->setTemplateAfter('maximize');
+        if(!$this->session->get('callsign')){
+            $this->response->redirect("member/signin");
+        }
+        $this->tag->setTitle('Radio');
+        $this->view->callsign = $this->session->get('callsign');
+        
+        $this->view->repeater = null;
+        if($id){
+            $this->view->id = $id;
+        }else{
+            $this->view->id = null;
+        }
+        
+        if ($this->request->isPost() == true) {
+            //$this->view->repeater = (Object)$this->request->getPost();
+            if($id){
+                $repeater = \Radio\Models\Repeater::findById($id);
+            }else{
+                $repeater = new \Radio\Models\Repeater();
+            }
+            $repeater->callsign = $this->request->getPost('callsign');
+            $repeater->name     = $this->request->getPost('name');
+            $repeater->province = $this->request->getPost('province');
+            $repeater->city     = $this->request->getPost('city');
+            $repeater->county     = $this->request->getPost('county');
+            $repeater->mode      = $this->request->getPost('mode');
+            $repeater->timeslot  = $this->request->getPost('timeslot');
+            $repeater->color  = $this->request->getPost('color');
+            $repeater->frequency= $this->request->getPost('frequency');
+            $repeater->shift    = $this->request->getPost('shift');
+            $repeater->squelch  = $this->request->getPost('squelch');
+            $repeater->code     = $this->request->getPost('code');
+            $repeater->band     = $this->request->getPost('band');
+            $repeater->coordinate = $this->request->getPost('coordinate');
+            $repeater->image    = $this->request->getPost('image');
+            $repeater->description   = $this->request->getPost('description');
+            $repeater->status   = $this->request->getPost('status');
+            $repeater->zone     = array('cq' => $this->request->getPost('cq'), 'itu' => $this->request->getPost('itu'));
+            $repeater->save();
+            
+            $message = new \Radio\Models\Message();
+            $message->datetime = date('Y-m-d H:i:s');
+            if($id){
+                $message->content = sprintf("%s %s 业余中继台，频率 %s 参数更新了！", $repeater->province, $repeater->city, $repeater->callsign, $repeater->frequency);
+            }else{
+                $message->content = sprintf("%s %s %s 新增中继站，频率 %s 快来看看吧！", $repeater->province, $repeater->city, $repeater->callsign, $repeater->frequency);
+            }
+            $message->save();
+        }
+        
+        $stations = \Radio\Models\Repeater::find(array('fields' => array('name','frequency')));
+        $this->view->stations = $stations;
+        
+        if($id){
+            $repeater = \Radio\Models\Repeater::findById($id);
+            //  'fields' => array('owner','province','city','frequency','shift','tone','code','coordinate','status')
+            $this->view->repeater = $repeater;
+        }
+    }    
     public function testAction(){
         $this->view->disable();
         print_r($this->dispatcher->getActionName());

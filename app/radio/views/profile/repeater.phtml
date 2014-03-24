@@ -1,0 +1,158 @@
+<?php use Phalcon\Tag; ?>
+<!--<div class="wrapper">
+    <div class="mainWrap">
+    </div>
+    <div class="sideWrap">
+
+    </div>
+</div>        -->
+        <div class="main-module">
+            <div class=head><H2>Zone map</H2></div>
+            <div class=body>
+
+<style type="text/css">
+#map{height:500px;width:700px;float:left;border-right:2px solid #bcbcbc;}
+</style>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=IoN3tUhZjq78v2DyeztYLQEO"></script>
+
+<div id="map"></div>
+
+<script type="text/javascript">
+
+// 百度地图API功能
+var map = new BMap.Map("map");
+var point   = null;
+var marker  = null;
+
+map.enableScrollWheelZoom();                            //启用滚轮放大缩小
+<?php if($repeater){?>
+point = new BMap.Point(<?php echo $repeater->coordinate ?>);
+map.centerAndZoom(point,12);
+marker = new BMap.Marker(point);
+map.addOverlay(marker);
+<?php }else{ ?>
+map.centerAndZoom("中国",5);                   // 初始化地图,设置城市和地图级别。    
+<?php } ?>
+map.addEventListener("click", function(e){
+    map.removeOverlay(marker);
+    point = new BMap.Point(e.point.lng, e.point.lat);
+    marker = new BMap.Marker(point);
+    map.addOverlay(marker);
+  document.getElementById("coordinate").value = e.point.lng + ", " + e.point.lat;
+});
+
+</script>                    
+                
+            </div>
+        </div>       
+    
+        
+        <div class="side-module">
+            <div class="head"><h2>Repeater Manager</h2></div>
+            <div class="body">
+        
+            <?php 
+            if($repeater){
+                Phalcon\Tag::setDefaults(array(
+                    "callsign"  => $repeater->callsign?$repeater->callsign:$callsign,
+                    "name"      => $repeater->name,
+                    "province"  => $repeater->province,
+                    "city"      => $repeater->city,
+                    "county"    => $repeater->county,
+                    "frequency" => $repeater->frequency,
+                    "shift"     => $repeater->shift,
+                    "squelch"   => $repeater->squelch,
+                    "code"      => $repeater->code,
+                    'band'      => $repeater->band,
+                    "coordinate"=> $repeater->coordinate,
+                    "cq"        => $repeater->zone['cq'],
+                    "itu"       => $repeater->zone['itu'],
+                    "image"     => $repeater->image,
+                    "status"    => $repeater->status,
+                    "description" => $repeater->description
+                    
+                ));
+            }else{
+                Phalcon\Tag::setDefaults(array("owner" => $callsign));
+            }
+            ?>
+
+            <datalist id="datalist_code">
+                <?php foreach (array(67.0,69.3,71.9,74.4,77.0,79.7,82,.5,85.4,88.5,91.5,94.8,97.4,100,103.5,107.2,110.9,114.8,118.8,123.0,127.3,131.8,136.,5,141.3,146.2,151.4,156.7,162.2,167.9,173.8,179.9,186.2,192.8,203.5,206.5,210.7,218.1,225.7,229.1,233.6,241.8,250.3,254.1) as $code){?>
+                <option value="<?php echo $code?>"><?php echo $code?></option>
+                <?php }?>
+            </datalist>
+
+            <?php echo Tag::form("radio/profile/repeater/$id"); ?>
+<!--            <label for="callsign">owner</label> --><?php echo Tag::hiddenField("callsign") ?><br />
+            <label for="name">name</label><?php echo Tag::textField("name") ?><br /> 
+            <label for="province">province</label><?php echo Tag::selectStatic("province", array('')) ?>
+            <label for="city">city</label><?php echo Tag::selectStatic("city", array('')) ?>
+            <label for="county">county</label><?php echo Tag::selectStatic("county", array('')) ?><br /> 
+            <label for="band">band</label><?php echo Phalcon\Tag::selectStatic("band", array("VHF"=>'VHF', "UHF"=>'UHF', "KUHF"=>'KUHF'))?>
+                <?php echo Phalcon\Tag::radioField(array("mode", "value" => "Analog", 'checked'=>''));?><label for="mode">模拟</label>
+                <?php echo Phalcon\Tag::radioField(array("mode", "value" => "Digital")) ?><label for="mode">数字</label><br /> 
+            <label for="frequency">frequency</label><?php echo Tag::textField("frequency") ?>
+            <label for="shift">shift</label><?php echo Tag::textField(array("shift", 'size'=>5, 'value'=>-5)) ?>
+            <fieldset>
+                <legend>模拟中继</legend>
+                <?php echo Phalcon\Tag::radioField(array("squelch", "value" => "CTCSS", 'checked'=>''));?><label for="CTCSS">CTCSS</label><?php echo Phalcon\Tag::radioField(array("squelch", "value" => "DCS")) ?><label for="DCS">DCS</label>
+                <label for="code">code</label><?php echo Tag::textField(array("code", 'size'=>6, 'value'=>'88.5', 'list'=>'datalist_code')) ?><br />
+            </fieldset>
+            <fieldset>
+                <legend>数字中继</legend>
+                <label for="timeslot">timeslot</label><?php echo Phalcon\Tag::selectStatic("timeslot", array("1"=>'1', "2"=>'2', "3"=>'3', '4'=>'4'))?>
+                <label for="color">color</label><?php echo Tag::textField(array("color", 'size'=>6, 'value'=>'12', 'list'=>'color_code')) ?><br />        
+            </fieldset>
+            <label for="zone">cq zone</label><?php echo Tag::textField(array("cq",'size'=>'4')) ?><label for="zone">itu zone</label><?php echo Tag::textField(array("itu",'size'=>'4')) ?><br />
+            <label for="coordinate">coordinate</label><?php echo Tag::textField("coordinate") ?><br /> 
+            <label for="image">image</label><?php echo Phalcon\Tag::imageInput("image"); ?><img src="<?php echo $repeater->image?>" /><br /> 
+            <label for="description">description</label><br /> <?php echo Phalcon\Tag::textArea(array("description", "cols" => 100, "rows" => 4))?><br /> 
+            <?php echo Phalcon\Tag::radioField(array("status", "value" => "Y", 'checked'=>''));?><label for="status">正常使用</label><?php echo Phalcon\Tag::radioField(array("status", "value" => "DCS")) ?><label for="status">维护中</label>
+            
+            <?php echo Tag::submitButton("submit") ?>
+            <?php echo Tag::submitButton("reset") ?>
+            </form> 
+            <script>
+$.getJSON( "/radio/index/province", function( data ) {
+    $("#province").find("option:first").text("省");
+    $.each( data, function( key, val ) {
+        $("<option/>").attr("value", val).text(val).appendTo($("#province"));
+    });
+});
+
+$("#province").change(function () {
+    $("#city, #county").find("option:gt(0)").remove();
+    $("#city").find("option:first").text("Loading...");
+    $.getJSON("/radio/index/city", {
+        province: $(this).val()
+    }, function (json) {
+        $("#city").find("option:first").text("城市");
+        for (var i = 0; i < json.length; i++) {
+            $("<option/>").attr("value", json[i]).text(json[i]).appendTo($("#city"));
+        }
+    });
+});    
+
+$("#city").change(function () {
+    //$("#county).find("option:gt(0)").remove();
+    $("#county").find("option:first").text("Loading...");
+    
+    $.getJSON("/radio/index/county", {
+        province: $("#province").val(),
+        city: $(this).val()
+    }, function (json) {
+        if(json == null){
+            $("#county").find("option:first").text("");
+        }else{
+            $("#county").find("option:first").text("县城");
+            for (var i = 0; i < json.length; i++) {
+                $("<option/>").attr("value", json[i]).text(json[i]).appendTo($("#county"));
+            }
+        }
+    }); 
+}); 
+            </script>
+            </div>
+            <div class="foot"></div>
+        </div>
