@@ -79,13 +79,17 @@ class MemberController extends HomeController
 		}
 		if($this->session->get('username')){
 			$this->view->disable();
-            $this->response->redirect("member");
+            if(in_array('HTTP_REFERER', $_SERVER) ){
+                $this->response->redirect($_SERVER['HTTP_REFERER']);
+            }else{
+                $this->response->redirect("member");
+            }
             $this->view->status = "已登陆";
 		}
     }
     public function signoutAction()
     {
-    	if($this->session->get('username')){			
+    	if($this->session->get('username')){
 			$this->session->remove('username');
 			echo '已退出';
 			//$this->view->disable();

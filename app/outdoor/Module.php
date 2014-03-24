@@ -25,6 +25,7 @@ class Module implements ModuleDefinitionInterface
             array(
                 'Outdoor\Controllers' => '../app/outdoor/controllers/',
                 'Outdoor\Models'      => '../app/outdoor/models/',
+                'Outdoor\Components'  => '../app/outdoor/components/',
             )
         );
 

@@ -1,0 +1,57 @@
+<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=IoN3tUhZjq78v2DyeztYLQEO"></script>
+
+<div class="wrapper">
+    <div class="mainWrap">
+        <?php echo $this->getContent() ?>
+    </div>
+    <div class="sideWrap">
+
+        <div class="side-module">
+            <div class="head"><h2>日志搜索</h2></div>
+            <div class="body">
+                <form method="post" name="logging" id="logging">
+                callsign <input type="text" id="callsign" name="callsign" value="" size="6" maxlength="6" />
+                <input type="submit" value="search" id="search" name="search"/>
+                </form>
+            </div>
+            <div class=foot></div>
+        </div>	
+        
+        <div class="side-module">
+            <div class="head"><h2>火腿排名</h2></div>
+            <div class="body">
+
+                <div class="divider solid"></div>
+                <div class="foot-links"></div>
+            </div>
+            <div class="foot"></div>
+        </div>       
+        
+        <div class="side-module">
+            <div class="head"><h2>日志报表</h2></div>
+            <div class="body">
+                <ul>
+                    <li>SSB (100)</li>
+                    <li>FM (50)</li>
+                    <li>LSB (1)</li>
+                </ul>
+                <div class="divider solid"></div>
+                <div class="foot-links"></div>
+            </div>
+            <div class="foot"></div>
+        </div>    
+        
+        <div class="side-module">
+            <div class="head"><h2>竞赛日志</h2></div>
+            <div class="body">
+                <ul>
+                    <li></li>
+                </ul>
+                <div class="divider solid"></div>
+                <div class="foot-links"></div>
+            </div>
+            <div class="foot"></div>
+        </div>            
+    </div>
+</div>

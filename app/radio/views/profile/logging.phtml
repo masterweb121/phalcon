@@ -1,6 +1,5 @@
 <?php use Phalcon\Tag; ?>
-<div class="wrapper">
-    <div class="mainWrap">
+
         <div class="main-module">
             <div class="head"><h2><?php echo $callsign?> 电台通联日志</h2></div>
             <div class="body"> 
@@ -65,7 +64,7 @@
                 "watt" => $logging->watt
                  ));
             ?>
-            <?php echo Tag::form("member/logging"); ?>
+            <?php echo Tag::form("radio/profile/logging/"); ?>
             <datalist id="rst_datalist">
                 <?php foreach ($datalist['rst'] as $frequency){?>
                 <option value="<?php echo $frequency;?>"><?php echo $frequency;?></option>
@@ -90,7 +89,7 @@
                 <option value="40">40</option>
             </datalist>         
                 
-            <table width="200" border="1">
+            <table width="100%" border="0">
               <tr>
                 <td><label for="date">date</label></td>
                 <td><label for="time">time</label></td>
@@ -127,22 +126,3 @@
 
 <?php //} ?>
 
-    </div>
-    <div class="sideWrap">
-        <div class="side-module">
-            <div class="head"><h2>业余无线电被叫清单</h2></div>
-            <div class="body">
-                <ul>
-            <?php foreach ($callings as $calling){?>
-                <li>
-                    <?php echo $calling->callsign;?> <a href="/radio/index/qrz/<?php echo $calling->callsign;?>">查看</a>
-                </li>
-            <?php }?>
-                </ul>
-                <div class="divider solid"></div>
-                <div class="foot-links"><a href="/radio/logging/">电台操作日志</a></div>
-            </div>
-            <div class="foot"></div>
-        </div>
-    </div>
-</div>

@@ -1,85 +1,15 @@
-{if $callsign and $logs}
-{literal}
 <script type="text/javascript">
-
 </script>
-{/literal}	
-
-{literal}
-<script type="text/javascript">
-$(document).ready(function(){
-	if (GBrowserIsCompatible()) {
-		var map = new GMap2(document.getElementById("map_canvas"));
-		
-		//map.addControl(new GSmallMapControl());
-        //最大模式
-        map.addControl(new GLargeMapControl());
-        //只有放大和缩小的模式
-        //map.addControl(new GSmallZoomControl());
-        //只有地图缩放控制条的模式
-        map.addControl(new GScaleControl());
-        //填加地图类型控制器 允许在地图视图、卫星视图和地图卫星混合模式, 三个模式中切换
-        map.enableScrollWheelZoom();
-        map.addControl(new GMapTypeControl());
-        map.addControl(new GOverviewMapControl());
-		//map.setMapType(G_DEFAULT_MAP_TYPE);
-		
-		function createMarker(point, call, qth) {
-          if(!qth) qth='收集中...';
-          
-          var marker = new GMarker(point);
-          GEvent.addListener(marker, "click", function() {
-{/literal}
-            marker.openInfoWindowHtml("<span>{#callsign#}: <a href=\"/{$locale}/radio/qrz/"+call+".html\"><strong style=\"color:#DE0000;\">" + call + "</strong></a>" +"<br />{#latitude#}: "+ point.lat() +"<br />{#longitude#}: "+ point.lng()+ "<br />QTH："+qth+"<br /></span>");
-{literal}            
-          });
-          return marker;
-        }
-{/literal}
-		var mylatlng = new GLatLng{$my_coordinates->coordinates}
-		map.setCenter(mylatlng, 9);
-		
-		{foreach from=$logging_coordinates item=log_cds}  
-    	var polyline = new GPolyline([
-    		mylatlng,	
-        	new GLatLng{$log_cds->coordinates}
-			], "#FF0000", 3);
-		map.addOverlay(polyline);
-		var latlng = new GLatLng{$log_cds->coordinates}; 
-		map.addOverlay(createMarker(latlng, "{$log_cds->callsign}", "{$log_cds->qth}"));
-		{/foreach}
-		
-{literal}
-	}
-
-});	
-</script>
-{/literal}
-
+<!--
 <div class="main-module">
 	<div class="head"><h2>{#logging#}</h2></div>
 	<div class="body"> 
 		<div id="map_canvas" style="width: 650px; height: 300px"></div>
 	</div>
 	<div class=foot></div>
-</div>	
-{/if}
-{if $session.callsign and $session.callsign eq $callsign}
+</div>	-->
 
 
-{/if}
-
-{if !$callsign}
-<div class="side-module">
-	<div class="head"><h2>{#search#} {#logging#}</h2></div>
-	<div class="body">
-		<form method="post" name="logging" id="logging">
-		{#callsign#} <input type="text" id="logging_callsign" name="logging_callsign" value="" size="6" maxlength="6" />
-		<input type="submit" value="{#search#}" id="go" name="go"/>
-		</form>
-	</div>
-	<div class=foot></div>
-</div>	
 
 <script type="text/javascript">
 $(document).ready(function(){
@@ -94,9 +24,9 @@ $(document).ready(function(){
 });
 </script>
 
-{/if}
 
-{if $logs}
+
+<?php if($loggings){ ?>
 
         <div class="main-module">
             <div class="head"><h2>业余电台通联日志</h2></div>
@@ -132,15 +62,10 @@ $(document).ready(function(){
             </div>
             <div class=foot></div>
         </div>
-{else}
+<?php }else{ ?>
 
-{$callsign} 没有在本站留下通联日志信息. <br />
-
-{$callsign} has not sign up himself logs infomation.
-
-{/if}
-
-
+没有在本站留下通联日志信息. <br />
+<?php } ?>
 <pre>        
 <?//php print_r($loggings)?>
 </pre>

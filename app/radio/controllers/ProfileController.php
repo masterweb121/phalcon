@@ -155,7 +155,12 @@ class ProfileController  extends RadioController {
 //            if($this->request->getPost("default", "string")){
 //                
 //            }
-            $callsign->save();         
+            if($callsign->save()){
+                $message = new \Radio\Models\Message();
+                $message->datetime = date('Y-m-d H:i:s');
+                $message->content = sprintf("%s 刚刚设置了呼号", $this->callsign);
+                $message->save(); 
+            }
         }
         $this->view->callsigns = \Radio\Models\Callsign::find(array(
             'fields' => array('callsign','description'),
@@ -163,7 +168,23 @@ class ProfileController  extends RadioController {
             )); 
     }
     public function equipmentAction(){
-		
+		 if($this->request->isPost()){
+            $equipment              = new \Radio\Models\Equipment();
+            $equipment->callsign    = $this->callsign;
+            $equipment->brand       = $this->request->getPost("brand", "string");
+            $equipment->transceiver = $this->request->getPost("transceiver", "string");
+            $equipment->antenna     = $this->request->getPost("antbrand", "string").' '.$this->request->getPost("antenna", "string");
+            if($equipment->save()){
+                $message = new \Radio\Models\Message();
+                $message->datetime = date('Y-m-d H:i:s');
+                $message->content = sprintf("%s 刚刚新增了一个装备 %s", $this->callsign, $equipment->brand.$equipment->transceiver.$equipment->antenna);
+                $message->save();                
+            }
+        }
+        $this->view->equipments = \Radio\Models\Equipment::find(array(
+            'fields' => array('brand','transceiver','antenna'),
+            array("callsign" => $this->callsign)
+            )); 
 	}
     public function netAction(){
 		$this->view->nets = \Radio\Models\Net::find();
@@ -188,14 +209,79 @@ class ProfileController  extends RadioController {
             $signaling->dtmf        = $this->request->getPost("dtmf", "string");
             $signaling->selectv     = $this->request->getPost("selectv", "string");
             $signaling->c4fm        = $this->request->getPost("c4fm", "string");
-            $signaling->save();
+            if($signaling->save()){
+                $message = new \Radio\Models\Message();
+                $message->datetime = date('Y-m-d H:i:s');
+                $message->content = sprintf("%s 刚刚设置了信令", $this->callsign);
+                $message->save();   
+            }
         }        
         $this->view->signaling = \Radio\Models\Signaling::findFirst(array(
             'fields' => array('callsign','c4fm','mototrbo','mdc1200','qcii','dtmf','selectv'),
             array("callsign" => $this->callsign)
             )); 
 	}
-    
+    public function loggingAction(){
+        if(!$this->session->get('callsign')){
+            $this->response->redirect("member/signin");
+        }
+        date_default_timezone_set("UTC");
+        $this->tag->appendTitle(' - Management');
+//        $this->view->setRenderLevel(View::LEVEL_LAYOUT);
+        if($this->request->isPost()){
+            $logging       = new \Radio\Models\Logging();
+            $logging->callsign  = $this->session->get('callsign'); //$this->request->getPost("callsign", "string");
+            $logging->date      = $this->request->getPost("date", "string");
+            $logging->time      = $this->request->getPost("time", "string");
+            $logging->frequency = $this->request->getPost("frequency", "string");
+            $logging->mode      = $this->request->getPost("mode", "string");
+            $logging->call      = $this->request->getPost("call", "string");
+            $logging->rst       = $this->request->getPost("rst", "string");
+            $logging->watt      = $this->request->getPost("watt", "string");
+            $logging->notes     = $this->request->getPost("notes", "string");
+            $logging->save();
+            $this->view->logging = (object)$this->request->getPost();
+            
+            $message = new \Radio\Models\Message();
+            $message->datetime = date('Y-m-d H:i:s');
+            $message->content = $logging->callsign .'与'.$logging->call.'做了一个通联';
+            $message->save();
+        }
+
+        $this->view->logging = null;
+        
+        $this->view->callsign  = $this->session->get('callsign');
+        $callings = \Radio\Models\Logging::find(
+            array(
+                array('call' => $this->session->get('callsign')),
+                'fields' => array('callsign','date','time','frequency','mode','call','rst','watt','notes'),
+                'limit' => 100
+            )
+        );
+        $this->view->callings = $callings;
+        $loggings = \Radio\Models\Logging::find(
+            array(
+                array('callsign' => $this->session->get('callsign')),
+                'fields' => array('callsign','date','time','frequency','mode','call','rst','watt','notes'),
+                "sort" => array("date" => -1),
+                'limit' => 100
+            )
+        );
+        $this->view->loggings = $loggings;
+        
+        $incoming =  \Radio\Models\Logging::find(array(
+                array('call' => $this->session->get('callsign')),
+                'fields' => array('callsign','date','time','frequency','mode','call','rst','watt','notes'),
+                "sort" => array("date" => -1),
+                'limit' => 100
+            ));
+        $this->view->incoming = $incoming;
+                
+        $datalist = array('frequency'=> array('439.460','439.850','438.275','438.200'),
+            'rst'=> array('59','59','55','58')
+            );
+        $this->view->datalist = $datalist;
+    }
     public function testAction(){
         $this->view->disable();
         print_r($this->dispatcher->getActionName());

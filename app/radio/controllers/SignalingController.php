@@ -32,6 +32,36 @@ class SignalingController extends RadioController {
             )); 
         $this->view->partial("signaling/index");
     }
+    public function mdc1200Action(){
+        $this->view->signalings = \Radio\Models\Signaling::find(array(
+            'fields' => array('callsign','mdc1200')
+            )); 
+        $this->view->partial("signaling/index");
+    }
+    public function qciiAction(){
+        $this->view->signalings = \Radio\Models\Signaling::find(array(
+            'fields' => array('callsign','qcii')
+            )); 
+        $this->view->partial("signaling/index");
+    }
+    public function dtmfAction(){
+        $this->view->signalings = \Radio\Models\Signaling::find(array(
+            'fields' => array('callsign','dtmf')
+            )); 
+        $this->view->partial("signaling/index");
+    }
+    public function selectvAction(){
+        $this->view->signalings = \Radio\Models\Signaling::find(array(
+            'fields' => array('callsign','selectv')
+            )); 
+        $this->view->partial("signaling/index");
+    }
+    public function c4fmAction(){
+        $this->view->signalings = \Radio\Models\Signaling::find(array(
+            'fields' => array('callsign','c4fm')
+            )); 
+        $this->view->partial("signaling/index");
+    }
     public function downloadAction(){
         $this->response->setHeader('Content-type', 'text/csv');
         $this->response->setHeader('Content-Disposition:', 'attachment; filename="repeater.csv"');

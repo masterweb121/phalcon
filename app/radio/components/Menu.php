@@ -31,7 +31,6 @@ class Menu extends Component
             array('title'=>'知识','link'=>'radio/knowledge'),
             array('title'=>'Contesting','link'=>'radio/contesting'),
             array('title'=>'奖状','link'=>'radio/awards'),
-            array('title'=>'Software','link'=>'/radio/software')
 		);
 		return( $menu );
     }
@@ -42,18 +41,27 @@ class Menu extends Component
                 array('title'=>'Morse','link'=>'radio/morse'),
                 array('title'=>'Zone','link'=>'radio/zone'),
                 array('title'=>'APRS','link'=>'radio/aprs'),
+                array('title'=>'Software','link'=>'/radio/software'),
+                array('title'=>'无线电运动协会','link'=>'radio'),
             ),
 			'logging' => array(
-				array('title'=>'HF','link'=>'/radio/logging'),
-                array('title'=>'VHF','link'=>'radio/logging'),
-                array('title'=>'UHF','link'=>'radio/logging'),
-				array('title'=>'KUHF','link'=>'radio/logging'),
-				array('title'=>'FSK','link'=>'radio/logging'),
-                array('title'=>'USB','link'=>'radio/logging'),
-                array('title'=>'LSB','link'=>'radio/logging'),
-                array('title'=>'SSB','link'=>'radio/logging'),
-                array('title'=>'FM','link'=>'radio/logging'),
-                array('title'=>'AM','link'=>'radio/logging'),
+                array('title'=>'FM','link'=>'/radio/logging/fm'),
+                array('title'=>'AM','link'=>'/radio/logging/am'),
+                array('title'=>'SSB','link'=>'/radio/logging/ssb'),
+                array('title'=>'LSB','link'=>'/radio/logging/lsb'),
+                array('title'=>'USB','link'=>'/radio/logging/usb'),
+                array('title'=>'CW','link'=>'/radio/logging/cw'),
+                
+                array('title'=>'RTTY','link'=>'/radio/logging/rtty'),
+                array('title'=>'SSTV','link'=>'/radio/logging/sstv'),
+                array('title'=>'FSK','link'=>'/radio/logging/fsk'),
+                array('title'=>'AFSK','link'=>'/radio/logging/afsk'),
+                array('title'=>'PSK','link'=>'/radio/logging/psk'),
+                
+                array('title'=>'HF','link'=>'/radio/logging/hf'),
+                array('title'=>'VHF','link'=>'/radio/logging/vhf'),
+                array('title'=>'UHF','link'=>'/radio/logging/uhf'),
+				array('title'=>'KUHF','link'=>'/radio/logging/kuhf'),
 			),
             'repeater' => array(
                 array('title'=>'Download','link'=>'/radio/repeater/download'),

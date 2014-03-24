@@ -30,7 +30,7 @@ class Elements extends Component
 			'member' => array(
 				array('title'=>'相册管理', 'link'=>'/member/'),
 				array('title'=>'电台管理','link'=>'radio/profile'),
-				array('title'=>'活动管理','link'=>'')
+				array('title'=>'户外管理','link'=>'outdoor/profile')
 			),
 			'about' => array(
 				array('title'=>'Home', 'link'=>'/'),

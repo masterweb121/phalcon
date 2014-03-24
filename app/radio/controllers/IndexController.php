@@ -40,10 +40,14 @@ class IndexController extends RadioController {
         $message->content = sprintf("%s 您的呼号被查询了一次.", $callsign);
         $message->save();
     }
-    public function brandAction(){
+    public function brandAction($category){
         $this->view->disable();
+        $brands = array(
+            'transceiver' => array("Yaesu",'Icom', "Kenwood",'Alinco', "Motorola",'Hytera'),
+            'antenna' => array("Diamond",'Nagoya', "Eagle" /*'Icom', "Kenwood"=>'Kenwood'*/),
+        );
         print(json_encode(
-            array("Yaesu",'Icom', "Kenwood",'Alinco', "Motorola",'Hytera')
+            $brands[$category]
         ));
 
     }
@@ -57,12 +61,7 @@ class IndexController extends RadioController {
         );
         print(json_encode($transceiver[$brand]));
     }
-    public function antbrandAction(){
-        $this->view->disable();
-        print(json_encode(
-            array("Diamond",'Nagoya', "Eagle" /*'Icom', "Kenwood"=>'Kenwood'*/)
-        ));
-    }
+
     public function antennaAction(){
         $this->view->disable();
         $brand = $this->request->get('brand');

@@ -5,16 +5,18 @@
 
         <table>
            <thead>
-               <th>callsign</th>
-               <th>description</th>
+               <th>品牌</th>
+               <th>电台</th>
+               <th>天线</th>
            </thead>
            <tbody>
-               <?php /*foreach($callsigns as $callsign){ ?>
+               <?php foreach($equipments as $equipment){ ?>
                <tr>
-                   <td><a href="/radio/index/qrz/<?php echo $callsign->callsign ?>"><?php echo $callsign->callsign ?></td>
-                   <td><?php echo $callsign->description ?></td>
+                   <td><?php echo $equipment->brand ?></td>
+                   <td><?php echo $equipment->transceiver ?></td>
+                   <td><?php echo $equipment->antenna ?></td>
                </tr>
-               <?php }*/?>
+               <?php }?>
            </tbody>
         </table>                
 
@@ -24,7 +26,7 @@
 
 
     <div class="side-module">
-        <div class="head"><h2>下列地址仅用于邮寄QSL卡片</h2></div>
+        <div class="head"><h2>装备管理</h2></div>
         <div class="body">
        <?php /*
         if($callsign)
@@ -42,7 +44,7 @@
                 <?php echo Phalcon\Tag::selectStatic("transceiver", array('')) ?>
                 <script>
 
-$.getJSON( "/radio/index/brand", function( data ) {
+$.getJSON( "/radio/index/brand/transceiver", function( data ) {
     $.each( data, function( key, val ) {
         $("<option/>").attr("value", val).text(val).appendTo($("#brand"));
     });
@@ -71,7 +73,7 @@ $("#brand").change(function () {
                 <?php echo Phalcon\Tag::selectStatic("antenna", array('')) ?>
                 <script>
 
-$.getJSON( "/radio/index/antbrand", function( data ) {
+$.getJSON( "/radio/index/brand/antenna", function( data ) {
     $.each( data, function( key, val ) {
         $("<option/>").attr("value", val).text(val).appendTo($("#antbrand"));
     });

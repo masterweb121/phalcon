@@ -1,6 +1,5 @@
 	<div id="channel">
 		<div class="language">
-			<?php echo Phalcon\Tag::linkTo(array( 'index', 'Home', 'target'=>"_parent", 'class' => 'on'));?></a>
             <?php foreach( $this->elements->getChannel() as $channel) {?>
                 | <?php echo Phalcon\Tag::linkTo(array( $channel['link'], $channel['title'], 'target'=>"_parent"/*, 'class' => ''*/));?></a>
             <?php }?>

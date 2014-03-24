@@ -34,7 +34,6 @@ body,table,input,textarea,select {font-family:微软雅黑,Verdana,sans-serif,�
                 $menuitem = $this->elements->getChannel();
             }
             ?>
-            <li class="on"><?php echo Phalcon\Tag::linkTo( '','Home');?></a></li>
             <?php  foreach( $menuitem as $menu) {?>
 			<li class="on"><?php echo Phalcon\Tag::linkTo(array( $menu['link'], $menu['title'], 'target'=>"_parent"/*, 'class' => ''*/));?></a></li>
             <?php }?>
