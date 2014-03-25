@@ -9,22 +9,19 @@
 namespace Outdoor\Controllers;
 
 /**
- * Description of CyclingController
+ * Description of TravelogueController
  *
  * @author neo
  */
-class CyclingController extends OutdoorController{
+class TravelogueController extends OutdoorController {
     public function initialize()
     {
-        $this->tag->setTitle('- Cycling');
+        $this->tag->setTitle('- Travelogue');
         parent::initialize();
     }
 	
     public function indexAction()
     {
-        
-    }
-    public function mtbAction(){
         
     }
 }

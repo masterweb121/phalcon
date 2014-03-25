@@ -41,9 +41,14 @@ try {
             "dbname" => $config->database->name
         ));
     });
+    
     $di->set('radio', function() use ($config){
         $mongo = new Mongo($config->mongodb->dsn);
         return $mongo->selectDb("radio");
+    }, true);
+    $di->set('member', function() use ($config){
+        $mongo = new Mongo($config->mongodb->dsn);
+        return $mongo->selectDb("member");
     }, true);
     // Setting up the collection Manager
     $di->set('collectionManager', function(){
@@ -76,13 +81,7 @@ try {
     $di->set('elements', function(){
         return new Elements();
     });
-
-	//Register a controller as a service
-//	$di->set('browse', function() {
-//		$component = new Browse();
-//		return $component;
-//	});
-
+    
     $di->set('router', function() {
 
         $router = new \Phalcon\Mvc\Router();

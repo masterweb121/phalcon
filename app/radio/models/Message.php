@@ -6,4 +6,15 @@ class Message extends \Phalcon\Mvc\Collection
     {
         $this->setConnectionService('radio');
     }
+    public function beforeCreate()
+    {
+        // Set the creation date
+        $this->datetime = date('Y-m-d H:i:s');
+    }
+
+    public function beforeUpdate()
+    {
+        // Set the modification date
+        //$this->modified_in = date('Y-m-d H:i:s');
+    }    
 }

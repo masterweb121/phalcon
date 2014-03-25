@@ -14,7 +14,7 @@ class Menu extends Component
 				array('title'=>'Technology','link'=>'technology'),
 				array('title'=>'Photography','link'=>'photography'),
 				array('title'=>'Radio','link'=>'radio'),
-				array('title'=>'About','link'=>'about')
+				
 		);
 		return($links);
 	}
@@ -24,6 +24,7 @@ class Menu extends Component
             array('title'=>'Home', 'link'=>'photography'),
             array('title'=>'相册', 'link'=>'photography/collection'),
             array('title'=>'摄影器材', 'link'=>'photography/equipment'),
+            array('title'=>'后期','link'=>'photoshop'),
 		);
 		return( $menu );
     }

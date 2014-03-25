@@ -17,12 +17,14 @@ class Menu extends Component
     public function getMenu()
     {
 		$menu = array(
-            array('title'=>'Home', 'link'=>'/outdoor'),
-            array('title'=>'Walking','link'=>'/outdoor'),
-            array('title'=>'Hiking','link'=>'/outdoor'),
+            array('title'=>'Home', 'link'=>'outdoor'),
+            array('title'=>'Walking','link'=>'outdoor'),
+            array('title'=>'Hiking','link'=>'outdoor'),
             array('title'=>'Cycling','link'=>'outdoor/cycling'),
-            array('title'=>'Camping','link'=>'/outdoor'),
-            array('title'=>'Activity','link'=>'/outdoor'),
+            array('title'=>'Camping','link'=>'outdoor'),
+            array('title'=>'Activity','link'=>'outdoor'),
+            array('title'=>'Travelogue','link'=>'outdoor/travelogue'),
+            
 		);
 		return( $menu );
     }
@@ -30,6 +32,7 @@ class Menu extends Component
     {
 		$submenu = array(
             'index' => array(
+                array('title'=>'Weather','link'=>'/outdoor/weather'),
                 array('title'=>'Routes','link'=>'/outdoor/'),
                 array('title'=>'Waypoint','link'=>'/outdoor/'),
                 array('title'=>'Track','link'=>'/outdoor/'),

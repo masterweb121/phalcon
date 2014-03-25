@@ -5,7 +5,7 @@ class IndexController extends RadioController {
     {
         $this->view->setTemplateAfter('theme');
 		//Set the document title
-        $this->tag->setTitle('Radio');
+        $this->tag->setTitle('- Home');
         parent::initialize();
     }
 	
@@ -34,10 +34,32 @@ class IndexController extends RadioController {
         ));
         $this->view->qrz = $member;
         
+        $this->view->mail = \Radio\Models\Mail::findFirst(array(
+                'fields' => array('callsign','addressee','address','zipcode','description'),
+                array("callsign" => $callsign)
+            )); 
+        $this->view->qth = \Radio\Models\Qth::findFirst(array(
+                'fields' => array('callsign','address','coordinate','zone','description'),
+                array("callsign" => $callsign)
+            ));
+//        $this->view->callsigns = \Radio\Models\Callsign::find(array(
+//            'fields' => array('callsign'),
+//            array("username" => $username)
+//            )); 
+        $this->view->equipments = \Radio\Models\Equipment::find(array(
+            'fields' => array('brand','transceiver','antenna'),
+            array("callsign" => $callsign)
+            )); 
+        $this->view->signaling = \Radio\Models\Signaling::findFirst(array(
+            'fields' => array('callsign','c4fm','mototrbo','mdc1200','qcii','dtmf','selectv'),
+            array("callsign" => $callsign)
+            )); 
+        
         date_default_timezone_set('UTC'); 
+        $who = $this->session->get('callsign');
         $message = new \Radio\Models\Message();
         $message->datetime = date('Y-m-d H:i:s');
-        $message->content = sprintf("%s 您的呼号被查询了一次.", $callsign);
+        $message->content = sprintf("%s 您的呼号被%s查询了一次.", $callsign, $who);
         $message->save();
     }
     public function brandAction($category){

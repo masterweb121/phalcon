@@ -20,8 +20,11 @@ class ProfileController  extends RadioController {
 		//Set the document title
         $this->tag->prependTitle('Radio'); 
         parent::initialize();
-        if(!$this->session->get('callsign')){
+        if(!$this->session->get('username')){
             $this->response->redirect("member/signin");
+        }
+        if(!$this->session->get('callsign')){
+            $this->response->redirect("member?msg=请你设置呼号");
         }
         $this->callsign = $this->session->get('callsign');
         $this->view->stations = null;

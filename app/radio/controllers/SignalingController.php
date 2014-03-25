@@ -77,5 +77,28 @@ class SignalingController extends RadioController {
             printf("%s\n",$line);
         }
     }
+    public function searchAction(){
+        $this->view->signalings = null;
+        if($this->request->isGet()){
+            $callsign = $this->request->get("callsign", "string");
+            if($callsign){
+                $this->view->signalings = \Radio\Models\Signaling::find(array(
+                    'fields' => array('callsign','c4fm','mototrbo','mdc1200','qcii','dtmf','selectv'),
+                    array('callsign'=>$callsign)
+                ));
+            }else{
+                $code = $this->request->get("code", "string");
+                $signaling = $this->request->get("signaling", "string");
+                if($code && $signaling){
+                    $this->view->signalings = \Radio\Models\Signaling::find(array(
+                        'fields' => array('callsign','c4fm','mototrbo','mdc1200','qcii','dtmf','selectv'),
+                        array($signaling => $code)
+                    ));
+                }
+            }
+            
+        }
+        $this->view->partial("signaling/index");
+    }
 }
  

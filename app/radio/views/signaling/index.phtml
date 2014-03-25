@@ -1,13 +1,10 @@
 	<div class="main-module">
-		<div class="head"><h2>Ham Software</h2></div>
+		<div class="head"><h2>信令列表</h2></div>
 		<div class="body">
 
-		</div>
-	</div>	
-
-<table>
+<table width="100%">
    <thead>
-       <th>callsign</th>
+       <th>Callsign</th>
        <th>Mototrbo</th>
        <th>MDC1200</th>
        <th>Quik-Call II</th>
@@ -18,7 +15,7 @@
    <tbody>
        <?php foreach($signalings as $signaling){ ?>
        <tr>
-           <td><a href="/{$locale}/radio/logs/{$signaling->callsign|lower}.html"><?php echo $signaling->callsign ?></td>
+           <td><a href="/radio/index/qrz/<?php echo $signaling->callsign ?>"><?php echo $signaling->callsign ?></td>
            <td><?php echo $signaling->mototrbo ?></td>
            <td><?php echo $signaling->mdc1200 ?></td>
            <td><?php echo $signaling->qcii ?></td>
@@ -28,4 +25,7 @@
        </tr>
        <?php }?>
    </tbody>
-</table>
+</table>            
+            
+		</div>
+	</div>	

@@ -13,19 +13,27 @@ class MemberController extends HomeController
     public function indexAction()
     {
         $this->view->member = null;
-        //echo $this->view->render('member/sidebar');
-        
+
         if($username = $this->session->get('username')){
             $member = Member::findFirst(array(
-                'fields' => array('username','password','callsign'),
+                /*'fields' => array('username','password','callsign'),*/
                 array("username" => $username)
             ));
+            if ($this->request->isPost() == true) {
+                $member->sex = $this->request->getPost("sex", "string");
+                $member->callsign = $this->request->getPost("callsign", "string");
+                $member->save();
+            }
             $this->view->member = $member;
+            $this->view->msg = $this->request->get('msg');
         }else{
             $this->view->disable();
             $this->response->redirect("member/signin");
         }
         //$this->view->pick('member/sidebar');
+    }
+    public function changeAction(){
+        
     }
     public function signupAction()
     {
@@ -39,10 +47,10 @@ class MemberController extends HomeController
 				$this->view->status = "两次输入密码不一至，请重新输入！";
 				return;
 			}
-            $callsign = $this->request->getPost("callsign");
+            //$callsign = $this->request->getPost("callsign");
             
             $member = new Member();
-            $member->callsign = $callsign;
+            //$member->callsign = $callsign;
             $member->username = $username;
             $member->password = $password;
             $member->save();

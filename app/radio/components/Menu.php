@@ -105,6 +105,11 @@ class Menu extends Component
             'beacon' => array(
                 array('title'=>'Propagation','link'=>'/radio/beacon/propagation'),
 			),
+            'awards' => array(
+                array('title'=>'DXCC','link'=>'/radio/awards/dxcc'),
+                array('title'=>'WAC','link'=>'/radio/awards/wac'),
+                array('title'=>'WAS','link'=>'/radio/awards/was'),
+			),
 		);
 		if(array_key_exists($this->controller,$submenu)){
 			

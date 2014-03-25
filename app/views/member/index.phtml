@@ -1,52 +1,57 @@
+<?php use Phalcon\Tag; ?>
 <div class="wrapper">
     <div class="mainWrap">
-        <div class="main-module">
-            <div class=head><H2>Zone map</H2></div>
-            <div class=body>
-
-<style type="text/css">
-#map{height:500px;width:700px;float:left;border-right:2px solid #bcbcbc;}
-</style>
-<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=IoN3tUhZjq78v2DyeztYLQEO"></script>
-
-<div id="map"></div>
-
-<script type="text/javascript">
-
-// 百度地图API功能
-var map = new BMap.Map("map");
-var point   = null;
-var marker  = null;
-map.centerAndZoom("中国",5);                   // 初始化地图,设置城市和地图级别。
-map.enableScrollWheelZoom();                            //启用滚轮放大缩小
-<?php if($repeater){?>
-point = new BMap.Point(<?php echo $repeater->coordinate ?>);
-marker = new BMap.Marker(point);
-map.addOverlay(marker);
-<?php } ?>
-map.addEventListener("click", function(e){
-    map.removeOverlay(marker);
-    point = new BMap.Point(e.point.lng, e.point.lat);
-    marker = new BMap.Marker(point);
-    map.addOverlay(marker);
-  document.getElementById("coordinate").value = e.point.lng + ", " + e.point.lat;
-});
-
-</script>                    
-                
-            </div>
-        </div>  
-
-<?php use Phalcon\Tag; ?>
 <?php 
-
+if($member)
+    Phalcon\Tag::setDefaults(array(
+        "username" => $member->username,
+        "password" => $member->password,
+        "sex" => $member->sex,
+        "callsign" => $member->callsign,
+    ));
 ?>
 
+<?php echo Tag::form("member/"); ?>
+        
+        <div class="main-module">
+            <div class=head><H2>修改密码</H2></div>
+            <div class=body>
 
+
+<p>
+    <label for="username">用户名</label>
+    <?php echo Tag::textField(array("username",'disabled'=>'')) ?>
+</p>
+
+<p>
+    <label for="password">密码</label>
+    <?php echo Tag::passwordField("password") ?>
+</p>
+
+<p>
+    <label for="password">确认密码</label>
+    <?php echo Tag::passwordField("password2") ?>
+</p>
+
+                <td><label for="sex">性别</label></td>
+                <td><?php echo Phalcon\Tag::radioField(array("sex", "value" => "男", 'checked'=>''));?><label for="sex">男</label><?php echo Phalcon\Tag::radioField(array("sex", "value" => "女")) ?><label for="sex">女</label></td>                
+            </div>
+        </div>  
+        <div class="main-module">
+            <div class=head><H2>业余无线电呼号（如果你不知道什么是业余无线电请不要设置）</H2></div>
+            <div class=body>
+<p>
+    <label for="callsign">呼号</label>
+    <?php echo Tag::textField("callsign") ?>
+</p>                
+            </div>
+        </div>  
 <?php ?>
 
-<?php ?>
-
+        <span style="color:red"><?php echo $msg ?></span><br/>
+        
+<?php echo Tag::submitButton("修改") ?>
+        
     </div>
     <div class="sideWrap">
         <?php $this->partial("member/sidebar") ?>

@@ -1,55 +1,6 @@
 <?php use Phalcon\Tag; ?>
 
-        <div class="main-module">
-            <div class="head"><h2><?php echo $callsign?> 电台通联日志</h2></div>
-            <div class="body"> 
-            <table>
-               <thead>
-                   <th>callsign</th>
-                   <th>date</th>
-                   <th>time</th>
-                   <th>frequency(Mhz)</th>
-                   <th>mode</th>
-                   <th>call</th>
-                   <th>rst</th>
-                   <th>watt</th>
-                   <th>notes</th>
-               </thead>
-               <tbody>
-                   <?php foreach($loggings as $log){ ?>
-                   <tr>
-                       <td><a href="/radio/qrz/<?php echo $log->callsign ?>"><?php echo $log->callsign ?></td>
-                       <td><?php echo $log->date ?></td>
-                       <td><?php echo $log->time ?></td>
-                       <td><?php echo $log->frequency ?></td>
-                       <td><?php echo $log->mode ?></td>
-                       <td><a href="/radio/qrz/<?php echo $log->call ?>"><?php echo $log->call ?></td>
-                       <td><?php echo $log->rst ?></td>
-                       <td><?php echo $log->watt ?></td>
-                       <td><?php echo $log->notes ?></td>
-                   </tr>
-                   <?php }?>
-               </tbody>
-               <td colspan="9">-------------------- 被叫日志 --------------------</td>
-               <tbody>
-                   <?php foreach($incoming as $log){ ?>
-                   <tr>
-                       <td><a href="/radio/qrz/<?php echo $log->callsign ?>"><?php echo $log->callsign ?></td>
-                       <td><?php echo $log->date ?></td>
-                       <td><?php echo $log->time ?></td>
-                       <td><?php echo $log->frequency ?></td>
-                       <td><?php echo $log->mode ?></td>
-                       <td><a href="/radio/qrz/<?php echo $log->call ?>"><?php echo $log->call ?></td>
-                       <td><?php echo $log->rst ?></td>
-                       <td><?php echo $log->watt ?></td>
-                       <td><?php echo $log->notes ?></td>
-                   </tr>
-                   <?php }?>
-               </tbody>               
-            </table>
-            </div>
-            <div class=foot></div>
-        </div>
+
 
         
         <div class="side-module">
@@ -123,6 +74,57 @@
             <div class="foot"></div>
         </div>
 <?php //}else{?>
+
+        <div class="main-module">
+            <div class="head"><h2><?php echo $callsign?> 电台通联日志</h2></div>
+            <div class="body"> 
+            <table>
+               <thead>
+                   <th>callsign</th>
+                   <th>date</th>
+                   <th>time</th>
+                   <th>frequency(Mhz)</th>
+                   <th>mode</th>
+                   <th>call</th>
+                   <th>rst</th>
+                   <th>watt</th>
+                   <th>notes</th>
+               </thead>
+               <tbody>
+                   <?php foreach($loggings as $log){ ?>
+                   <tr>
+                       <td><a href="/radio/qrz/<?php echo $log->callsign ?>"><?php echo $log->callsign ?></td>
+                       <td><?php echo $log->date ?></td>
+                       <td><?php echo $log->time ?></td>
+                       <td><?php echo $log->frequency ?></td>
+                       <td><?php echo $log->mode ?></td>
+                       <td><a href="/radio/qrz/<?php echo $log->call ?>"><?php echo $log->call ?></td>
+                       <td><?php echo $log->rst ?></td>
+                       <td><?php echo $log->watt ?></td>
+                       <td><?php echo $log->notes ?></td>
+                   </tr>
+                   <?php }?>
+               </tbody>
+               <td colspan="9">-------------------- 被叫日志 --------------------</td>
+               <tbody>
+                   <?php foreach($incoming as $log){ ?>
+                   <tr>
+                       <td><a href="/radio/qrz/<?php echo $log->callsign ?>"><?php echo $log->callsign ?></td>
+                       <td><?php echo $log->date ?></td>
+                       <td><?php echo $log->time ?></td>
+                       <td><?php echo $log->frequency ?></td>
+                       <td><?php echo $log->mode ?></td>
+                       <td><a href="/radio/qrz/<?php echo $log->call ?>"><?php echo $log->call ?></td>
+                       <td><?php echo $log->rst ?></td>
+                       <td><?php echo $log->watt ?></td>
+                       <td><?php echo $log->notes ?></td>
+                   </tr>
+                   <?php }?>
+               </tbody>               
+            </table>
+            </div>
+            <div class=foot></div>
+        </div>
 
 <?php //} ?>
 
