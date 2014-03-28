@@ -18,11 +18,14 @@ class ProfileController extends OutdoorController{
     {
         $this->tag->setTitle('Profile');
         parent::initialize();
+        if(!$this->session->get('username')){
+            $this->response->redirect("member/signin");
+        }
     }
 	
     public function indexAction()
     {
-        
+        $this->view->activitys = \Outdoor\Models\Activity::find();
     }
     public function mtbAction(){
         

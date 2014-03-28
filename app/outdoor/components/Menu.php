@@ -22,7 +22,7 @@ class Menu extends Component
             array('title'=>'Hiking','link'=>'outdoor'),
             array('title'=>'Cycling','link'=>'outdoor/cycling'),
             array('title'=>'Camping','link'=>'outdoor'),
-            array('title'=>'Activity','link'=>'outdoor'),
+            array('title'=>'Activity','link'=>'outdoor/activity'),
             array('title'=>'Travelogue','link'=>'outdoor/travelogue'),
             
 		);
@@ -45,6 +45,16 @@ class Menu extends Component
                 array('title'=>'','link'=>'/outdoor/'),
                 array('title'=>'','link'=>'/outdoor/'),
             ),
+            'activity' => array(
+                array('title'=>'All','link'=>'/outdoor/activity/'),
+                array('title'=>'Walking','link'=>'/outdoor/activity/category/walking'),
+                array('title'=>'Hiking','link'=>'/outdoor/activity/category/hiking'),
+                array('title'=>'Cycling','link'=>'/outdoor/activity/category/cycling'),
+                array('title'=>'Camping','link'=>'/outdoor/activity/category/camping'),
+                array('title'=>'Technology','link'=>'/outdoor/activity/category/technology'),
+                array('title'=>'Photography','link'=>'/outdoor/activity/category/photography'),
+                array('title'=>'Radio','link'=>'/outdoor/activity/category/radio/'),
+            )
 		);
 		if(array_key_exists($this->controller,$submenu)){
 			

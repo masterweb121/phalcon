@@ -1,0 +1,33 @@
+<div class="main-module">
+	<div class="head"><h2>活动细则</h2></div>
+	<div class="body"> 
+        <table width="100%">
+            <?php if($activity) {?>
+            <tr>    <td><?php echo $activity->category ?></td></tr>
+            <tr>    <td><?php echo $activity->title ?></td></tr>
+            <tr>    <td><?php echo $activity->province ?> <?php echo $activity->city ?> <?php echo $activity->county ?></td></tr>
+            <tr>    <td><?php echo $activity->begin ?></td></tr>
+            <tr>    <td><?php echo $activity->end ?></td></tr>
+            <?php }?>
+        </table>
+	</div>
+	<div class=foot></div>
+</div>
+
+<div class="main-module">
+	<div class="head"><h2>活动成员</h2></div>
+	<div class="body"> 
+        <table width="100%">
+            <?php if($activity) {?>
+            <tr>    <td><?php echo $activity->category ?></td></tr>
+            <tr>    <td><?php echo $activity->title ?></td></tr>
+            <tr>    <td><?php echo $activity->province ?> <?php echo $activity->city ?> <?php echo $activity->county ?></td></tr>
+            <tr>    <td><?php echo $activity->begin ?></td></tr>
+            <tr>    <td><?php echo $activity->end ?></td></tr>
+            <?php }?>
+        </table>
+	</div>
+	<div class=foot></div>
+</div>
+
+<?php use Phalcon\Tag; ?>

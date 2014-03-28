@@ -32,33 +32,11 @@ class Elements extends Component
 				array('title'=>'电台管理','link'=>'radio/profile'),
 				array('title'=>'户外管理','link'=>'outdoor/profile')
 			),
-			'about' => array(
-				array('title'=>'Home', 'link'=>'/'),
-				array('title'=>'Technology','link'=>'/technology/'),
-				array('title'=>'About','link'=>'/about/')
-			),
-			'technology' => array(
-				array('title'=>'Linux', 'link'=>'/technology/linux/'),
-				array('title'=>'CentOS','link'=>'/technology/centos/'),
-				array('title'=>'MySQL','link'=>'/technology/mysql/'),
-				array('title'=>'FreeBSD','link'=>'/technology/freebsd/'),
-				array('title'=>'Architect','link'=>'/technology/architect/')
-			),
-			'photography' => array(
-				array('title'=>'2014','link'=>'/photography/album/2014/'),
-				array('title'=>'2013','link'=>'/photography/album/2013/'),
-				array('title'=>'2012','link'=>'/photography/album/2012/'),
-				array('title'=>'2011','link'=>'/photography/album/2011/'),
-				array('title'=>'2010','link'=>'/photography/album/2010/')
-			),
-            'radio' => array(
-				array('title'=>'Repeater', 'link'=>'radio/repeater'),
-				array('title'=>'Logging','link'=>'radio/logging'),
-				array('title'=>'Morse','link'=>'radio/morse'),
-                array('title'=>'Zone','link'=>'radio/zone'),
-                array('title'=>'APRS','link'=>'radio/aprs'),
-                array('title'=>'Software','link'=>'/radio/software')
-			),
+//			'about' => array(
+//				array('title'=>'Home', 'link'=>'/'),
+//				array('title'=>'Technology','link'=>'/technology/'),
+//				array('title'=>'About','link'=>'/about/')
+//			),
 		);
 		if(array_key_exists($menu,$submenu)){
 			return($submenu[$menu]);

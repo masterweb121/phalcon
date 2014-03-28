@@ -19,7 +19,7 @@ class IndexController extends RadioController {
         $messages = \Radio\Models\Message::find(array(
                 'fields' => array('datetime','content'),
                 'sort' => array('datetime'=>-1),
-                'limit' => 50
+                'limit' => 20
             ));
         $this->view->messages = $messages; 
     }

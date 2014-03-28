@@ -42,7 +42,7 @@ class Menu extends Component
                 array('title'=>'Zone','link'=>'radio/zone'),
                 array('title'=>'APRS','link'=>'radio/aprs'),
                 array('title'=>'Software','link'=>'/radio/software'),
-                array('title'=>'无线电运动协会','link'=>'radio'),
+                array('title'=>'无线电运动协会','link'=>'/radio/association'),
             ),
 			'logging' => array(
                 array('title'=>'FM','link'=>'/radio/logging/fm'),

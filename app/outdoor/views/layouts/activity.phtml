@@ -1,0 +1,49 @@
+<div class="wrapper">
+    <div class="mainWrap">
+        <?php echo $this->getContent() ?>
+    </div>
+    <div class="sideWrap">
+        
+        <div class="side-module">
+            <div class="head"><h2>通过呼号查询信令</h2></div>
+            <div class="body">
+                <form method="get" name="qrz" id="qrz" action="/radio/signaling/search">
+                    callsign <input type="text" id="callsign" name="callsign" value="" size="6" maxlength="6" required=""/>
+                <input type="submit" value="search" id="go" name="go"/>
+                </form>
+                <div class="divider solid"></div>
+                <div class="foot-links"></div>
+            </div>
+            <div class="foot"></div>
+        </div>       
+
+        <div class="side-module">
+            <div class="head"><h2>通过信令查询呼号</h2></div>
+            <div class="body">
+                <form method="get" name="qrz" id="qrz" action="/radio/signaling/search">
+                    信令代码：<input type="text" id="code" name="code" value="" size="8" maxlength="8" required=""/><input type="submit" value="search" id="go" name="go"/><br />
+                    信令模式：<select name="signaling">
+                                <option value="mototrbo">Mototrbo</option>
+                                <option value="mdc1200">MDC1200</option>
+                                <option value="qcii">Quik-Call II</option>
+                                <option value="dtmf">DTMF</option>
+                                <option value="c4fm">Yaesu(C4FM)</option>
+                                <option value="selectv">Select V</option>
+                            </select>
+                </form>
+                <div class="divider solid"></div>
+                <div class="foot-links"></div>
+            </div>
+            <div class="foot"></div>
+        </div>               
+        <div class="side-module">
+            <div class="head"><h2>说明</h2></div>
+            <div class="body">
+                这里为Ham朋友提供一个信令ID备案与查询平台
+                <div class="divider solid"></div>
+                <div class="foot-links"><a href="/radio/profile/signaling">我要备案信令ID</a></div>
+            </div>
+            <div class="foot"></div>
+        </div>         
+    </div>
+</div>

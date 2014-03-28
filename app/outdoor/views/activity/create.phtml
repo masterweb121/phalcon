@@ -1,0 +1,152 @@
+<?php use Phalcon\Tag; ?>
+<div class="main-module">
+	<div class="head"><h2>发起一个活动</h2></div>
+	<div class="body"> 
+
+<style type="text/css">
+#map{height:500px;width:700px;float:left;border-right:2px solid #bcbcbc;}
+</style>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=IoN3tUhZjq78v2DyeztYLQEO"></script>
+
+<div id="map"></div>
+
+<script type="text/javascript">
+
+// 百度地图API功能
+var map = new BMap.Map("map");
+var point   = null;
+var marker  = null;
+
+map.enableScrollWheelZoom();                            //启用滚轮放大缩小
+<?php if($activity){?>
+point = new BMap.Point(<?php echo $activity->coordinate ?>);
+map.centerAndZoom(point,12);
+marker = new BMap.Marker(point);
+map.addOverlay(marker);
+<?php }else{ ?>
+map.centerAndZoom("中国",5);                   // 初始化地图,设置城市和地图级别。    
+<?php } ?>
+map.addEventListener("click", function(e){
+    map.removeOverlay(marker);
+    point = new BMap.Point(e.point.lng, e.point.lat);
+    marker = new BMap.Marker(point);
+    map.addOverlay(marker);
+  document.getElementById("coordinate").value = e.point.lng + ", " + e.point.lat;
+});
+
+</script>            
+        
+	</div>
+	<div class=foot></div>
+</div>	
+
+<div class="side-module">
+    <div class="head"><h2>QTH 地址</h2></div>
+    <div class="body">
+   <?php 
+    if($activity)
+    Phalcon\Tag::setDefaults(array(
+        'id'    => $activity->_id,
+        "category"   => $activity->category,
+        "title" => $activity->title,
+        "province" => $activity->province,
+        "city" => $activity->city,
+        "county" => $activity->county,
+        "coordinate"   => $activity->coordinate,
+        "begin" => $activity->begin,
+        "end" => $activity->end,
+        "content" => $activity->content
+         ));
+    ?>
+    <?php echo Tag::form("outdoor/activity/change/".$activity->_id); echo Phalcon\Tag::hiddenField("id");?>
+    <table width="100%" border="0">
+        </tr>
+            <td><label for="category">活动类别</label></td>
+            <td><?php echo Phalcon\Tag::selectStatic("category", array(
+                'walking'=>'Walking',
+                "hiking"=>'Hiking',
+                "cycling"=>'Cycling',
+                "camping"=>'Camping',
+                "technology"=>'Technology', 
+                "photography"=>'Photography', 
+                'radio'=>'Radio'
+                ))?></td>
+        </tr>
+        <tr>
+            <td><label for="title">标题</label></td>
+            <td><?php echo \Phalcon\Tag::textField(array("title", 'size'=>50, 'required'=>'')); ?></td>
+        </tr>
+            <td><label for="coordinate">地点与坐标</label></td>
+            <td>
+                <label for="province">province</label><?php echo Tag::selectStatic("province", array()) ?>
+                <label for="city">city</label><?php echo Tag::selectStatic("city", array()) ?>
+                <label for="county">county</label><?php echo Tag::selectStatic("county", array()) ?>
+                <?php echo Tag::hiddenField(array("coordinate")) ?>
+            </td>
+        </tr>
+        </tr>
+            <td><label for="datetime">截止日期</label></td>
+            <td><?php echo \Phalcon\Tag::tagHtml('input type="datetime" name="begin" id="begin" size=20 value="'.date('Y-m-d H:i:s').'"');?> -
+                <?php echo \Phalcon\Tag::tagHtml('input type="datetime" name="end" id="end" size=20 value="'.date('Y-m-d H:i:s').'"');?>
+            </td>
+        </tr>
+<!--        <tr>
+            <td><label for="zone">Zone</label></td>
+            <td><label for="zone">cq zone</label><?php echo Tag::textField("cq") ?><label for="zone">itu zone</label><?php echo Tag::textField("itu") ?><br /></td>
+        </tr>              -->
+        <tr>
+            <td><label for="content">内容</label></td>
+            <td><?php echo Phalcon\Tag::textArea(array("content", "cols" => 95, "rows" => 10, 'required'=>''))?></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+            <?php echo Tag::submitButton("保存") ?>
+            </td>
+        </tr>
+    </table>
+    </form>      
+
+<script>
+$.getJSON( "/radio/index/province", function( data ) {
+    $("#province").find("option:first").text("省");
+    $.each( data, function( key, val ) {
+        $("<option/>").attr("value", val).text(val).appendTo($("#province"));
+    });
+});
+
+$("#province").change(function () {
+    $("#city, #county").find("option:gt(0)").remove();
+    $("#city").find("option:first").text("Loading...");
+    $.getJSON("/radio/index/city", {
+        province: $(this).val()
+    }, function (json) {
+        $("#city").find("option:first").text("城市");
+        for (var i = 0; i < json.length; i++) {
+            $("<option/>").attr("value", json[i]).text(json[i]).appendTo($("#city"));
+        }
+    });
+});    
+
+$("#city").change(function () {
+    //$("#county).find("option:gt(0)").remove();
+    $("#county").find("option:first").text("Loading...");
+    
+    $.getJSON("/radio/index/county", {
+        province: $("#province").val(),
+        city: $(this).val()
+    }, function (json) {
+        if(json == null){
+            $("#county").find("option:first").text("");
+        }else{
+            $("#county").find("option:first").text("县城");
+            for (var i = 0; i < json.length; i++) {
+                $("<option/>").attr("value", json[i]).text(json[i]).appendTo($("#county"));
+            }
+        }
+    }); 
+}); 
+            </script>    
+    
+    </div>
+    <div class="foot"></div>
+</div>

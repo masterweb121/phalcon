@@ -111,7 +111,7 @@ map.addEventListener("click", function(e){
             <?php echo Phalcon\Tag::radioField(array("status", "value" => "Y", 'checked'=>''));?><label for="status">正常使用</label><?php echo Phalcon\Tag::radioField(array("status", "value" => "DCS")) ?><label for="status">维护中</label>
             
             <?php echo Tag::submitButton("submit") ?>
-            <?php echo Tag::submitButton("reset") ?>
+ 
             </form> 
             <script>
 $.getJSON( "/radio/index/province", function( data ) {

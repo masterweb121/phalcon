@@ -50,6 +50,10 @@ try {
         $mongo = new Mongo($config->mongodb->dsn);
         return $mongo->selectDb("member");
     }, true);
+    $di->set('outdoor', function() use ($config){
+        $mongo = new Mongo($config->mongodb->dsn);
+        return $mongo->selectDb("radio");
+    }, true);
     // Setting up the collection Manager
     $di->set('collectionManager', function(){
         return new Phalcon\Mvc\Collection\Manager();
@@ -115,6 +119,12 @@ try {
             /*'module'     => 'home',*/
             'controller' => 'member',
             'action'     => 1,
+            'params' => 2
+        ));
+        $router->add("/about(/?)", array(
+            /*'module'     => 'home',*/
+            'controller' => 'about',
+            'action'     => 'index',
             'params' => 2
         ));
         return $router;

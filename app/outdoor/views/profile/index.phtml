@@ -1,0 +1,18 @@
+<div class="main-module">
+	<div class="head"><h2>活动列表</h2></div>
+	<div class="body"> 
+        <table width="100%">
+            <?php foreach($activitys as $activity) {?>
+            <tr>
+                <td><?php echo $activity->category ?></td>
+                <td><?php echo $activity->title ?></td>
+                <td><?php echo $activity->province ?> <?php echo $activity->city ?> <?php echo $activity->county ?></td>
+                <td><?php echo $activity->begin ?></td>
+                <td><?php echo $activity->end ?></td>
+                <td><a href="/outdoor/activity/change/<?php echo $activity->_id ?>">修改活动</a></td>
+            </tr>
+            <?php }?>
+        </table>
+	</div>
+	<div class=foot></div>
+</div>	
