@@ -4,8 +4,25 @@
         <div class="main-module">
             <div class=head><H2>QRZ</H2></div>
             <div class=body>
-                <?php echo $qrz->callsign ?>
+                正在使用的呼号：<?php echo $qrz->callsign ?> <br/>
                 <?php //echo $qrz->qth ?>
+                曾经使用过的呼号:<br/>
+                <table>
+                   <thead>
+                       <th>callsign</th>
+                       <th>description</th>
+                   </thead>
+                   <tbody>
+                       <?php foreach($callsigns as $callsign){ ?>
+                       <tr>
+                           <td><a href="/radio/index/qrz/<?php echo $callsign->callsign ?>"><?php echo $callsign->callsign ?></td>
+                           <td><?php echo $callsign->description ?></td>
+                       </tr>
+                       <?php }?>
+                   </tbody>
+                </table>                
+
+
             </div>
         </div>
 
@@ -28,7 +45,7 @@
                 
 
 <style type="text/css">
-#map{height:500px;width:700px;float:left;border-right:2px solid #bcbcbc;}
+#map{height:300px;width:700px;float:left;border-right:2px solid #bcbcbc;}
 </style>
 <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=IoN3tUhZjq78v2DyeztYLQEO"></script>
 
@@ -55,6 +72,62 @@ map.centerAndZoom("中国",5);                   // 初始化地图,设置城市
             </div>
             <div class="foot"></div>
         </div>
+        <div class=main-module id=tagging>
+            <div class=head><h2><?php echo $qrz->callsign ?> 的设备列表</h2></div>
+            <div class=body>
+
+            <table>
+               <thead>
+                   <th>品牌</th>
+                   <th>电台</th>
+                   <th>天线</th>
+               </thead>
+               <tbody>
+                   <?php foreach($equipments as $equipment){ ?>
+                   <tr>
+                       <td><?php echo $equipment->brand ?></td>
+                       <td><?php echo $equipment->transceiver ?></td>
+                       <td><?php echo $equipment->antenna ?></td>
+                   </tr>
+                   <?php }?>
+               </tbody>
+            </table>   
+
+            </div>
+        </div>  
+        
+        <div class="main-module">
+            <div class="head"><h2><?php echo $qrz->callsign ?> 信令ID</h2></div>
+            <div class="body">
+
+            <table width="100%">
+               <thead>
+                   <th>Callsign</th>
+                   <th>Mototrbo</th>
+                   <th>MDC1200</th>
+                   <th>Quik-Call II</th>
+                   <th>DTMF</th>
+                   <th>Select V</th>
+                   <th>Yaesu(C4FM)</th>
+               </thead>
+               <tbody>
+                   <?php if($signaling){ ?>
+                   <tr>
+                       <td><a href="/radio/index/qrz/<?php echo $signaling->callsign ?>"><?php echo $signaling->callsign ?></td>
+                       <td><?php echo $signaling->mototrbo ?></td>
+                       <td><?php echo $signaling->mdc1200 ?></td>
+                       <td><?php echo $signaling->qcii ?></td>
+                       <td><?php echo $signaling->dtmf ?></td>
+                       <td><?php echo $signaling->selectv ?></td>
+                       <td><?php echo $signaling->c4fm ?></td>
+                   </tr>
+                   <?php }?>
+               </tbody>
+            </table>            
+
+            </div>
+        </div>	
+        
         
     </div>
     <div class="sideWrap">

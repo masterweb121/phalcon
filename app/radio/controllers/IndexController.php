@@ -32,6 +32,10 @@ class IndexController extends RadioController {
                 'fields' => array('username','name','callsign'),
                 array("callsign" => $callsign)
         ));
+        $this->view->callsigns = \Radio\Models\Callsign::find(array(
+            'fields' => array('callsign','description'),
+            array("username" => $member->username)
+            )); 
         $this->view->qrz = $member;
         
         $this->view->mail = \Radio\Models\Mail::findFirst(array(

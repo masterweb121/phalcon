@@ -10,7 +10,7 @@ class IndexController extends OutdoorController {
 	
     public function indexAction()
     {
-        
+        $this->view->activitys = \Outdoor\Models\Activity::find();
     }
 
 }
