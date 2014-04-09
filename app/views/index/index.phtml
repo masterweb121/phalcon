@@ -2,16 +2,10 @@
 
 <div id="bigContainer">
 
-
-
 	<div class="main-module">
-		<div class="head"><h2>{#itinerary#}</h2></div>
+		<div class="head"><h2> </h2></div>
 		<div class="body">
-			<ol>
-			{foreach from=$travels item=last10}
-				<li><a href="/outdoor/travelogue/itinerary/%7B$last10-%3Eid%7D.html">{$last10-&gt;title}</a></li>
-			{/foreach}
-			</ol>
+
 		</div>
 	</div>
 	
@@ -40,8 +34,6 @@
 	<div class="foot"></div>
 </div>
 {/if}
-
-
 
 	</div>
 
@@ -105,9 +97,7 @@
 </tbody></table>
     <?php echo $this->getContent() ?>
     <hr>
-<?php 
-echo Phalcon\Tag::linkTo("signup", "Sign Up Here!");
-?>
+<?php echo Phalcon\Tag::linkTo("signup", "Sign Up Here!"); ?>
 
 <table width="100%">
     <tbody><tr>

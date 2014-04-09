@@ -1,5 +1,5 @@
 <div class="side-module">
-	<div class="head"><h2>{#net#} - <?php echo $net->datetime ?></h2></div>
+	<div class="head"><h2>无线电台网 - <?php echo $net->datetime ?></h2></div>
 	<div class="body"> 
 
 <div><?php echo $net->frequency?> Radio net, <?php echo $net->topic ?>, control by <a href="/radio/index/qrz/<?php echo $net->host?>"><?php echo $net->host?></a></div>
@@ -12,47 +12,48 @@
 <?php use Phalcon\Tag; ?>
 
 <div class="main-module">
-	<div class="head"><h2>{#net#} - Check IN !</h2></div>
+	<div class="head"><h2>Check IN !</h2></div>
 	<div class="body"> 
 
-<?php echo Tag::form("radio/net/checkin/".$id); ?>
-<table>
-	<tr>
-		<td><label for="callsign">callsign</label></td>
-		<td><label for="rst">rst</label></td>
-		<td><label for="qth">QTH</label></td>
-		<td><label for="device">device</label></td>
-		<td><label for="watt">watt</label></td>
-	</tr>
-	<tr>
-		<td><input name="callsign" type="text" id="callsign" value="" size="6" maxlength="6" required /></td>
-		<td><input name="rst" type="text" id="rst" value="" size="3" maxlength="3" required /></td>
-		<td><input name="qth" type="text" id="qth" value="" size="30" maxlength="50" required /></td>
-		<td><input name="device" type="text" id="device" value="" size="30" maxlength="50" required /></td>
-		<td><?php echo Tag::textField(array("watt",'required '=>'')) ?></td>
-	</tr>
-    <tr>
-        <td colspan="4">
-            Leave a message <input name="message" type="text" id="device" value="" size="30" maxlength="50" />
-        </td>
-    </tr>
-    <tr>
-        <td colspan="4"><input type="submit" name="submit" id="submit" value="Check In!" /> </td>
-    </tr>
-</table>
-<input name="net_id" type="hidden" id="net_id" value="{$net->id}" /><br /> 
-</form> 
+    <?php echo Tag::form("radio/net/checkin/".$id); ?>
+    <table width="100%">
+        <tr>
+            <td><label for="callsign">callsign</label></td>
+            <td><label for="rst">rst</label></td>
+            <td><label for="qth">QTH</label></td>
+            <td><label for="device">device</label></td>
+            <td><label for="watt">watt</label></td>
+        </tr>
+        <tr>
+            <td><input name="callsign" type="text" id="callsign" value="" size="6" maxlength="6" required /></td>
+            <td><input name="rst" type="text" id="rst" value="" size="3" maxlength="3" required /></td>
+            <td><input name="qth" type="text" id="qth" value="" size="30" maxlength="50" required /></td>
+            <td><input name="device" type="text" id="device" value="" size="30" maxlength="50" required /></td>
+            <td><?php echo Tag::textField(array("watt",'required '=>'')) ?></td>
+        </tr>
+        <tr>
+            <td colspan="4">
+                Leave a message <input name="message" type="text" id="device" value="" size="30" maxlength="50" />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4"><input type="submit" name="submit" id="submit" value="Check In!" /> </td>
+        </tr>
+    </table>
+    <input name="net_id" type="hidden" id="net_id" value="{$net->id}" /><br /> 
+    </form> 
 
-<form action="" method="post" enctype="multipart/form-data" name="form1" id="form1">
-	<input name="net_id" type="hidden" id="net_id" value="{$net->id}" />
-  <fieldset>
-  <legend>{#logging#}</legend>
-  <label for="userfile">{#logging#}</label>
-  <input type="file" name="userfile" id="userfile" />
-  <input type="submit" name="upload" id="upload" value="{#submit#}" />
-  {$error}
-  </fieldset>
-</form>
+    <form action="" method="post" enctype="multipart/form-data" name="form1" id="form1">
+        <input name="net_id" type="hidden" id="net_id" value="{$net->id}" />
+        <fieldset>
+            <legend>上传记录</legend>
+            <label for="userfile">CSV文件</label>
+            <input type="file" name="userfile" id="userfile" />
+            <input type="submit" name="upload" id="upload" value="Upload" /><br />
+            如果你不想逐条添加，可以上传csv文件批量添加。
+        </fieldset>
+    </form>
+    
 	</div>
 	<div class=foot></div>
 </div>	
@@ -83,31 +84,31 @@ $(document).ready(function(){
 </script>
 
 <div class="main-module">
-	<div class="head"><h2>{#net#} {#logging#}</h2></div>
+	<div class="head"><h2>台网日志</h2></div>
 	<div class="body"> 
 
-<table>
-	<tr>
-		<td>time</td>
-		<td>callsign</td>
-		<td>rst</td>
-		<td>QTH</td>
-		<td>device</td>
-		<td>power</td>
-        <td>message</td>
-	</tr>
-<?php foreach($checkins as $checkin) {?>
-	<tr>
-		<td><?php echo $checkin->datetime ?></td>
-        <td><?php echo $checkin->callsign ?></td>
-        <td><?php echo $checkin->rst ?></td>
-        <td><?php echo $checkin->qth ?></td>
-        <td><?php echo $checkin->device ?></td>
-        <td><?php echo $checkin->watt ?></td>
-        <td><?php echo $checkin->message ?></td>
-	</tr>
-<?php }?>
-</table>
+    <table width="100%">
+        <tr>
+            <td>time</td>
+            <td>callsign</td>
+            <td>rst</td>
+            <td>QTH</td>
+            <td>device</td>
+            <td>power</td>
+            <td>message</td>
+        </tr>
+    <?php foreach($checkins as $checkin) {?>
+        <tr>
+            <td><?php echo $checkin->datetime ?></td>
+            <td><?php echo $checkin->callsign ?></td>
+            <td><?php echo $checkin->rst ?></td>
+            <td><?php echo $checkin->qth ?></td>
+            <td><?php echo $checkin->device ?></td>
+            <td><?php echo $checkin->watt ?></td>
+            <td><?php echo $checkin->message ?></td>
+        </tr>
+    <?php }?>
+    </table>
 
 	</div>
 	<div class=foot></div>

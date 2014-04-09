@@ -1,5 +1,5 @@
 <div class="side-module">
-	<div class="head"><h2>{#net#} - <?php echo $net->datetime ?></h2></div>
+	<div class="head"><h2>业余无线电台网 - <?php echo $net->topic ?></h2></div>
 	<div class="body"> 
 
 <div><?php echo $net->frequency?> Radio net, <?php echo $net->topic ?>, control by <a href="/radio/index/qrz/<?php echo $net->host?>"><?php echo $net->host?></a></div>
@@ -16,45 +16,76 @@
 	</div>
 	<div class=foot></div>
 </div>	
-
+<?php //print_r($coordinates);?>
 <script type="text/javascript">
 var map = new BMap.Map("map");
-map.centerAndZoom("重庆",12);
+map.centerAndZoom("中国",6);
+map.enableScrollWheelZoom(); 
+var point = new BMap.Point(<?php echo $net->coordinate?>); 
+var polyline = null;
+var marker = null;
 
-var pointA = new BMap.Point(106.486654,29.490295);  // 创建点坐标A--大渡口区
-var pointB = new BMap.Point(106.581515,29.615467);  // 创建点坐标B--江北区
-//alert('从大渡口区到江北区的距离是：'+map.getDistance(pointA,pointB)+' 米。');     //获取两点距离
+marker = new BMap.Marker(new BMap.Point(<?php echo $net->coordinate ?>));
+map.addOverlay(marker); 
+var opts = {
+  width : 80,
+  height: 50,
+  title : "<?php echo $net->frequency ?>" ,
+  enableMessage:true
+}
+var infoWindow = new BMap.InfoWindow("<?php echo $net->host ?>", opts); 
+map.openInfoWindow(infoWindow,new BMap.Point(<?php echo $net->coordinate ?>));
 
-var polyline = new BMap.Polyline([pointA,pointB], {strokeColor:"blue", strokeWeight:2, strokeOpacity:0.5});  //定义折线
-map.addOverlay(polyline);   //添加折线到地图上
+<?php foreach($coordinates as $callsign=>$coordinate){ ?>
+polyline = new BMap.Polyline([point,new BMap.Point(<?php echo $coordinate?>)], {strokeColor:"blue", strokeWeight:2, strokeOpacity:0.5}); 
+map.addOverlay(polyline);
+
+marker = new BMap.Marker(new BMap.Point(<?php echo $coordinate?>));
+
+infoWindow = new BMap.InfoWindow("<div style='width:100px'><h4 style='margin:0 0 5px 0;padding:0.2em 0'>台网参与者</h4>" + 
+    "<p style='margin:0;line-height:1.5;font-size:13px;'><?php echo $callsign?></p>" + 
+    "<p><a href='/radio/index/qrz/<?php echo $callsign?>'>查看呼号</a></div>");
+
+marker.addEventListener("click", function(){
+        this.openInfoWindow(infoWindow);
+        document.getElementById('imgDemo').onload = function (){
+        infoWindow.redraw();
+        }
+    });
+map.addOverlay(marker); 
+
+
+
+<?php }?>
+
 </script>
 
 <div class="main-module">
-	<div class="head"><h2>{#net#} {#logging#}</h2></div>
+	<div class="head"><h2>Check In List</h2></div>
 	<div class="body"> 
 
-<table>
-	<tr>
-		<td>time</td>
-		<td>callsign</td>
-		<td>rst</td>
-		<td>QTH</td>
-		<td>device</td>
-		<td>power</td>
-        <td>message</td>
-	</tr>
-<?php foreach($checkins as $checkin) {?>
-	<tr>
-		<td><?php echo $checkin->datetime ?></td>
-        <td><?php echo $checkin->callsign ?></td>
-        <td><?php echo $checkin->rst ?></td>
-        <td><?php echo $checkin->qth ?></td>
-        <td><?php echo $checkin->device ?></td>
-        <td><?php echo $checkin->watt ?></td>
-        <td><?php echo $checkin->message ?></td>
-	</tr>
-<?php }?>
-</table>
+    <table width="100%">
+        <tr>
+            <td>time</td>
+            <td>callsign</td>
+            <td>rst</td>
+            <td>QTH</td>
+            <td>device</td>
+            <td>power</td>
+            <td>message</td>
+        </tr>
+    <?php foreach($checkins as $checkin) {?>
+        <tr>
+            <td><?php echo $checkin->datetime ?></td>
+            <td><?php echo $checkin->callsign ?></td>
+            <td><?php echo $checkin->rst ?></td>
+            <td><?php echo $checkin->qth ?></td>
+            <td><?php echo $checkin->device ?></td>
+            <td><?php echo $checkin->watt ?></td>
+            <td><?php echo $checkin->message ?></td>
+        </tr>
+    <?php }?>
+    </table>
 
 	</div>
 	<div class=foot></div>

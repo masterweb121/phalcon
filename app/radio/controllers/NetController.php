@@ -32,6 +32,16 @@ class NetController extends RadioController {
                 array('netId'=>$id)
                 ));
             $this->view->net = \Radio\Models\Net::findById($id);
+            
+            $coordinates = array();
+            foreach($this->view->checkins as $checkin){
+                $qth = \Radio\Models\Qth::findFirst(array(
+                    'fields' => array('coordinate'),
+                    array("callsign" => $checkin->callsign)
+                ));
+                $coordinates[$checkin->callsign] = $qth->coordinate;
+            }
+            $this->view->coordinates = $coordinates;
         }else{
             $this->view->checkins = null;
         }

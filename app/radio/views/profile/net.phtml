@@ -1,3 +1,29 @@
-<?php $this->partial("net/index") ?>
+<?php //$this->partial("net/index") ?>
+<div class="main-module">
+	<div class="head"><h2>业余无线电台网列表</h2></div>
+	<div class="body"> 
+
+    <table width="100%">
+        <tr>
+            <td><label for="datetime">datetime</label></td>
+            <td><label for="frequency">frequency</label></td>
+            <td><label for="topic">topic</label></td>
+            <td><label for="topic">host</label></td>
+            <td></td>
+        </tr>
+    <?php foreach($nets as $net){ ?>
+        <tr>
+            <td><?php echo $net->datetime ?></td>
+            <td><?php echo $net->frequency ?></td>
+            <td><?php echo $net->topic ?></td>
+            <td><a href="/radio/index/qrz/<?php echo $net->host ?>"><?php echo $net->host ?></a></td>
+            <td><a href="/radio/net/checkin/<?php echo $net->_id ?>">台网名单</a></td>
+        </tr>
+    <?php }?>
+    </table>
+
+	</div>
+	<div class=foot></div>
+</div>
 
 <a href="/radio/net/start">开始台网</a>

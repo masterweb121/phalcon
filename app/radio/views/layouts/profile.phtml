@@ -76,12 +76,12 @@
                 <ul>
             <?php foreach ($stations as $station){?>
                 <li>
-                    <?php echo $station->frequency;?> <?php echo $station->name;?> <a href="/radio/repeater/details/<?php echo $station->_id;?>">预览</a>|<a href="/radio/repeater/mgmt/<?php echo $station->_id;?>">编辑</a>
+                    <?php echo $station->frequency;?> <?php echo $station->name;?> <a href="/radio/repeater/details/<?php echo $station->_id;?>">预览</a>|<a href="/radio/profile/repeater/<?php echo $station->_id;?>">编辑</a>
                 </li>
             <?php }?>
                 </ul>
                 <div class="divider solid"></div>
-                <div class="foot-links"><a href="/radio/repeater/mgmt/">新增中继台</a> | <a href="/radio/profile/">返回</a> </div>
+                <div class="foot-links"><a href="/radio/profile/repeater/">新增中继台</a> | <a href="/radio/profile/">返回</a> </div>
             </div>
             <div class="foot"></div>
         </div>
