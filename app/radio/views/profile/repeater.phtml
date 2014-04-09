@@ -96,7 +96,7 @@ map.addEventListener("click", function(e){
             <label for="shift">shift</label><?php echo Tag::textField(array("shift", 'size'=>5, 'value'=>-5)) ?>
             <fieldset>
                 <legend>模拟中继</legend>
-                <?php echo Phalcon\Tag::radioField(array("squelch", "value" => "CTCSS", 'checked'=>''));?><label for="CTCSS">CTCSS</label><?php echo Phalcon\Tag::radioField(array("squelch", "value" => "DCS")) ?><label for="DCS">DCS</label>
+                <?php echo Phalcon\Tag::radioField(array("squelch", "value" => "CTCSS", 'checked'=>''));?><label for="squelch">CTCSS</label><?php echo Phalcon\Tag::radioField(array("squelch", "value" => "DCS")) ?><label for="squelch">DCS</label><?php echo Phalcon\Tag::radioField(array("squelch", "value" => "")) ?><label for="squelch">无亚音</label>
                 <label for="code">code</label><?php echo Tag::textField(array("code", 'size'=>6, 'value'=>'88.5', 'list'=>'datalist_code')) ?><br />
             </fieldset>
             <fieldset>
