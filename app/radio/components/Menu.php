@@ -22,15 +22,16 @@ class Menu extends Component
     {
 		$menu = array(
             array('title'=>'Home', 'link'=>'radio/index'),
-            array('title'=>'Repeater', 'link'=>'radio/repeater'),
-            array('title'=>'Logging','link'=>'radio/logging'),
+            array('title'=>'中继台', 'link'=>'radio/repeater'),
+            array('title'=>'通联日志','link'=>'radio/logging'),
             array('title'=>'台网','link'=>'radio/net'),
             array('title'=>'信标','link'=>'radio/beacon'),
             array('title'=>'信令','link'=>'radio/signaling'),
             array('title'=>'产品','link'=>'radio/product'),
             array('title'=>'知识','link'=>'radio/knowledge'),
-            array('title'=>'Contesting','link'=>'radio/contesting'),
-            array('title'=>'奖状','link'=>'radio/awards'),
+            array('title'=>'竞赛','link'=>'radio/contesting'),
+            //array('title'=>'奖状','link'=>'radio/awards'),
+            array('title'=>'软件','link'=>'radio/software'),
 		);
 		return( $menu );
     }
@@ -38,10 +39,9 @@ class Menu extends Component
     {
 		$submenu = array(
             'index' => array(
-                array('title'=>'Morse','link'=>'radio/morse'),
-                array('title'=>'Zone','link'=>'radio/zone'),
-                array('title'=>'APRS','link'=>'radio/aprs'),
-                array('title'=>'Software','link'=>'/radio/software'),
+//                array('title'=>'Morse','link'=>'radio/morse'),
+//                array('title'=>'Zone','link'=>'radio/zone'),
+                array('title'=>'活动','link'=>'/outdoor/activity/category/radio/'),
                 array('title'=>'无线电运动协会','link'=>'/radio/association'),
             ),
 			'logging' => array(
@@ -89,9 +89,9 @@ class Menu extends Component
                 array('title'=>'APRS','link'=>'/radio/knowledge/aprs'),
 			),
             'net' => array(
-                array('title'=>'什么是台网','link'=>'/radio/knowledge/net'),
-                array('title'=>'Zone','link'=>'/radio/knowledge/zone'),
-                array('title'=>'APRS','link'=>'/radio/knowledge/aprs'),
+                //array('title'=>'什么是台网','link'=>'/radio/knowledge/net'),
+                //array('title'=>'Zone','link'=>'/radio/knowledge/zone'),
+                //array('title'=>'APRS','link'=>'/radio/knowledge/aprs'),
 			),
             'signaling' => array(
                 array('title'=>'Mototrbo','link'=>'/radio/signaling/mototrbo'),
@@ -105,7 +105,7 @@ class Menu extends Component
             'beacon' => array(
                 array('title'=>'Propagation','link'=>'/radio/beacon/propagation'),
 			),
-            'awards' => array(
+            'contesting' => array(
                 array('title'=>'DXCC','link'=>'/radio/awards/dxcc'),
                 array('title'=>'WAC','link'=>'/radio/awards/wac'),
                 array('title'=>'WAS','link'=>'/radio/awards/was'),
