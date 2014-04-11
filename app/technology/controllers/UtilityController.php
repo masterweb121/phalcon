@@ -128,4 +128,11 @@ class UtilityController extends \Phalcon\Mvc\Controller
             
         }
     }
+    public function usbkeyAction(){
+        $usbkey = null;
+        if ($this->request->isPost() == true) {
+            $usbkey = $this->request->getPost("ukey", "string");
+        }
+        $this->view->usbkey = $usbkey;
+	}
 }

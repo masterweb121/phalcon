@@ -1,0 +1,36 @@
+<?php use Phalcon\Tag; ?>
+<div class="main-module">
+    <div class=head><H2>Usb key 查询</H2></div>
+    <div class=body>
+
+    <?php echo Tag::form(array('technology/utility/usbkey', 'name'=>'usbkey', 'id'=>'usbkey'));?>
+    <?php echo Tag::hiddenField("ukey") ?>
+    <p>
+       <label for="key">USB key:</label>
+       <?php echo $usbkey ?>
+    </p>
+
+    <p>
+       <?php echo Tag::submitButton("Read") ?>
+    </p>
+
+    </form>
+    
+<OBJECT classid="clsid:C7672410-309E-4318-8B34-016EE77D6B58" id="ePass" name ="ePass" STYLE="LEFT: 0px; TOP: 0px" width="0" height="0" codebase="/webinst/files/install.cab"></OBJECT>
+<script type="text/javascript">
+try{ 
+    var ukey = document.getElementById('ukey');
+    var ePass = document.getElementById('ePass');
+    ePass.OpenDevice(1,"");
+    ukey.value = ePass.GetStrProperty(7, 0, 0);
+    ePass.CloseDevice();
+
+}
+catch(e){
+    alert("请插入U盾");
+}
+</script>
+    
+    
+    </div>
+</div>  
