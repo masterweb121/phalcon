@@ -18,10 +18,10 @@ class Menu extends Component
     {
 		$menu = array(
             array('title'=>'Home', 'link'=>'outdoor'),
-            array('title'=>'Walking','link'=>'outdoor'),
-            array('title'=>'Hiking','link'=>'outdoor'),
-            array('title'=>'Cycling','link'=>'outdoor/cycling'),
-            array('title'=>'Camping','link'=>'outdoor'),
+            array('title'=>'Walking','link'=>'outdoor/activity/category/walking'),
+            array('title'=>'Hiking','link'=>'outdoor/hiking'),
+            array('title'=>'Cycling','link'=>'outdoor/activity/category/cycling'),
+            array('title'=>'Camping','link'=>'outdoor/camping'),
             array('title'=>'Activity','link'=>'outdoor/activity'),
             array('title'=>'Travelogue','link'=>'outdoor/travelogue'),
             
@@ -44,6 +44,13 @@ class Menu extends Component
                 array('title'=>'自行车协会','link'=>'/outdoor'),
                 array('title'=>'','link'=>'/outdoor/'),
                 array('title'=>'','link'=>'/outdoor/'),
+            ),
+            'hiking' => array(
+                array('title'=>'Trekking','link'=>'/outdoor/hiking/trekking'),
+                array('title'=>'river trekking','link'=>'/outdoor/hiking/river'),
+                //array('title'=>'Backpacking','link'=>'/outdoor/hiking'),
+                //array('title'=>'','link'=>'/outdoor/hiking'),
+                //array('title'=>'','link'=>'/outdoor/hiking'),
             ),
             'activity' => array(
                 array('title'=>'All','link'=>'/outdoor/activity/'),
