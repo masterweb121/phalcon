@@ -154,7 +154,25 @@ class MemberController extends HomeController
         $this->view->callings = $callings;
     }
     
-    
+    public function checkAction(){
+        $this->view->disable();
+        if ($this->request->isGet() == true) {
+            //$this->request->get("username");
+            //$this->request->get("password");
+            if($username = $this->request->get("username")){
+                $member = Member::findFirst(array(
+                    'fields' => array('username','password','callsign'),
+                    array("username" => $username)
+                ));
+                if($member){
+                    print(json_encode(true));
+                }else{
+                    print(json_encode(false));
+                }
+            }
+        }
+        return(false);
+    }
     public function unsubscribeAction(){
         
     }

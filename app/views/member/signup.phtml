@@ -33,6 +33,25 @@
 
 </form>
 
+<script>
+$(document).ready(function(){
+    $("#username").blur(function(){
+        $.getJSON("/member/check/", {
+            username: $(this).val()
+        }, function (json) {
+            if(json){
+                alert("用户已经存在");
+            }
+        });
+    });
+    $("#password2").blur(function(){
+        if($("#password").val() != $(this).val()){
+            alert('请检查密码');
+        }
+    });
+});
+</script>
+
 <?php }else{ ?>
 	<?php echo $status; ?>
 <?php } ?>

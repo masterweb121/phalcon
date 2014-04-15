@@ -1,3 +1,4 @@
+<?php if(0){ ?>
 <div id="fullContainer">
 
 <div id="bigContainer">
@@ -19,7 +20,7 @@
    	</div>
 	<div class="foot"></div>
 </div>	
-{if $activities}
+
 <div class="side-module">
 	<div class="head"><h2>原最新活动</h2></div>
 	<div class="body">
@@ -33,11 +34,11 @@
    	</div>
 	<div class="foot"></div>
 </div>
-{/if}
+
 
 	</div>
 
-{*	
+
 	<div id="leftColumn">
 		{include file="left.tpl"}
 	</div>	
@@ -45,23 +46,21 @@
 	<div id="rightColumn">
 		{include file="right.tpl"}
 	</div>
-*}	
+
 
 </div>
-{*
+<?php } ?>
 <br clear="all">
 
 <table width="100%">
 	<tbody><tr>
 	<td valign="top">	
 	<div class="main-module">
-		<div class="head"><h2>摄影</h2></div>
+		<div class="head"><h2>摄影频道</h2></div>
 		<div class="body">
-		<ol>
-		{foreach from=$rss.digital.items item=i}
-			<li><a href="http://netkiller.users.sourceforge.net/%7B$i.link%7D">{$i.title}</a></li>
-		{/foreach}
-		</ol>
+
+            <div class="divider solid"></div>
+            <div class="foot-links"><?php echo Phalcon\Tag::linkTo("photography", "我是摄影爱好者"); ?></div>
 	   	</div>
 		<div class="foot"></div>
 	</div>
@@ -70,11 +69,9 @@
 	<div class="main-module">
 		<div class="head"><h2>户外运动</h2></div>
 		<div class="body">
-		<ol>
-		{foreach from=$rss.car.items item=i}
-			<li><a href="http://netkiller.users.sourceforge.net/%7B$i.link%7D">{$i.title}</a></li>
-		{/foreach}
-		</ol>
+
+            <div class="divider solid"></div>
+            <div class="foot-links"><?php echo Phalcon\Tag::linkTo("outdoor", "我是户外运动爱好者"); ?></div>
 	   	</div>
 		<div class="foot"></div>
 	</div>
@@ -83,11 +80,8 @@
 	<div class="main-module">
 		<div class="head"><h2>业余无线电</h2></div>
 		<div class="body">
-		<ol>
-		{foreach from=$rss.book.items item=i}
-			<li><a href="http://netkiller.users.sourceforge.net/%7B$i.link%7D">{$i.title}</a></li>
-		{/foreach}
-		</ol>
+            <div class="divider solid"></div>
+            <div class="foot-links"><?php echo Phalcon\Tag::linkTo("radio", "我是业余无线电爱好者"); ?></div>
 	   	</div>
 		<div class="foot"></div>
 	</div>	
@@ -97,7 +91,7 @@
 </tbody></table>
     <?php echo $this->getContent() ?>
     <hr>
-<?php echo Phalcon\Tag::linkTo("signup", "Sign Up Here!"); ?>
+
 
 <table width="100%">
     <tbody><tr>

@@ -135,4 +135,8 @@ class UtilityController extends \Phalcon\Mvc\Controller
         }
         $this->view->usbkey = $usbkey;
 	}
+    public function passwordAction(){
+        //$this->view->password = system("cat /dev/urandom | tr -cd [:alnum:] | fold -w30 | head -n 20");
+        $this->view->password = '';
+    }
 }
