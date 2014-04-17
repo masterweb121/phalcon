@@ -28,7 +28,8 @@ class Elements extends Component
 		}
 		$submenu = array(
 			'member' => array(
-				array('title'=>'相册管理', 'link'=>'/member/'),
+				array('title'=>'个人资料管理', 'link'=>'member/'),
+                array('title'=>'相册管理', 'link'=>'photography/profile'),
 				array('title'=>'电台管理','link'=>'radio/profile'),
 				array('title'=>'户外管理','link'=>'outdoor/profile')
 			),
@@ -88,7 +89,7 @@ class Elements extends Component
 			),
 		);
 		if(array_key_exists($menu,$submenu)){
-			
+
 			return($submenu[$menu]);
 		}
 		return( array());

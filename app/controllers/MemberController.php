@@ -9,20 +9,25 @@ class MemberController extends HomeController
         $this->tag->setTitle('Signup');
         parent::initialize();
     }
-	
+
     public function indexAction()
     {
         $this->view->member = null;
-
+        $this->view->status = null;
         if($username = $this->session->get('username')){
             $member = Member::findFirst(array(
                 /*'fields' => array('username','password','callsign'),*/
                 array("username" => $username)
             ));
+
             if ($this->request->isPost() == true) {
                 $member->sex = $this->request->getPost("sex", "string");
                 $member->callsign = $this->request->getPost("callsign", "string");
-                $member->save();
+                $member->name = $this->request->getPost("name", "string");
+                $member->age = $this->request->getPost("age", "string");
+                if($member->save()){
+                    $this->view->status = '保存成功';
+                }
             }
             $this->view->member = $member;
             $this->view->msg = $this->request->get('msg');
@@ -33,7 +38,7 @@ class MemberController extends HomeController
         //$this->view->pick('member/sidebar');
     }
     public function changeAction(){
-        
+
     }
     public function signupAction()
     {
@@ -48,13 +53,13 @@ class MemberController extends HomeController
 				return;
 			}
             //$callsign = $this->request->getPost("callsign");
-            
+
             $member = new Member();
             //$member->callsign = $callsign;
             $member->username = $username;
             $member->password = $password;
             $member->save();
-            
+
             if ($member->save()) {
                 $this->view->status = "Great, a new user was saved successfully!";
                 //$this->session->set('username',$username);
@@ -77,13 +82,13 @@ class MemberController extends HomeController
                 array("username" => $username),
                 array("password" => $password)
             ));
-            
+
 			if($member){
 				$this->session->set('username',$username);
                 $this->session->set('callsign',$member->callsign);
 			}else{
 				$this->view->status = 'Sorry!';
-			}			
+			}
 		}
 		if($this->session->get('username')){
 			$this->view->disable();
@@ -104,7 +109,7 @@ class MemberController extends HomeController
 		}
     }
     public function profileAction(){
-        
+
     }
     public function radioAction(){
         $this->tag->setTitle('Radio');
@@ -129,12 +134,12 @@ class MemberController extends HomeController
                 'description' => '深圳业余无线电数字中继',
                 'owner' => 'BG7IVQ',
                 'point' => array(114.077371, 22.633201),
-                ),            
+                ),
         );
         // 中继列表
         $stations = Radio\Repeater::find(array('fields' => array('frequency')));
         $this->view->stations = $stations;
-        
+
         // 消息列表
         $messages = Radio\Message::find(array(
                 'fields' => array('datetime','content'),
@@ -142,7 +147,7 @@ class MemberController extends HomeController
                 'limit' => 50
             ));
         $this->view->messages = $messages;
-        
+
         // 呼入列表
         $callings = Radio\Logging::find(
             array(
@@ -153,7 +158,7 @@ class MemberController extends HomeController
         );
         $this->view->callings = $callings;
     }
-    
+
     public function checkAction(){
         $this->view->disable();
         if ($this->request->isGet() == true) {
@@ -174,9 +179,9 @@ class MemberController extends HomeController
         return(false);
     }
     public function unsubscribeAction(){
-        
+
     }
     public function subscribeAction(){
-        
+
     }
 }

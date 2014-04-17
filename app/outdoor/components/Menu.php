@@ -17,14 +17,14 @@ class Menu extends Component
     public function getMenu()
     {
 		$menu = array(
-            array('title'=>'Home', 'link'=>'outdoor'),
+            array('title'=>'频道首页', 'link'=>'outdoor'),
             array('title'=>'Walking','link'=>'outdoor/activity/category/walking'),
             array('title'=>'Hiking','link'=>'outdoor/hiking'),
-            array('title'=>'Cycling','link'=>'outdoor/activity/category/cycling'),
+            array('title'=>'Cycling','link'=>'outdoor/cycling'),
             array('title'=>'Camping','link'=>'outdoor/camping'),
             array('title'=>'Activity','link'=>'outdoor/activity'),
             array('title'=>'Travelogue','link'=>'outdoor/travelogue'),
-            
+
 		);
 		return( $menu );
     }
@@ -64,7 +64,7 @@ class Menu extends Component
             )
 		);
 		if(array_key_exists($this->controller,$submenu)){
-			
+
 			return($submenu[$this->controller]);
 		}
 		return( array());

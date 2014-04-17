@@ -14,14 +14,14 @@ class Menu extends Component
 				array('title'=>'Technology','link'=>'technology'),
 				array('title'=>'Photography','link'=>'photography'),
 				array('title'=>'Radio','link'=>'radio'),
-				
+
 		);
 		return($links);
 	}
     public function getMenu()
     {
 		$menu = array(
-            array('title'=>'Home', 'link'=>'photography'),
+            array('title'=>'摄影频道', 'link'=>'photography'),
             array('title'=>'相册', 'link'=>'photography/collection'),
             array('title'=>'摄影器材', 'link'=>'photography/equipment'),
             array('title'=>'后期','link'=>'photoshop'),
@@ -45,7 +45,7 @@ class Menu extends Component
 			),
 		);
 		if(array_key_exists($this->controller,$submenu)){
-			
+
 			return($submenu[$this->controller]);
 		}
 		return( array());

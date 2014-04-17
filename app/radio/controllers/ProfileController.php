@@ -18,7 +18,7 @@ class ProfileController  extends RadioController {
     {
         $this->view->setTemplateAfter('theme');
 		//Set the document title
-        $this->tag->prependTitle('Radio'); 
+        $this->tag->prependTitle('Radio');
         parent::initialize();
         if(!$this->session->get('username')){
             $this->response->redirect("member/signin");
@@ -36,12 +36,12 @@ class ProfileController  extends RadioController {
         $this->view->mail = \Radio\Models\Mail::findFirst(array(
                 'fields' => array('callsign','addressee','address','zipcode','description'),
                 array("callsign" => $callsign)
-            ));  
+            ));
         $this->view->qth = \Radio\Models\Qth::findFirst(array(
                 'fields' => array('callsign','address','coordinate','zone','description'),
                 array("callsign" => $callsign)
             ));
-        
+
         $this->view->repeaters = \Radio\Models\Repeater::find(array(
             'fields' => array('frequency','name'),
             array("callsign" => $callsign),
@@ -66,7 +66,7 @@ class ProfileController  extends RadioController {
         $this->view->callsigns = \Radio\Models\Callsign::find(array(
             'fields' => array('callsign','description'),
             array("username" => $username)
-            )); 
+            ));
     }
     public function mailAction(){
         if(!$this->session->get('callsign')){
@@ -84,7 +84,7 @@ class ProfileController  extends RadioController {
             }else{
                 $mail        = new \Radio\Models\Mail();
             }
-            
+
             $mail->callsign  = $this->session->get('callsign'); //$this->request->getPost("callsign", "string");
             $mail->addressee = $this->request->getPost("addressee", "string");
             $mail->address   = $this->request->getPost("address", "string");
@@ -92,18 +92,18 @@ class ProfileController  extends RadioController {
             $mail->description  = $this->request->getPost("description", "string");
             $mail->save();
             //$this->view->logging = (object)$this->request->getPost();
-            
+
             $message = new \Radio\Models\Message();
             $message->datetime = date('Y-m-d H:i:s');
             $message->content = sprintf("%s 刚刚更新了QSL卡片邮寄地址", $mail->callsign);
             $message->save();
         }
-        
+
         $callsign = $this->session->get('callsign');
         $mail = \Radio\Models\Mail::findFirst(array(
                 'fields' => array('callsign','addressee','address','zipcode','description'),
                 array("callsign" => $callsign)
-            ));  
+            ));
         if($mail){
             $this->view->mail = $mail;
         }
@@ -124,7 +124,7 @@ class ProfileController  extends RadioController {
             }else{
                 $qth        = new \Radio\Models\Qth();
             }
-            
+
             $qth->callsign  = $this->session->get('callsign'); //$this->request->getPost("callsign", "string");
             $qth->addressee = $this->request->getPost("addressee", "string");
             $qth->address   = $this->request->getPost("address", "string");
@@ -133,13 +133,13 @@ class ProfileController  extends RadioController {
             $qth->description  = $this->request->getPost("description", "string");
             $qth->save();
             //$this->view->logging = (object)$this->request->getPost();
-            
+
             $message = new \Radio\Models\Message();
             $message->datetime = date('Y-m-d H:i:s');
             $message->content = sprintf("%s 刚刚更新了Qth设台地址", $qth->callsign);
             $message->save();
         }
-        
+
         $callsign = $this->session->get('callsign');
         $qth = \Radio\Models\Qth::findFirst(array(
                 'fields' => array('callsign','address','coordinate','zone','description'),
@@ -151,26 +151,37 @@ class ProfileController  extends RadioController {
     }
     public function callsignAction(){
         $username = $this->session->get('username');
-
+        if($id = $this->request->get('id')){
+            //$this->view->disable();
+            //echo $id;
+            $callsign = \Radio\Models\Callsign::findById($id);
+//            array(
+//                array('id'=>$id, "username" => $username)
+//            )
+            //print_r($callsign);
+            if ($callsign->username == $username) {
+                $callsign->delete();
+            }
+        }
         if($this->request->isPost()){
             $callsign           = new \Radio\Models\Callsign();
             $callsign->username = $username;
             $callsign->callsign  = $this->request->getPost("callsign", "string");
             $callsign->description  = $this->request->getPost("description", "string");
 //            if($this->request->getPost("default", "string")){
-//                
+//
 //            }
             if($callsign->save()){
                 $message = new \Radio\Models\Message();
                 $message->datetime = date('Y-m-d H:i:s');
                 $message->content = sprintf("%s 刚刚设置了呼号", $this->callsign);
-                $message->save(); 
+                $message->save();
             }
         }
         $this->view->callsigns = \Radio\Models\Callsign::find(array(
             'fields' => array('callsign','description'),
             array("username" => $username)
-            )); 
+            ));
     }
     public function equipmentAction(){
 		 if($this->request->isPost()){
@@ -183,19 +194,19 @@ class ProfileController  extends RadioController {
                 $message = new \Radio\Models\Message();
                 $message->datetime = date('Y-m-d H:i:s');
                 $message->content = sprintf("%s 刚刚新增了一个装备 %s", $this->callsign, $equipment->brand.$equipment->transceiver.$equipment->antenna);
-                $message->save();                
+                $message->save();
             }
         }
         $this->view->equipments = \Radio\Models\Equipment::find(array(
             'fields' => array('brand','transceiver','antenna'),
             array("callsign" => $this->callsign)
-            )); 
+            ));
 	}
     public function netAction(){
 		$this->view->nets = \Radio\Models\Net::find();
 	}
     public function digitalAction(){
-		
+
 	}
     public function signalingAction(){
 
@@ -218,13 +229,13 @@ class ProfileController  extends RadioController {
                 $message = new \Radio\Models\Message();
                 $message->datetime = date('Y-m-d H:i:s');
                 $message->content = sprintf("%s 刚刚设置了信令", $this->callsign);
-                $message->save();   
+                $message->save();
             }
-        }        
+        }
         $this->view->signaling = \Radio\Models\Signaling::findFirst(array(
             'fields' => array('callsign','c4fm','mototrbo','mdc1200','qcii','dtmf','selectv'),
             array("callsign" => $this->callsign)
-            )); 
+            ));
 	}
     public function loggingAction(){
         if(!$this->session->get('callsign')){
@@ -248,13 +259,13 @@ class ProfileController  extends RadioController {
                 $message = new \Radio\Models\Message();
                 $message->datetime = date('Y-m-d H:i:s');
                 $message->content = $logging->callsign .'与'.$logging->call.'做了一个通联';
-                $message->save();                
+                $message->save();
             }
             $this->view->logging = (object)$this->request->getPost();
         }
 
         $this->view->logging = null;
-        
+
         $this->view->callsign  = $this->session->get('callsign');
         $callings = \Radio\Models\Logging::find(
             array(
@@ -273,7 +284,7 @@ class ProfileController  extends RadioController {
             )
         );
         $this->view->loggings = $loggings;
-        
+
         $incoming =  \Radio\Models\Logging::find(array(
                 array('call' => $this->session->get('callsign')),
                 'fields' => array('callsign','date','time','frequency','mode','call','rst','watt','notes'),
@@ -281,7 +292,7 @@ class ProfileController  extends RadioController {
                 'limit' => 100
             ));
         $this->view->incoming = $incoming;
-                
+
         $datalist = array('frequency'=> array('439.460','439.850','438.275','438.200'),
             'rst'=> array('59','59','55','58')
             );
@@ -294,14 +305,14 @@ class ProfileController  extends RadioController {
         }
         $this->tag->setTitle('Radio');
         $this->view->callsign = $this->session->get('callsign');
-        
+
         $this->view->repeater = null;
         if($id){
             $this->view->id = $id;
         }else{
             $this->view->id = null;
         }
-        
+
         if ($this->request->isPost() == true) {
             //$this->view->repeater = (Object)$this->request->getPost();
             if($id){
@@ -328,7 +339,7 @@ class ProfileController  extends RadioController {
             $repeater->status   = $this->request->getPost('status');
             $repeater->zone     = array('cq' => $this->request->getPost('cq'), 'itu' => $this->request->getPost('itu'));
             $repeater->save();
-            
+
             $message = new \Radio\Models\Message();
             $message->datetime = date('Y-m-d H:i:s');
             if($id){
@@ -338,16 +349,16 @@ class ProfileController  extends RadioController {
             }
             $message->save();
         }
-        
+
         $stations = \Radio\Models\Repeater::find(array('fields' => array('name','frequency')));
         $this->view->stations = $stations;
-        
+
         if($id){
             $repeater = \Radio\Models\Repeater::findById($id);
             //  'fields' => array('owner','province','city','frequency','shift','tone','code','coordinate','status')
             $this->view->repeater = $repeater;
         }
-    }    
+    }
     public function testAction(){
         $this->view->disable();
         print_r($this->dispatcher->getActionName());

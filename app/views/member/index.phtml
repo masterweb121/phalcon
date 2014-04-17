@@ -1,60 +1,80 @@
 <?php use Phalcon\Tag; ?>
 <div class="wrapper">
     <div class="mainWrap">
-<?php 
+<?php
 if($member)
     Phalcon\Tag::setDefaults(array(
         "username" => $member->username,
         "password" => $member->password,
         "sex" => $member->sex,
         "callsign" => $member->callsign,
+        "name" => $member->name,
+        "age" => $member->age,
+
     ));
 ?>
 
 <?php echo Tag::form("member/"); ?>
-        
+        <?php echo $status ?>
         <div class="main-module">
             <div class=head><H2>修改密码</H2></div>
             <div class=body>
 
 
-<p>
-    <label for="username">用户名</label>
-    <?php echo Tag::textField(array("username",'disabled'=>'')) ?>
-</p>
+            <p>
+                <label for="username">用户名</label>
+                <?php echo Tag::textField(array("username",'disabled'=>'')) ?>
+            </p>
 
-<p>
-    <label for="password">密码</label>
-    <?php echo Tag::passwordField("password") ?>
-</p>
+            <p>
+                <label for="password">密码</label>
+                <?php echo Tag::passwordField("password") ?>
+            </p>
 
-<p>
-    <label for="password">确认密码</label>
-    <?php echo Tag::passwordField("password2") ?>
-</p>
+            <p>
+                <label for="password">确认密码</label>
+                <?php echo Tag::passwordField("password2") ?>
+            </p>
 
-                <td><label for="sex">性别</label></td>
-                <td><?php echo Phalcon\Tag::radioField(array("sex", "value" => "男", 'checked'=>''));?><label for="sex">男</label><?php echo Phalcon\Tag::radioField(array("sex", "value" => "女")) ?><label for="sex">女</label></td>                
             </div>
-        </div>  
+        </div>
+
+        <div class="main-module">
+            <div class=head><H2>个人信息</H2></div>
+            <div class=body>
+            <p>
+                <label for="name">姓名</label>
+                <?php echo Tag::textField("name") ?>
+            </p>
+            <p>
+                <label for="sex">性别</label>
+                <?php echo Phalcon\Tag::radioField(array("sex", "value" => "男", 'checked'=>''));?><label for="sex">男</label><?php echo Phalcon\Tag::radioField(array("sex", "value" => "女")) ?><label for="sex">女</label>
+            </p>
+            <p>
+                <label for="age">年龄</label>
+                <?php echo Tag::textField("age") ?>
+            </p>
+            </div>
+        </div>
+
         <div class="main-module">
             <div class=head><H2>业余无线电呼号（如果你不知道什么是业余无线电请不要设置）</H2></div>
             <div class=body>
-<p>
-    <label for="callsign">呼号</label>
-    <?php echo Tag::textField("callsign") ?>
-</p>                
+            <p>
+                <label for="callsign">呼号</label>
+                <?php echo Tag::textField("callsign") ?>
+            </p>
             </div>
-        </div>  
+        </div>
 <?php ?>
 
         <span style="color:red"><?php echo $msg ?></span><br/>
-        
+
 <?php echo Tag::submitButton("修改") ?>
-        
+
     </div>
     <div class="sideWrap">
         <?php $this->partial("member/sidebar") ?>
     </div>
 </div>
-        
+

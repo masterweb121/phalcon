@@ -21,7 +21,7 @@ class Menu extends Component
     public function getMenu()
     {
 		$menu = array(
-            array('title'=>'Home', 'link'=>'radio/index'),
+            array('title'=>'频道首页', 'link'=>'radio/index'),
             array('title'=>'中继台', 'link'=>'radio/repeater'),
             array('title'=>'通联日志','link'=>'radio/logging'),
             array('title'=>'台网','link'=>'radio/net'),
@@ -51,13 +51,13 @@ class Menu extends Component
                 array('title'=>'LSB','link'=>'/radio/logging/lsb'),
                 array('title'=>'USB','link'=>'/radio/logging/usb'),
                 array('title'=>'CW','link'=>'/radio/logging/cw'),
-                
+
                 array('title'=>'RTTY','link'=>'/radio/logging/rtty'),
                 array('title'=>'SSTV','link'=>'/radio/logging/sstv'),
                 array('title'=>'FSK','link'=>'/radio/logging/fsk'),
                 array('title'=>'AFSK','link'=>'/radio/logging/afsk'),
                 array('title'=>'PSK','link'=>'/radio/logging/psk'),
-                
+
                 array('title'=>'HF','link'=>'/radio/logging/hf'),
                 array('title'=>'VHF','link'=>'/radio/logging/vhf'),
                 array('title'=>'UHF','link'=>'/radio/logging/uhf'),
@@ -67,7 +67,7 @@ class Menu extends Component
                 array('title'=>'Download','link'=>'/radio/repeater/download'),
                 array('title'=>'Analog','link'=>'/radio/repeater/analog'),
                 array('title'=>'Digital','link'=>'/radio/repeater/digital'),
-				
+
                 array('title'=>'UHF', 'link'=>'/radio/repeater/uhf'),
 				array('title'=>'VHF','link'=>'/radio/repeater/vhf'),
                 array('title'=>'DMR','link'=>'/radio/repeater/digital'),
@@ -112,7 +112,7 @@ class Menu extends Component
 			),
 		);
 		if(array_key_exists($this->controller,$submenu)){
-			
+
 			return($submenu[$this->controller]);
 		}
 		return( array());
