@@ -16,16 +16,16 @@
        <?php foreach($signalings as $signaling){ ?>
        <tr>
            <td><a href="/radio/index/qrz/<?php echo $signaling->callsign ?>"><?php echo $signaling->callsign ?></td>
-           <td><?php echo $signaling->mototrbo ?></td>
-           <td><?php echo $signaling->mdc1200 ?></td>
-           <td><?php echo $signaling->qcii ?></td>
-           <td><?php echo $signaling->dtmf ?></td>
-           <td><?php echo $signaling->selectv ?></td>
-           <td><?php echo $signaling->c4fm ?></td>
+           <td><?php echo @$signaling->mototrbo ?></td>
+           <td><?php echo @$signaling->mdc1200 ?></td>
+           <td><?php echo @$signaling->qcii ?></td>
+           <td><?php echo @$signaling->dtmf ?></td>
+           <td><?php echo @$signaling->selectv ?></td>
+           <td><?php echo @$signaling->c4fm ?></td>
        </tr>
        <?php }?>
    </tbody>
-</table>            
-            
+</table>
+
 		</div>
-	</div>	
+	</div>

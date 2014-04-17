@@ -24,42 +24,42 @@ class SignalingController extends RadioController {
     public function indexAction(){
         $this->view->signalings = \Radio\Models\Signaling::find(array(
             'fields' => array('callsign','c4fm','mototrbo','mdc1200','qcii','dtmf','selectv')
-            )); 
+            ));
     }
     public function mototrboAction(){
         $this->view->signalings = \Radio\Models\Signaling::find(array(
             'fields' => array('callsign','mototrbo')
-            )); 
+            ));
         $this->view->partial("signaling/index");
     }
     public function mdc1200Action(){
         $this->view->signalings = \Radio\Models\Signaling::find(array(
             'fields' => array('callsign','mdc1200')
-            )); 
+            ));
         $this->view->partial("signaling/index");
     }
     public function qciiAction(){
         $this->view->signalings = \Radio\Models\Signaling::find(array(
             'fields' => array('callsign','qcii')
-            )); 
+            ));
         $this->view->partial("signaling/index");
     }
     public function dtmfAction(){
         $this->view->signalings = \Radio\Models\Signaling::find(array(
             'fields' => array('callsign','dtmf')
-            )); 
+            ));
         $this->view->partial("signaling/index");
     }
     public function selectvAction(){
         $this->view->signalings = \Radio\Models\Signaling::find(array(
             'fields' => array('callsign','selectv')
-            )); 
+            ));
         $this->view->partial("signaling/index");
     }
     public function c4fmAction(){
         $this->view->signalings = \Radio\Models\Signaling::find(array(
             'fields' => array('callsign','c4fm')
-            )); 
+            ));
         $this->view->partial("signaling/index");
     }
     public function downloadAction(){
@@ -67,9 +67,9 @@ class SignalingController extends RadioController {
         $this->response->setHeader('Content-Disposition:', 'attachment; filename="repeater.csv"');
         $this->view->disable();
         $signalings = \Radio\Models\Signaling::find(array(
-            'fields' => array('callsign','c4fm','mototrbo','mdc1200','qcii','dtmf','selectv')
+            'fields' => array('callsign','mototrbo','mdc1200','qcii','dtmf','selectv','c4fm')
             ));
-        printf("'callsign','c4fm','mototrbo','mdc1200','qcii','dtmf','selectv'\n");
+        printf("'callsign','mototrbo','mdc1200','qcii','dtmf','selectv','c4fm'\n");
         foreach ($signalings as $signaling){
             $row = (array)$signaling;
             unset($row['_id']);
@@ -96,9 +96,8 @@ class SignalingController extends RadioController {
                     ));
                 }
             }
-            
+
         }
         $this->view->partial("signaling/index");
     }
 }
- 

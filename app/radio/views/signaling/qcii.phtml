@@ -3,7 +3,7 @@
 		<div class="body">
 
 		</div>
-	</div>	
+	</div>
 
 <table>
    <thead>
@@ -14,7 +14,7 @@
        <?php foreach($signalings as $signaling){ ?>
        <tr>
            <td><a href="/{$locale}/radio/logs/{$signaling->callsign|lower}.html"><?php echo $signaling->callsign ?></td>
-           <td><?php echo $signaling->qcii ?></td>
+           <td><?php echo @$signaling->qcii ?></td>
        </tr>
        <?php }?>
    </tbody>

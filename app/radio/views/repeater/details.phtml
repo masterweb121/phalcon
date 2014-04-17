@@ -1,17 +1,17 @@
-<div class="wrapper">    
+<div class="wrapper">
     <div class="mainWrap">
 
 <?php if($repeater){?>
 <div class="main-module">
 	<div class="head"><h2><?php echo $repeater->name?> 中继台信号覆盖区</h2></div>
-	<div class="body"> 
+	<div class="body">
 
 <style type="text/css">
 #map {
     /* height: 180px; */
-    width: 700px; 
+    width: 700px;
     height: 600px;
-} 
+}
 </style>
 
 <div id="map"></div>
@@ -20,7 +20,7 @@
 var map = new BMap.Map("map");
 var point = new BMap.Point(<?php echo $repeater->coordinate?>);
 map.centerAndZoom(point, 12);
-map.enableScrollWheelZoom();  
+map.enableScrollWheelZoom();
 var marker = new BMap.Marker(point);
 map.addOverlay(marker);
 var circle = new BMap.Circle(point,70000,{strokeColor:"blue",fillColor:"blue",strokeWeight:1, strokeStyle:"dashed", strokeOpacity:0.5, fillOpacity: 0.05});
@@ -40,11 +40,11 @@ map.addOverlay(circle);
 		最外侧两个灰色覆盖区是，梧桐山顶手台覆盖区和罕见成功通联，曾经有火腿通联成功。
 	</div>
 	<div class=foot></div>
-</div>	        
-   
+</div>
 
 
-<?php }?>     
+
+<?php }?>
 
     </div>
     <div class="sideWrap">
@@ -71,11 +71,16 @@ map.addOverlay(circle);
                     <li>台主: <?php echo $repeater->callsign?></li>
                     <li>图片: <?php echo $repeater->image?></li>
                     <li>状态: <?php echo $repeater->status?></li>
-                    <li>描述: <?php echo $repeater->description?></li>
-                </ul> 	
+                </ul>
             </div>
             <div class="foot"></div>
-        </div>        
-        
+        </div>
+         <div class="side-module">
+            <div class="head"><h2>描述:</h2></div>
+            <div class="body">
+                <?php echo $repeater->description?>
+            </div>
+            <div class="foot"></div>
+        </div>
     </div>
 </div>
