@@ -1,0 +1,61 @@
+<?php use Phalcon\Tag; ?>
+<div class="main-module">
+    <div class=head><H2>JSON Debug Tools</H2></div>
+    <div class=body>
+
+<?php //if($forms)
+    /*Phalcon\Tag::setDefaults(array(
+       "output"        => $output,
+     ));*/
+
+?>
+
+    <fieldset>
+        <legend>URL读取</legend>
+        <?php echo Tag::form('technology/utility/json/get'); ?>
+        <p>
+           <label for="url">URL:</label>
+           <?php echo Tag::textField(array("url",'size'=>80)) ?>
+            <?php echo Tag::submitButton("Read") ?><br>
+
+            <?php echo Phalcon\Tag::checkField(array("decode", "value" => "Y")) ?>Decode
+        </p>
+        </form>
+    </fieldset>
+
+    <fieldset>
+        <legend>编码与解码</legend>
+        <?php echo Tag::form('technology/utility/json/code'); ?>
+        <p>
+           <label for="type">encode</label>
+           <?php echo Phalcon\Tag::radioField(array("type", "value" => "encode")) ?>
+           <label for="type">decode</label>
+           <?php echo Phalcon\Tag::radioField(array("type", "value" => "decode")) ?>
+        </p>
+        <p>
+           <label for="assoc">Object</label>
+           <?php echo Phalcon\Tag::radioField(array("assoc", "value" => "Y")) ?>
+           <label for="assoc">Array</label>
+           <?php echo Phalcon\Tag::radioField(array("assoc", "value" => "N")) ?>
+        </p>
+        <p>
+          <label for="string">string:</label>
+          <?php echo Tag::textArea(array("string", "cols" => 100, "rows" => 8)) ?>
+       </p>
+
+       <?php echo Tag::submitButton("Process") ?>
+       </form>
+
+    </fieldset>
+
+        <p>
+          <label for="output">Output:</label>
+        </p>
+        <pre>
+<?php echo $output ?>
+        </pre>
+
+       </p>
+
+    </div>
+</div>

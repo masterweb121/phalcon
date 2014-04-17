@@ -1,0 +1,52 @@
+<div class="main-module">
+    <div class=head><H2>SOAP Debug Tools</H2></div>
+    <div class=body>
+<?php use Phalcon\Tag; ?>
+<?php if($forms)
+    Phalcon\Tag::setDefaults(array(
+       "uri"        => $forms->uri,
+       "location"   => $forms->location,
+       "login"      => $forms->login,
+       "password"   => $forms->password,
+       "func"       => $forms->func,
+       "output"       => var_export($output,true)
+     ));
+
+?>
+<?php echo Tag::form('technology/utility/soap'); ?>
+
+    <p>
+       <label for="uri">uri:</label>
+       <?php echo Tag::textField(array("uri", "size" => 50)) ?>
+    </p>
+    <p>
+       <label for="location">location:</label>
+       <?php echo Tag::textField(array("location", "size" => 80)) ?>
+    </p>
+    <p>
+       <label for="login">login:</label>
+       <?php echo Tag::textField(array("login", "size" => 30)) ?>
+    </p>
+    <p>
+       <label for="password">password:</label>
+       <?php echo Tag::textField(array('password', "size" => 30)) ?>
+    </p>
+    <p>
+       <label for="func">function:</label>
+       <?php echo Tag::textField(array('func', "size" => 30)) ?>
+    </p>
+    <p>
+       <label for="param">param:</label>
+       <?php echo Tag::textField(array('param', "size" => 30)) ?>
+    </p>
+     <p>
+       <label for="output">Output:</label>
+       <?php echo Tag::textArea(array("output", "cols" => 100, "rows" => 20)) ?>
+    </p>
+    <p>
+       <?php echo Tag::submitButton("Submit") ?>
+    </p>
+
+</form>
+    </div>
+</div>

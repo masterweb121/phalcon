@@ -9,22 +9,22 @@ class UtilityController extends \Phalcon\Mvc\Controller
         $this->tag->setTitle('Technology - Utility Programs');
         $this->view->menu = new \Technology\Components\Menu($this->dispatcher->getControllerName(), $this->dispatcher->getActionName());
     }
-	
+
     public function indexAction()
     {
-		
+
 		//$content = $cache->start($book.'/'.$page);
 		// If $content is null then the content will be generated for the cache
-		//if ($content === null) {	
+		//if ($content === null) {
 			// Store the output into the cache file
 		//	$cache->save();
 
-		//} 
+		//}
     }
 
 
 	public function searchAction(){
-	
+
 	}
 	// crypt and htpasswd
 	public function cryptAction($password = null){
@@ -60,7 +60,7 @@ class UtilityController extends \Phalcon\Mvc\Controller
         }else if ($this->request->isPost() == true) {
 			$string = $this->request->getPost("string", "string");
 			$this->view->digest = sha1($string);
-		}        	
+		}
 	}
     public function crc32Action($string){
         $this->view->digest = '';
@@ -70,7 +70,7 @@ class UtilityController extends \Phalcon\Mvc\Controller
         }else if ($this->request->isPost() == true) {
 			$string = $this->request->getPost("string", "string");
 			$this->view->digest = crc32($string);
-		}        	
+		}
 	}
     public function urlAction($type,$url){
 
@@ -121,11 +121,11 @@ class UtilityController extends \Phalcon\Mvc\Controller
         if($this->request->getPost()){
             $ipaddr = $this->request->getPost("ip", "string");
             $url = sprintf("http://api.map.baidu.com/location/ip?ak=IoN3tUhZjq78v2DyeztYLQEO&ip=%s&coor=bd09ll",$ipaddr);
-            
+
             $result = json_decode(file_get_contents($url), TRUE);
             $this->view->result = $result;
             //print_r($result);
-            
+
         }
     }
     public function usbkeyAction(){
@@ -138,5 +138,70 @@ class UtilityController extends \Phalcon\Mvc\Controller
     public function passwordAction(){
         //$this->view->password = system("cat /dev/urandom | tr -cd [:alnum:] | fold -w30 | head -n 20");
         $this->view->password = '';
+    }
+    public function soapAction(){
+        $this->view->forms = null;
+        if ($this->request->isPost() == true) {
+            $this->view->forms = (object)$this->request->getPost();
+            $options = array('uri' => $this->request->getPost("uri", "string"),
+                'location'=>$this->request->getPost("location", "string"),
+                'compression' => 'SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_GZIP',
+                'login'=>$this->request->getPost("login", "string"),
+                'password'=>$this->request->getPost("password", "string"),
+                'trace'=>true
+                                );
+            try {
+                $client = new \SoapClient(null, $options);
+                $func   = $this->request->getPost("func", "string");
+                $param  = $this->request->getPost("param", "string");
+                if($param){
+                    $this->view->output = call_user_func_array(array($client, $func),  explode($delimiter = ',', $param));
+                }else{
+                    $this->view->output = $client->$func();
+                }
+            }
+            catch (Exception $e)
+            {
+                $this->view->disable();
+                echo 'Caught exception: ',  $e->getMessage(), "\n";
+            }
+        }
+    }
+    public function jsonAction($op = null){
+        $this->view->output = null;
+        if ($this->request->isPost() == true){
+            if($op === 'code'){
+                $type = $this->request->getPost("type", "string");
+                if($type == "encode"){
+                    $string = $_POST['string'];
+                    $arr = explode(",", $string);
+                    print_r(json_encode($arr));
+                    $this->view->output = json_encode($arr);
+                }
+                if($type == "decode"){
+
+                    $json = $_POST['string'];
+                    $assoc = $this->request->getPost("assoc");
+                    //stripslashes($this->request->getPost("string", "string"));
+                    //print_r(json_decode($json, $assoc));
+
+                    if($assoc == 'Y'){
+                        $this->view->output = print_r(json_decode($json, true),true);
+                    }else{
+                        $this->view->output = var_export(json_decode($json, false),true);
+                    }
+                }
+            }
+            if($op === 'get'){
+                //$this->view->disable();
+                echo $this->request->getPost("decode");
+                if($this->request->getPost("decode")){
+                    $this->view->output = print_r(json_decode(file_get_contents($this->request->getPost("url", "string"))),true);
+                }else{
+                    $this->view->output = file_get_contents($this->request->getPost("url", "string"));
+                }
+            }
+        }
+
     }
 }
