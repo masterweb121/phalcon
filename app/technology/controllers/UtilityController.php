@@ -128,7 +128,7 @@ class UtilityController extends \Phalcon\Mvc\Controller
 
         }
     }
-    public function usbkeyAction(){
+    public function usbtokenAction(){
         $usbkey = null;
         if ($this->request->isPost() == true) {
             $usbkey = $this->request->getPost("ukey", "string");
@@ -202,6 +202,8 @@ class UtilityController extends \Phalcon\Mvc\Controller
                 }
             }
         }
+    }
+    public function sshkeygen(){
 
     }
 }

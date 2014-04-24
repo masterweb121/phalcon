@@ -3,10 +3,10 @@
     <div class=head><H2>Usb key 查询</H2></div>
     <div class=body>
 
-    <?php echo Tag::form(array('technology/utility/usbkey', 'name'=>'usbkey', 'id'=>'usbkey'));?>
+    <?php echo Tag::form(array('technology/utility/usbtoken', 'name'=>'usbkey', 'id'=>'usbkey'));?>
     <?php echo Tag::hiddenField("ukey") ?>
     <p>
-       <label for="key">USB key:</label>
+       <label for="key">USB Token:</label>
        <?php echo $usbkey ?>
     </p>
 
@@ -22,9 +22,9 @@ try{
     var ukey = document.getElementById('ukey');
     var ePass = document.getElementById('ePass');
     ePass.OpenDevice(1,"");
+    //alert(ePass.GetLibVersion());
     ukey.value = ePass.GetStrProperty(7, 0, 0);
     ePass.CloseDevice();
-
 }
 catch(e){
     alert("请插入U盾");
