@@ -3,11 +3,14 @@
     <div class=head><H2>Usb key 查询</H2></div>
     <div class=body>
 
-    <?php echo Tag::form(array('technology/utility/usbtoken', 'name'=>'usbkey', 'id'=>'usbkey'));?>
-    <?php echo Tag::hiddenField("ukey") ?>
+    <?php echo Tag::form(array('technology/utility/usbtoken'));?>
     <p>
-       <label for="key">USB Token:</label>
-       <?php echo $usbkey ?>
+       <label for="usbkey">USB Token:</label>
+       <?php echo Tag::textField(array("usbkey", 'size'=>32)) ?>
+    </p>
+    <p>
+        <label for="version">Lib Version:</label>
+        <?php echo Tag::textField("version") ?>
     </p>
 
     <p>
@@ -19,11 +22,14 @@
 <OBJECT classid="clsid:C7672410-309E-4318-8B34-016EE77D6B58" id="ePass" name ="ePass" STYLE="LEFT: 0px; TOP: 0px" width="0" height="0" codebase="/usbtoken/install.cab"></OBJECT>
 <script type="text/javascript">
 try{
-    var ukey = document.getElementById('ukey');
     var ePass = document.getElementById('ePass');
+    var usbkey = document.getElementById('usbkey');
+    var version = document.getElementById('version');
     ePass.OpenDevice(1,"");
-    //alert(ePass.GetLibVersion());
-    ukey.value = ePass.GetStrProperty(7, 0, 0);
+
+    usbkey.value = ePass.GetStrProperty(7, 0, 0);
+    version.value = ePass.GetLibVersion();
+
     ePass.CloseDevice();
 }
 catch(e){

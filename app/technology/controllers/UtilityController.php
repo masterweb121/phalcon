@@ -129,11 +129,10 @@ class UtilityController extends \Phalcon\Mvc\Controller
         }
     }
     public function usbtokenAction(){
-        $usbkey = null;
         if ($this->request->isPost() == true) {
-            $usbkey = $this->request->getPost("ukey", "string");
+            //$this->view->disable();
+            //printf("USB Key: %s", $this->request->getPost("usbkey", "string"));
         }
-        $this->view->usbkey = $usbkey;
 	}
     public function passwordAction(){
         //$this->view->password = system("cat /dev/urandom | tr -cd [:alnum:] | fold -w30 | head -n 20");
