@@ -1,0 +1,25 @@
+<?php use Phalcon\Tag; ?>
+<div class="main-module">
+    <div class=head><H2>uniqid</H2></div>
+    <div class=body>
+        <?php echo $uniqid ?> <br />
+
+        <?php echo Tag::form('technology/utility/uniqid'); ?>
+        <p>
+           <label for="prefix">prefix</label>
+           <?php echo Tag::textField("prefix") ?>
+        </p>
+        <?php /*
+        <p>
+            <label for="more_entropy">more_entropy</label>
+            <?php echo Phalcon\Tag::selectStatic("more_entropy", array('')) ?>
+        </p>
+         *
+         */?>
+        <p>
+            <?php echo Tag::submitButton("Submit") ?>
+        </p>
+
+        </form>
+    </div>
+</div>

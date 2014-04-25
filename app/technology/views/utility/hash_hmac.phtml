@@ -1,0 +1,27 @@
+<?php use Phalcon\Tag; ?>
+<div class="main-module">
+    <div class=head><H2>hash_hmac</H2></div>
+    <div class=body>
+        <?php echo $hmac ?> <br />
+
+        <?php echo Tag::form('technology/utility/hash_hmac'); ?>
+        <p>
+            <label for="algos">algos</label>
+            <?php echo Phalcon\Tag::selectStatic("algos", $algos) ?>
+        </p>
+        <p>
+           <label for="string">String</label>
+           <?php echo Tag::textField("string") ?>
+        </p>
+
+        <p>
+           <label for="secret">secret</label>
+           <?php echo Tag::textField("secret") ?>
+        </p>
+         <p>
+            <?php echo Tag::submitButton("Submit") ?>
+         </p>
+
+        </form>
+    </div>
+</div>

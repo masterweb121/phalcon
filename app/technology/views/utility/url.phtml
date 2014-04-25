@@ -1,28 +1,28 @@
-		<div class="main-module">
-            <div class=head><H2>URL Encode/Decode</H2></div>
-            <div class=body>
-<?php echo $url ?> <br />
+<div class="main-module">
+    <div class=head><H2>URL Encode/Decode</H2></div>
+    <div class=body>
+        <?php echo $url ?> <br />
 
-<?php use Phalcon\Tag; ?>
+        <?php use Phalcon\Tag; ?>
 
-<?php echo Tag::form('technology/utility/url'); ?>
+        <?php echo Tag::form('technology/utility/url'); ?>
 
- <p>
-    <label for="type">encode</label>
-    <?php echo Phalcon\Tag::radioField(array("type", "value" => "encode")) ?>
-    <label for="type">decode</label>
-    <?php echo Phalcon\Tag::radioField(array("type", "value" => "decode")) ?>
- </p>
+         <p>
+            <label for="type">encode</label>
+            <?php echo Phalcon\Tag::radioField(array("type", "value" => "encode")) ?>
+            <label for="type">decode</label>
+            <?php echo Phalcon\Tag::radioField(array("type", "value" => "decode")) ?>
+         </p>
 
- <p>
-    <label for="url">URL:</label>
-    <?php echo Tag::textField("url") ?>
- </p>
+         <p>
+            <label for="url">URL:</label>
+            <?php echo Tag::textField(array("url", 'size'=>100)) ?>
+         </p>
 
- <p>
-    <?php echo Tag::submitButton("Submit") ?>
- </p>
+         <p>
+            <?php echo Tag::submitButton("Submit") ?>
+         </p>
 
-</form>
-            </div>
-        </div>  
+        </form>
+    </div>
+</div>

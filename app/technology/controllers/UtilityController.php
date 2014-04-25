@@ -73,7 +73,7 @@ class UtilityController extends \Phalcon\Mvc\Controller
 		}
 	}
     public function urlAction($type,$url){
-
+        $this->view->url = null;
 		if($type == 'encode'){
         	print(urlencode( $url ));
             $this->view->disable();
@@ -202,7 +202,27 @@ class UtilityController extends \Phalcon\Mvc\Controller
             }
         }
     }
-    public function sshkeygen(){
+    public function hash_hmacAction(){
+        $algos = array();
+        foreach(hash_algos() as $key=>$val){
+            $algos[$val] = $val;
+        }
+        $this->view->algos =$algos;
+        $this->view->hmac = null;
+        if ($this->request->isPost() == true) {
+            $this->view->hmac = hash_hmac($this->request->getPost("algos"), $this->request->getPost("string"), $this->request->getPost("secret"));
+        }
+    }
+    public function uniqidAction(){
+        $this->view->uniqid = null;
+        $this->view->uniqid = uniqid();
+        if ($this->request->isPost() == true) {
+            if($this->request->getPost("prefix")){
+                $this->view->uniqid = uniqid($this->request->getPost("prefix"));
+            }
+        }
+    }
+    public function sshkeygenAction(){
 
     }
 }
