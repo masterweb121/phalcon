@@ -28,7 +28,7 @@ class UtilityController extends \Phalcon\Mvc\Controller
 	}
 	// crypt and htpasswd
 	public function cryptAction($password = null){
-
+        $this->view->encrypt = null;
 		if($password){
 			print(crypt($password));
 			$this->view->disable();
