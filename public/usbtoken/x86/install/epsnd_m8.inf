@@ -1,0 +1,35 @@
+;
+;DestDir can be 10 for Windows directory, 11 for Windows\System(32) directory.
+
+[version]
+; version signature (same for both NT and Win95) do not remove
+signature="$CHICAGO$"
+AdvancedINF=2.0
+
+[SourceDisksNames]
+; This section specifies that all sources are in the "default" location.
+1="default",,1
+
+[DefaultInstall]
+; Default section to process and copy all files under the section
+; capicom.files and Register DLLs under the section capicom.register.
+CopyFiles=epsNDSC.files
+RegisterOCXs=epsNDSC.register
+
+[DestinationDirs]
+; Destination Directories for CopyFiles Sections.
+; 11 indicates LDID_SYS - system directory
+epsNDSC.files=11
+
+[epsNDSC.files]
+; ,,,32 - Suppress version conflict dialog and don't overwrite newer DLLs
+ft_nd_api.dll,,,4
+ft_nd_sc.dll,,,4
+ft_nd_mod.dll,,,4
+ft_nd_full.dll,,,4
+msvcp60.dll,,,32
+
+[epsNDSC.register]
+%11%\ft_nd_sc.dll
+%11%\ft_nd_mod.dll
+%11%\ft_nd_full.dll
